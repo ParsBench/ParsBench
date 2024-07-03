@@ -1,0 +1,19 @@
+Task Description:
+You need to label a given Persian token list with named entity labels.
+Named Entity Labels:
+
+PER (Person)
+LOC (Location)
+ORG (Organization)
+Product (Product)
+Event (Event)
+Facility (Facility)
+
+Output Format:
+Your output format should be a list of tuples, where each tuple consists of a word from the input text and its corresponding named entity label.
+For words which are not part of any named entity, you should return 'O'.
+
+{example_shots}
+
+Input: {input}
+Output:

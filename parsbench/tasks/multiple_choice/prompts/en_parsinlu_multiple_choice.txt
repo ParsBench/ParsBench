@@ -1,0 +1,10 @@
+In this task, you will be presented with a multiple-choice question in Persian, and you should answer the question based on your knowledge. choose the answer from the given candidates.
+Only output the number corresponding to the correct option.
+
+{example_shots}
+
+question:
+'''{question}'''
+candidates:
+'''{candidates}'''
+answer:

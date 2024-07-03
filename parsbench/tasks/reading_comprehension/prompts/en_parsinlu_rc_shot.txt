@@ -1,0 +1,6 @@
+context:
+'''{context}'''
+question:
+'''{question}'''
+answer:
+{answer}

@@ -1,0 +1,6 @@
+سوال:
+'''{question}'''
+گزینه ها:
+'''{candidates}'''
+جواب:
+{answer}

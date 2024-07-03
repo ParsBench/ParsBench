@@ -1,0 +1,15 @@
+You will be presented with a premise, and a hypothesis about that premise.
+You need to decide whether the hypothesis is entailed by the premise by choosing one of the following answers:
+'e': The hypothesis follows logically from the information contained in the premise.
+'c': The hypothesis is logically false from the information contained in the premise.
+'n': It is not possible to determine whether the hypothesis is true or false without further information.
+Read the passage of information thoroughly and select the correct answer from the three answer labels.
+Read the premise thoroughly to ensure you know what the premise entails.
+
+{example_shots}
+
+premise:
+'''{premise}'''
+hypothesis:
+'''{hypothesis}'''
+answer:

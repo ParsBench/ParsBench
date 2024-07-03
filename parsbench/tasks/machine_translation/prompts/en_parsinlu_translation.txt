@@ -1,0 +1,7 @@
+Task Description:
+In this task, which is Machine Translation (MT), you will be presented with a sentence in {input_language}.
+You should translate it to {output_language} in the most appropriate way.
+
+{exmple_shots}
+
+{input} ->

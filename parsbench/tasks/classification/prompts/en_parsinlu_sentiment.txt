@@ -1,0 +1,16 @@
+The below sentence is a person's review. The review is in Persian. Identify the sentiment or polarity associated with it.
+Possible answers are:
+'-3': 'no sentiment expressed'
+'-2': 'very negative'
+'-1': 'negative'
+'0': 'neutral'
+'1': 'positive'
+'2': 'very positive'
+'3': 'mixed'
+
+Only output the corresponding number. Do not output the word.
+
+{example_shots}
+
+Review: {review}
+Sentiment:

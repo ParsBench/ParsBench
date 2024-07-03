@@ -1,0 +1,21 @@
+Natural Language Inference: Read the following premise and hypothesis carefully and determine the relationship between them.
+Choose one of the three categories below that best describes their relationship:
+
+- entailment: The meaning of the hypothesis is logically inferred or derived from the premise.
+- contradiction: The meaning of the hypothesis contradicts or conflicts with the premise.
+- neutral: There is no clear logical relationship between the premise and hypothesis.
+
+Note: The premise and hypothesis are in Persian.
+
+example pattern:
+<premise><sep><hypothesis>
+<category>:
+    entailment or contradiction or neutral
+
+{example_shots}
+
+Only write the category name in the output.
+    
+Please select the appropriate category for the given example:
+<{premise}><sep><{hypothesis}>
+<category>:

@@ -1,0 +1,6 @@
+question:
+'''{question}'''
+candidtaes:
+'''{candidates}'''
+answer:
+{answer}

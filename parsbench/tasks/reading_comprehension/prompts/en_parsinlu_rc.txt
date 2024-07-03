@@ -1,0 +1,9 @@
+In this task, you will be shown a Persian passage and question. You need to write an answer for the question. Try to keep your answers as short as possible.
+
+{example_shots}
+
+context:
+'''{context}'''
+question:
+'''{question}'''
+answer:
