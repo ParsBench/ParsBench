@@ -1,6 +1,13 @@
 from pathlib import Path
 
-import math_equivalence as math_metric
+try:
+    import math_equivalence as math_metric
+except ImportError:
+    raise Exception(
+        "The math_equivalence package is not installed."
+        "You should install it manually by `pip install git+https://github.com/hendrycks/math.git`"
+    )
+
 
 from parsbench.scores.base import Scorer, wrap_scorer
 from parsbench.tasks.base import (

@@ -1798,21 +1798,6 @@ files = [
 ]
 
 [[package]]
-name = "math_equivalence"
-version = "0.0.0"
-description = "A utility for determining whether 2 answers for a problem in the MATH dataset are equivalent."
-optional = false
-python-versions = "*"
-files = []
-develop = false
-
-[package.source]
-type = "git"
-url = "https://github.com/hendrycks/math.git"
-reference = "HEAD"
-resolved_reference = "357963a7f5501a6c1708cf3f3fb0cdf525642761"
-
-[[package]]
 name = "matplotlib-inline"
 version = "0.1.7"
 description = "Inline Matplotlib backend for Jupyter"
@@ -4537,4 +4522,4 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.11,<3.12"
-content-hash = "1182401a125fc6acc293bcd9d99da0292bf05be808c1f66c690b94a68f0b9f37"
+content-hash = "e63cec3e841d41bfba5a4df15a5e72d25d27aac0467a8425cbebddd5fe9fefd2"

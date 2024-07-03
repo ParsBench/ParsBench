@@ -2,6 +2,12 @@
 
 ## Installation
 
+Install [Math Equivalence](https://github.com/hendrycks/math) package manually:
+
+```bash
+pip install git+https://github.com/hendrycks/math.git
+```
+
 Install ParsBench using pip:
 
 ```bash
