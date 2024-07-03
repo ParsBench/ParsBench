@@ -1,6 +1,0 @@
-premise:
-'''{premise}'''
-hypothesis:
-'''{hypothesis}'''
-answer:
-'{target}'

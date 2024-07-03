@@ -1,3 +1,0 @@
-# Contribution
-
-Coming Soon...

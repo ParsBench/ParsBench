@@ -1,2 +1,0 @@
-<{premise}><sep><{hypothesis}>
-<category>: {label}
