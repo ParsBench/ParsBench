@@ -9,7 +9,8 @@ You can easily create a benchmark with your desired tasks and models.
 ```python
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
-from parsbench.models import OpenAIModel
+from parsbench.benchmarks import CustomBenchmark
+from parsbench.models import OpenAIModel, PreTrainedTransformerModel
 from parsbench.tasks import ParsiNLUMultipleChoice, PersianMath, ParsiNLUReadingComprehension
 
 # Create Models
@@ -49,7 +50,29 @@ result = benchmark.run(
 To benchmark your model based on all existing tasks in the framework. You can use `load_all_tasks` function.
 
 ```python
-from tasks.
+from parsbench.benchmarks import CustomBenchmark
+from parsbench.models import OpenAIModel
+from parsbench.tasks import ParsiNLUMultipleChoice
+from parsbench.tasks.utils import load_all_tasks
+
+aya_model = OpenAIModel(
+    api_base_url="http://localhost:11434/v1/",
+    api_secret_key="ollama",
+    model="aya:latest",
+)
+
+# Run Benchmark
+benchmark = CustomBenchmark(
+    models=[aya_model],
+    tasks=load_all_tasks(),
+)
+result = benchmark.run(
+    prompt_lang="fa",
+    prompt_shots=[0, 3],
+    n_first=100,
+    sort_by_score=True,
+)
+```
 
 ## Benchmark Result
 

@@ -1,4 +1,4 @@
-# Advance Tutorial
+# Advanced Tutorial
 
 This section is for the ones who want to implement their own Tasks or want to use the framework APIs for other use cases.
 

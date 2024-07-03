@@ -28,7 +28,7 @@ nav:
       - Models: tutorial/models.md
       - Tasks: tutorial/tasks.md
       - Benchmarks: tutorial/benchmarks.md
-      - Advance: tutorial/advance.md
+      - Advanced: tutorial/advanced.md
     - Contribution: contribution.md
     - Code Reference:
         - Models: code_reference/models.md

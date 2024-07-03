@@ -166,3 +166,6 @@ notes/
 
 # VSCode
 .vscode/
+
+# DS Store
+.DS_Store
