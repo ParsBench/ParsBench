@@ -16,7 +16,7 @@
         <link rel="prev" href="../tasks/">
       
       
-        <link rel="next" href="../advance/">
+        <link rel="next" href="../advanced/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -409,7 +409,16 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Full Benchmark">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#benchmark-result" class="md-nav__link">
+    <span class="md-ellipsis">
+      Benchmark Result
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Benchmark Result">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -442,11 +451,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../advance/" class="md-nav__link">
+      <a href="../advanced/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Advance
+    Advanced
   </span>
   
 
@@ -530,6 +539,27 @@
   
   <span class="md-ellipsis">
     Models
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../code_reference/scores/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Scores
   </span>
   
 
@@ -650,7 +680,16 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Full Benchmark">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#benchmark-result" class="md-nav__link">
+    <span class="md-ellipsis">
+      Benchmark Result
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Benchmark Result">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -691,7 +730,8 @@
 <p>You can easily create a benchmark with your desired tasks and models.</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">AutoModelForCausalLM</span><span class="p">,</span> <span class="n">AutoTokenizer</span>
 
-<span class="kn">from</span> <span class="nn">parsbench.models</span> <span class="kn">import</span> <span class="n">OpenAIModel</span>
+<span class="kn">from</span> <span class="nn">parsbench.benchmarks</span> <span class="kn">import</span> <span class="n">CustomBenchmark</span>
+<span class="kn">from</span> <span class="nn">parsbench.models</span> <span class="kn">import</span> <span class="n">OpenAIModel</span><span class="p">,</span> <span class="n">PreTrainedTransformerModel</span>
 <span class="kn">from</span> <span class="nn">parsbench.tasks</span> <span class="kn">import</span> <span class="n">ParsiNLUMultipleChoice</span><span class="p">,</span> <span class="n">PersianMath</span><span class="p">,</span> <span class="n">ParsiNLUReadingComprehension</span>
 
 <span class="c1"># Create Models</span>
@@ -727,15 +767,33 @@
 </code></pre></div>
 <h2 id="full-benchmark">Full Benchmark</h2>
 <p>To benchmark your model based on all existing tasks in the framework. You can use <code>load_all_tasks</code> function.</p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">tasks.</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">parsbench.benchmarks</span> <span class="kn">import</span> <span class="n">CustomBenchmark</span>
+<span class="kn">from</span> <span class="nn">parsbench.models</span> <span class="kn">import</span> <span class="n">OpenAIModel</span>
+<span class="kn">from</span> <span class="nn">parsbench.tasks</span> <span class="kn">import</span> <span class="n">ParsiNLUMultipleChoice</span>
+<span class="kn">from</span> <span class="nn">parsbench.tasks.utils</span> <span class="kn">import</span> <span class="n">load_all_tasks</span>
 
-<span class="c1">## Benchmark Result</span>
+<span class="n">aya_model</span> <span class="o">=</span> <span class="n">OpenAIModel</span><span class="p">(</span>
+    <span class="n">api_base_url</span><span class="o">=</span><span class="s2">&quot;http://localhost:11434/v1/&quot;</span><span class="p">,</span>
+    <span class="n">api_secret_key</span><span class="o">=</span><span class="s2">&quot;ollama&quot;</span><span class="p">,</span>
+    <span class="n">model</span><span class="o">=</span><span class="s2">&quot;aya:latest&quot;</span><span class="p">,</span>
+<span class="p">)</span>
 
-<span class="n">The</span> <span class="n">benchmark</span> <span class="n">result</span> <span class="n">contains</span> <span class="nb">all</span> <span class="n">evaluation</span> <span class="n">results</span> <span class="k">for</span> <span class="n">each</span> <span class="n">model</span><span class="o">.</span> <span class="n">You</span> <span class="n">can</span> <span class="n">use</span> <span class="n">it</span> <span class="n">directly</span> <span class="ow">or</span> <span class="n">convert</span> <span class="n">it</span> <span class="n">to</span>
-<span class="n">a</span> <span class="n">Pandas</span> <span class="n">DataFrame</span> <span class="k">with</span> <span class="err">`</span><span class="n">to_pandas</span><span class="err">`</span> <span class="n">function</span><span class="o">.</span> <span class="n">If</span> <span class="n">you</span> <span class="n">want</span> <span class="n">to</span> <span class="n">get</span> <span class="n">a</span> <span class="n">pivot</span> <span class="n">table</span> <span class="n">of</span> <span class="n">benchmark</span> <span class="n">result</span><span class="p">,</span> <span class="n">you</span> <span class="n">should</span> <span class="n">use</span> <span class="err">`</span><span class="n">to_pandas</span><span class="p">(</span><span class="n">pivot</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="err">`</span><span class="o">.</span>
-
-<span class="err">```</span><span class="n">python</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">(</span><span class="n">pivot</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+<span class="c1"># Run Benchmark</span>
+<span class="n">benchmark</span> <span class="o">=</span> <span class="n">CustomBenchmark</span><span class="p">(</span>
+    <span class="n">models</span><span class="o">=</span><span class="p">[</span><span class="n">aya_model</span><span class="p">],</span>
+    <span class="n">tasks</span><span class="o">=</span><span class="n">load_all_tasks</span><span class="p">(),</span>
+<span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">benchmark</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="n">prompt_lang</span><span class="o">=</span><span class="s2">&quot;fa&quot;</span><span class="p">,</span>
+    <span class="n">prompt_shots</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+    <span class="n">n_first</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+    <span class="n">sort_by_score</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div>
+<h2 id="benchmark-result">Benchmark Result</h2>
+<p>The benchmark result contains all evaluation results for each model. You can use it directly or convert it to
+a Pandas DataFrame with <code>to_pandas</code> function. If you want to get a pivot table of benchmark result, you should use <code>to_pandas(pivot=True)</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">(</span><span class="n">pivot</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
 </code></pre></div>
 <p>Output should be like:</p>
 <div class="highlight"><pre><span></span><code>                                                                                     score          
