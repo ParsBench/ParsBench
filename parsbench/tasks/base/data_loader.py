@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import Callable, Self
+from typing import Callable
 
 import datasets
 import jsonlines
@@ -88,7 +88,7 @@ class HuggingFaceDataLoader(DataLoader):
 
     Methods:
         load(self) -> list[dict]: Loads the dataset from the specified data path and split.
-        with_filter(self, func: Callable[..., bool]) -> Self: Adds a filter function to apply when loading the dataset.
+        with_filter(self, func: Callable[..., bool]) -> "HuggingFaceDataLoader": Adds a filter function to apply when loading the dataset.
     """
 
     def __init__(self, data_path: str, split: str | None = None) -> None:
@@ -103,6 +103,6 @@ class HuggingFaceDataLoader(DataLoader):
                 dataset = dataset.filter(filter_)
         return dataset.to_list()
 
-    def with_filter(self, func: Callable[..., bool]) -> Self:
+    def with_filter(self, func: Callable[..., bool]) -> "HuggingFaceDataLoader":
         self._filters.append(func)
         return self

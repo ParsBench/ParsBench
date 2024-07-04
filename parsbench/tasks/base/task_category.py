@@ -1,7 +1,7 @@
-from enum import StrEnum
+from enum import Enum
 
 
-class TaskCategory(StrEnum):
+class TaskCategory(str, Enum):
     CLASSIC = "classic"
     REASONING = "reasoning"
     MATH = "math"

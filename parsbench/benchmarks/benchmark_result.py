@@ -1,7 +1,6 @@
 from dataclasses import asdict, dataclass
 from itertools import groupby
 from pathlib import Path
-from typing import Self
 
 import jsonlines
 import numpy as np
@@ -24,7 +23,7 @@ class ModelBenchmarkResult:
     evaluation_results: list[EvaluationResult]
 
     @classmethod
-    def from_dict(cls, data: dict) -> Self:
+    def from_dict(cls, data: dict) -> "ModelBenchmarkResult":
         evaluation_results = [
             EvaluationResult.from_dict(task) for task in data.pop("evaluation_results")
         ]
@@ -66,7 +65,7 @@ class BenchmarkResult:
     model_benchmarks: list[ModelBenchmarkResult]
 
     @classmethod
-    def from_file(cls, path: str) -> Self:
+    def from_file(cls, path: str) -> "BenchmarkResult":
         with jsonlines.open(path, "r") as reader:
             model_benchmarks: list[ModelBenchmarkResult] = []
             for row in reader.iter(type=dict, skip_invalid=True):
@@ -75,7 +74,7 @@ class BenchmarkResult:
         return cls(model_benchmarks=model_benchmarks)
 
     @classmethod
-    def from_dict(cls, data: dict) -> Self:
+    def from_dict(cls, data: dict) -> "BenchmarkResult":
         model_benchmarks = [
             ModelBenchmarkResult.from_dict(mbr) for mbr in data.pop("model_benchmarks")
         ]

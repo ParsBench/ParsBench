@@ -1,14 +1,30 @@
 [tool.poetry]
 name = "parsbench"
-version = "0.1.0"
+version = "0.1.1"
 description = "ParsBench provides toolkits for benchmarking LLMs based on the Persian language tasks."
 authors = ["Shahriar Shariati <shahriarshm81@gmail.com>"]
 readme = "README.md"
-license = [{file = "LICENSE"}]
+license = "LICENSE"
+homepage = "https://shahriarshm.github.io/parsbench"
+repository = "https://github.com/shahriarshm/parsbench"
+documentation = "https://shahriarshm.github.io/parsbench"
+keywords = ["llm", "benchmarking", "persian"]
+classifiers = [
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: System :: Benchmark",
+    "Natural Language :: Persian",
+    "Operating System :: OS Independent",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3 :: Only"
+]
 packages = [{include = "parsbench"}]
 
 [tool.poetry.dependencies]
-python = ">=3.11,<3.12"
+python = ">=3.10,<3.12"
 transformers = "^4.41.2"
 openai = "^1.34.0"
 jsonlines = "^4.0.0"
@@ -25,6 +41,8 @@ jupyter = "^1.0.0"
 mypy = "^1.10.0"
 mkdocs-material = "^9.5.27"
 mkdocstrings = {version = "^0.25.1", extras = ["python"]}
+math-equivalence = {git = "https://github.com/hendrycks/math.git"}
+matplotlib = "^3.9.1"
 
 [build-system]
 requires = ["poetry-core"]

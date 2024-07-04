@@ -1,5 +1,4 @@
 from dataclasses import asdict, dataclass
-from typing import Self
 
 import jsonlines
 import pandas as pd
@@ -21,7 +20,7 @@ class PromptShotEvaluationResult:
     score: float
 
     @classmethod
-    def from_dict(cls, data: dict) -> Self:
+    def from_dict(cls, data: dict) -> "PromptShotEvaluationResult":
         return cls(**data)
 
     def to_dict(self) -> dict:
@@ -56,13 +55,13 @@ class EvaluationResult:
     sub_task: str | None = None
 
     @classmethod
-    def from_file(cls, path: str) -> Self:
+    def from_file(cls, path: str) -> "EvaluationResult":
         with jsonlines.open(path, "r") as reader:
             data = reader.read(type=dict)
             return cls.from_dict(data)
 
     @classmethod
-    def from_dict(cls, data: dict) -> Self:
+    def from_dict(cls, data: dict) -> "EvaluationResult":
         prompt_shot_results = [
             PromptShotEvaluationResult.from_dict(psr)
             for psr in data.pop("prompt_shot_results")

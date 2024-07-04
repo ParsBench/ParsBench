@@ -1,5 +1,5 @@
 from abc import ABCMeta
-from typing import Callable, Self
+from typing import Callable
 
 from tqdm import tqdm
 
@@ -233,7 +233,7 @@ class Task(TaskMatchGenerator, TaskScorer, metaclass=ABCMeta):
 
         return evaluation_results
 
-    def __enter__(self) -> Self:
+    def __enter__(self) -> "Task":
         self.load_data()
         return self
 

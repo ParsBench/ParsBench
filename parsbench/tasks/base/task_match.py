@@ -1,5 +1,5 @@
 from dataclasses import asdict, dataclass
-from typing import Callable, Self
+from typing import Callable
 
 import jsonlines
 import pandas as pd
@@ -14,7 +14,7 @@ class TaskMatch:
     score: int | None = None
 
     @classmethod
-    def from_dict(cls, data: dict) -> Self:
+    def from_dict(cls, data: dict) -> "TaskMatch":
         return cls(**data)
 
     def format_completion(self, formatter: Callable[[str], str]):
@@ -45,7 +45,7 @@ class TaskMatchGroup:
         return len(self.matches)
 
     @classmethod
-    def from_file(cls, path: str, n_shots: int) -> Self:
+    def from_file(cls, path: str, n_shots: int) -> "TaskMatchGroup":
         with jsonlines.open(path, "r") as reader:
             matches: list[TaskMatch] = []
             for row in reader.iter(type=dict, skip_invalid=True):
@@ -54,7 +54,7 @@ class TaskMatchGroup:
         return cls(n_shots=n_shots, matches=matches)
 
     @classmethod
-    def from_dict(cls, data: dict) -> Self:
+    def from_dict(cls, data: dict) -> "TaskMatchGroup":
         matches = [TaskMatch.from_dict(m) for m in data.pop("matches")]
         return cls(**data, matches=matches)
 
