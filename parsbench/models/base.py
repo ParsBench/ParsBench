@@ -52,7 +52,9 @@ class Model(ABC):
         if prefer_concurrency and self.support_concurrency:
             matches = self._gen_with_concurrency(matches, n_workers=n_workers)
         else:
-            for match in tqdm(matches, desc="Generating completions"):
+            for match in tqdm(
+                matches, total=len(matches), desc="Generating completions"
+            ):
                 match.completion = self.get_prompt_completion(match.prompt)
         return matches
 

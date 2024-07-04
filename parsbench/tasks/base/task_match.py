@@ -41,6 +41,9 @@ class TaskMatchGroup:
     def __iter__(self):
         yield from iter(self.matches)
 
+    def __len__(self) -> int:
+        return len(self.matches)
+
     @classmethod
     def from_file(cls, path: str, n_shots: int) -> Self:
         with jsonlines.open(path, "r") as reader:
