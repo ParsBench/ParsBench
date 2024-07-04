@@ -23,6 +23,8 @@ class OpenAIModel(Model):
         generate_completions: Generates completions for a list of TaskMatch objects using ThreadPoolExecutor.
     """
 
+    support_concurrency: bool = True
+
     def __init__(
         self,
         api_base_url: str,

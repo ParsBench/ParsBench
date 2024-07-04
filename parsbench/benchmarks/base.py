@@ -22,19 +22,22 @@ class Benchmark(ABC):
         save_evaluation: bool = False,
         save_benchmark: bool = False,
         output_path: str = None,
+        prefer_concurrency: bool = True,
+        n_workers: int = 4,
     ) -> BenchmarkResult:
         """
         Abstract method that must be implemented by subclasses. It runs the benchmarking task with the given parameters and returns a BenchmarkResult object.
 
         Parameters:
-            prompt_lang (str): The language prompt for the benchmarking task. Default is "fa".
-            prompt_shots (list[int] | None): The list of prompt shots for the benchmarking task. Default is None.
-            n_first (int | None): The number of first items to consider. Default is None.
-            sort_by_score (bool): A flag to indicate whether to sort the results by score. Default is True.
-            save_matches (bool): A flag to indicate whether to save the matches. Default is False.
-            save_evaluation (bool): A flag to indicate whether to save the evaluation. Default is False.
-            save_benchmark (bool): A flag to indicate whether to save the benchmark. Default is False.
-            output_path (str): The output path to save the benchmark results. Default is None.
+            prompt_lang (str, optional): The language of the prompt (default is "fa").
+            prompt_shots (list[int], optional): The list of prompt shots to evaluate (default is None).
+            n_first (int, optional): The number of initial prompts to consider (default is 200).
+            sort_by_score (bool, optional): Whether to sort the model benchmarks by average score (default is True).
+            save_matches (bool, optional): Flag to save the generated matches (default is False).
+            save_evaluation (bool, optional): Flag to save the evaluation results (default is False).
+            output_path (str, optional): The output path to save the matches and evaluation results.
+            prefer_concurrency (bool, optional): The flag to use concurrent processing if the model and task support that (default is True).
+            n_workers (int, optional): The number of workers for concurrent processing (default is 4).
 
         Returns:
             BenchmarkResult: An object containing the benchmarking results.

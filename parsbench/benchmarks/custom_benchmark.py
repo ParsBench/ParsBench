@@ -37,19 +37,22 @@ class CustomBenchmark(Benchmark):
         save_evaluation: bool = False,
         save_benchmark: bool = False,
         output_path: str = None,
+        prefer_concurrency: bool = True,
+        n_workers: int = 4,
     ) -> BenchmarkResult:
         """
         Run the benchmarking process for the given models and tasks.
 
         Parameters:
-            prompt_lang (str): The language of the prompt (default is "fa").
-            prompt_shots (list[int] | None): The list of prompt shots to evaluate, or None to use default.
-            n_first (int | None): The number of prompts to evaluate, or None to use default.
-            sort_by_score (bool): Whether to sort the model benchmarks by average score (default is True).
-            save_matches (bool): Whether to save the matches during evaluation (default is False).
-            save_evaluation (bool): Whether to save the evaluation results (default is False).
-            save_benchmark (bool): Whether to save the benchmark results (default is False).
-            output_path (str): The path to save the results.
+            prompt_lang (str, optional): The language of the prompt (default is "fa").
+            prompt_shots (list[int], optional): The list of prompt shots to evaluate (default is None).
+            n_first (int, optional): The number of initial prompts to consider (default is 200).
+            sort_by_score (bool, optional): Whether to sort the model benchmarks by average score (default is True).
+            save_matches (bool, optional): Flag to save the generated matches (default is False).
+            save_evaluation (bool, optional): Flag to save the evaluation results (default is False).
+            output_path (str, optional): The output path to save the matches and evaluation results.
+            prefer_concurrency (bool, optional): The flag to use concurrent processing if the model and task support that (default is True).
+            n_workers (int, optional): The number of workers for concurrent processing (default is 4).
 
         Returns:
             BenchmarkResult: The result of the benchmarking process.
@@ -72,6 +75,8 @@ class CustomBenchmark(Benchmark):
                         save_matches=save_matches,
                         save_evaluation=save_evaluation,
                         output_path=output_path,
+                        prefer_concurrency=prefer_concurrency,
+                        n_workers=n_workers,
                     )
                     model_evaluations[model.model_name].extend(evaluation_results)
 

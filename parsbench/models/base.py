@@ -16,15 +16,19 @@ class Model(ABC):
 
     Attributes:
         model_name (property): A property representing the name of the model.
+        support_concurrency (bool): A flag indicating if the model supports concurrency.
 
     Methods:
-        get_prompt_completion: An abstract method to get the completion for a given prompt.
-        prompt_formater: An abstract method to format a prompt.
-        generate_completions: A method to generate completions for a list of TaskMatch objects using ThreadPoolExecutor.
+        model_name(self) -> str: Abstract method to return the name of the model.
+        get_prompt_completion(self, prompt: str) -> str: Abstract method to generate completion for a given prompt.
+        prompt_formater(self, prompt: str) -> Union[str, List[Dict]]: Abstract method to format a prompt.
+        generate_completions(self, matches: TaskMatchGroup, prefer_concurrency: bool = True, n_workers: int = 4) -> TaskMatchGroup: Method to generate completions for a list of matches, optionally using concurrency.
 
-    Raises:
-        NotImplementedError: If the abstract methods are not implemented in the subclass.
+    Note:
+        This class should be subclassed to implement the abstract methods.
     """
+
+    support_concurrency: bool = False
 
     @property
     @abstractmethod
@@ -42,7 +46,18 @@ class Model(ABC):
     def generate_completions(
         self,
         matches: "TaskMatchGroup",
+        prefer_concurrency: bool = True,
         n_workers: int = 4,
+    ) -> "TaskMatchGroup":
+        if prefer_concurrency and self.support_concurrency:
+            matches = self._gen_with_concurrency(matches, n_workers=n_workers)
+        else:
+            for match in tqdm(matches, desc="Generating completions"):
+                match.completion = self.get_prompt_completion(match.prompt)
+        return matches
+
+    def _gen_with_concurrency(
+        self, matches: "TaskMatchGroup", n_workers: int = 4
     ) -> "TaskMatchGroup":
         def _gen_single_match_completion(match: "TaskMatch") -> "TaskMatch":
             match.completion = self.get_prompt_completion(match.prompt)

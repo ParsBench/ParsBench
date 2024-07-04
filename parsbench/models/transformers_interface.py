@@ -32,6 +32,8 @@ class PreTrainedTransformerModel(Model):
         get_prompt_completion: Generates a completion for a given prompt using the model and tokenizer.
     """
 
+    support_concurrency: bool = False  # TODO: should support later.
+
     def __init__(
         self,
         model: PreTrainedModel,

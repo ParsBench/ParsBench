@@ -136,6 +136,7 @@ class Task(TaskMatchGenerator, TaskScorer, metaclass=ABCMeta):
         save_matches: bool = False,
         save_evaluation: bool = False,
         output_path: str = None,
+        prefer_concurrency: bool = True,
         n_workers: int = 4,
     ) -> list[EvaluationResult]:
         """
@@ -150,7 +151,8 @@ class Task(TaskMatchGenerator, TaskScorer, metaclass=ABCMeta):
             save_matches (bool, optional): Flag to save the generated matches (default is False).
             save_evaluation (bool, optional): Flag to save the evaluation results (default is False).
             output_path (str, optional): The output path to save the matches and evaluation results.
-            n_workers (int, optional): The number of workers for parallel processing (default is 4).
+            prefer_concurrency (bool, optional): The flag to use concurrent processing if the model and task support that (default is True).
+            n_workers (int, optional): The number of workers for concurrent processing (default is 4).
 
         Returns:
             list[EvaluationResult]: A list of EvaluationResult objects representing the evaluation results.
@@ -200,7 +202,11 @@ class Task(TaskMatchGenerator, TaskScorer, metaclass=ABCMeta):
                     eval_desc = f"sub task '{sub_task}' with " + eval_desc
                 desc = f"Evaluating {eval_desc} prompt:"
                 print(desc)
-                model.generate_completions(match_group, n_workers=n_workers)
+                model.generate_completions(
+                    match_group,
+                    prefer_concurrency=prefer_concurrency,
+                    n_workers=n_workers,
+                )
                 self.score_matches(match_group)
 
                 if save_matches:
