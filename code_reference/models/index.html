@@ -731,6 +731,17 @@
               </div>
             </td>
           </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="parsbench.models.base.Model.support_concurrency">support_concurrency</span></code></td>
+            <td>
+                  <code>bool</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>A flag indicating if the model supports concurrency.</p>
+              </div>
+            </td>
+          </tr>
       </tbody>
     </table>
 
@@ -745,10 +756,18 @@
       </thead>
       <tbody>
             <tr class="doc-section-item">
+              <td><code><span title="parsbench.models.base.Model.model_name">model_name</span></code></td>
+              <td>
+                <div class="doc-md-description">
+                  <p>Abstract method to return the name of the model.</p>
+                </div>
+              </td>
+            </tr>
+            <tr class="doc-section-item">
               <td><code><span title="parsbench.models.base.Model.get_prompt_completion">get_prompt_completion</span></code></td>
               <td>
                 <div class="doc-md-description">
-                  <p>An abstract method to get the completion for a given prompt.</p>
+                  <p>str) -&gt; str: Abstract method to generate completion for a given prompt.</p>
                 </div>
               </td>
             </tr>
@@ -756,7 +775,7 @@
               <td><code><span title="parsbench.models.base.Model.prompt_formater">prompt_formater</span></code></td>
               <td>
                 <div class="doc-md-description">
-                  <p>An abstract method to format a prompt.</p>
+                  <p>str) -&gt; Union[str, List[Dict]]: Abstract method to format a prompt.</p>
                 </div>
               </td>
             </tr>
@@ -764,7 +783,7 @@
               <td><code><span title="parsbench.models.base.Model.generate_completions">generate_completions</span></code></td>
               <td>
                 <div class="doc-md-description">
-                  <p>A method to generate completions for a list of TaskMatch objects using ThreadPoolExecutor.</p>
+                  <p>TaskMatchGroup, prefer_concurrency: bool = True, n_workers: int = 4) -&gt; TaskMatchGroup: Method to generate completions for a list of matches, optionally using concurrency.</p>
                 </div>
               </td>
             </tr>
@@ -772,28 +791,10 @@
     </table>
 
 
-<p><span class="doc-section-title">Raises:</span></p>
-    <table>
-      <thead>
-        <tr>
-          <th>Type</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-          <tr class="doc-section-item">
-            <td>
-                  <code>NotImplementedError</code>
-            </td>
-            <td>
-              <div class="doc-md-description">
-                <p>If the abstract methods are not implemented in the subclass.</p>
-              </div>
-            </td>
-          </tr>
-      </tbody>
-    </table>
-
+<details class="note" open>
+  <summary>Note</summary>
+  <p>This class should be subclassed to implement the abstract methods.</p>
+</details>
               <details class="quote">
                 <summary>Source code in <code>parsbench/models/base.py</code></summary>
                 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">13</span>
@@ -850,21 +851,42 @@
 <span class="normal">64</span>
 <span class="normal">65</span>
 <span class="normal">66</span>
-<span class="normal">67</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">Model</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span>
+<span class="normal">80</span>
+<span class="normal">81</span>
+<span class="normal">82</span>
+<span class="normal">83</span>
+<span class="normal">84</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">Model</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    An abstract base class representing a model.</span>
 
 <span class="sd">    Attributes:</span>
 <span class="sd">        model_name (property): A property representing the name of the model.</span>
+<span class="sd">        support_concurrency (bool): A flag indicating if the model supports concurrency.</span>
 
 <span class="sd">    Methods:</span>
-<span class="sd">        get_prompt_completion: An abstract method to get the completion for a given prompt.</span>
-<span class="sd">        prompt_formater: An abstract method to format a prompt.</span>
-<span class="sd">        generate_completions: A method to generate completions for a list of TaskMatch objects using ThreadPoolExecutor.</span>
+<span class="sd">        model_name(self) -&gt; str: Abstract method to return the name of the model.</span>
+<span class="sd">        get_prompt_completion(self, prompt: str) -&gt; str: Abstract method to generate completion for a given prompt.</span>
+<span class="sd">        prompt_formater(self, prompt: str) -&gt; Union[str, List[Dict]]: Abstract method to format a prompt.</span>
+<span class="sd">        generate_completions(self, matches: TaskMatchGroup, prefer_concurrency: bool = True, n_workers: int = 4) -&gt; TaskMatchGroup: Method to generate completions for a list of matches, optionally using concurrency.</span>
 
-<span class="sd">    Raises:</span>
-<span class="sd">        NotImplementedError: If the abstract methods are not implemented in the subclass.</span>
+<span class="sd">    Note:</span>
+<span class="sd">        This class should be subclassed to implement the abstract methods.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">support_concurrency</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
 
     <span class="nd">@property</span>
     <span class="nd">@abstractmethod</span>
@@ -882,7 +904,20 @@
     <span class="k">def</span> <span class="nf">generate_completions</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">matches</span><span class="p">:</span> <span class="s2">&quot;TaskMatchGroup&quot;</span><span class="p">,</span>
+        <span class="n">prefer_concurrency</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
         <span class="n">n_workers</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;TaskMatchGroup&quot;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">prefer_concurrency</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">support_concurrency</span><span class="p">:</span>
+            <span class="n">matches</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_gen_with_concurrency</span><span class="p">(</span><span class="n">matches</span><span class="p">,</span> <span class="n">n_workers</span><span class="o">=</span><span class="n">n_workers</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">match</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span>
+                <span class="n">matches</span><span class="p">,</span> <span class="n">total</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">matches</span><span class="p">),</span> <span class="n">desc</span><span class="o">=</span><span class="s2">&quot;Generating completions&quot;</span>
+            <span class="p">):</span>
+                <span class="k">match</span><span class="o">.</span><span class="n">completion</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_prompt_completion</span><span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">prompt</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">matches</span>
+
+    <span class="k">def</span> <span class="nf">_gen_with_concurrency</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">matches</span><span class="p">:</span> <span class="s2">&quot;TaskMatchGroup&quot;</span><span class="p">,</span> <span class="n">n_workers</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;TaskMatchGroup&quot;</span><span class="p">:</span>
         <span class="k">def</span> <span class="nf">_gen_single_match_completion</span><span class="p">(</span><span class="n">match</span><span class="p">:</span> <span class="s2">&quot;TaskMatch&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;TaskMatch&quot;</span><span class="p">:</span>
             <span class="k">match</span><span class="o">.</span><span class="n">completion</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_prompt_completion</span><span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">prompt</span><span class="p">)</span>
@@ -1140,7 +1175,9 @@
 <span class="normal">65</span>
 <span class="normal">66</span>
 <span class="normal">67</span>
-<span class="normal">68</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">OpenAIModel</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">OpenAIModel</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A model interface for OpenAI-like APIs.</span>
 
@@ -1159,6 +1196,8 @@
 <span class="sd">        get_prompt_completion: Generates completion for a given prompt using the OpenAI API.</span>
 <span class="sd">        generate_completions: Generates completions for a list of TaskMatch objects using ThreadPoolExecutor.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">support_concurrency</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
@@ -1413,7 +1452,9 @@
 <span class="normal">82</span>
 <span class="normal">83</span>
 <span class="normal">84</span>
-<span class="normal">85</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">PreTrainedTransformerModel</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+<span class="normal">85</span>
+<span class="normal">86</span>
+<span class="normal">87</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">PreTrainedTransformerModel</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A model interface for pre-trained transformer models.</span>
 
@@ -1429,6 +1470,8 @@
 <span class="sd">        prompt_formater: Formats a prompt by combining system instruction and user input.</span>
 <span class="sd">        get_prompt_completion: Generates a completion for a given prompt using the model and tokenizer.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">support_concurrency</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># TODO: should support later.</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
