@@ -12,7 +12,7 @@ Tasks are used to test and evaluate the Model responses. They come with a datase
 | ParsiNLU Machine Translation Fa -> En | Bleu | [ParsiNLU](https://huggingface.co/datasets/persiannlp/parsinlu_translation_fa_en) |
 | PersiNLU Multiple Choice | Exact Match (Accuracy) | [ParsiNLU](https://github.com/persiannlp/parsinlu) |
 | ParsiNLU Reading Comprehension | Common Tokens (F1) | [ParsiNLU](https://huggingface.co/datasets/persiannlp/parsinlu_reading_comprehension) |
-| Persian NER | NER Exact Match (F1) | [ParsiNLU](https://github.com/HaniehP/PersianNER) |
+| Persian NER | NER Exact Match (F1) | [PersianNER](https://github.com/HaniehP/PersianNER) |
 | Persian Math | Math Equivalence (Accuracy) | [Source](https://github.com/Ipouyall/Benchmarking_ChatGPT_for_Persian) |
 | ConjNLI Entailment | Exact Match (F1) | [Source](https://github.com/Ipouyall/Benchmarking_ChatGPT_for_Persian) |
 

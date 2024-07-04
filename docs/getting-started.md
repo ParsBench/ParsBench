@@ -51,6 +51,7 @@ ollama run aya
 Then we benchmark those models using the ParsBench.
 
 ```python
+from parsbench.benchmarks import CustomBenchmark
 from parsbench.models import OpenAIModel
 from parsbench.tasks import ParsiNLUMultipleChoice, PersianMath, ParsiNLUReadingComprehension
 

@@ -4,6 +4,7 @@ version = "0.1.0"
 description = "ParsBench provides toolkits for benchmarking LLMs based on the Persian language tasks."
 authors = ["Shahriar Shariati <shahriarshm81@gmail.com>"]
 readme = "README.md"
+license = [{file = "LICENSE"}]
 packages = [{include = "parsbench"}]
 
 [tool.poetry.dependencies]

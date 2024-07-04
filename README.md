@@ -12,7 +12,7 @@ ParsBench provides toolkits for benchmarking Large Language Models (LLMs) based 
 
 I was trying to fine-tune an open-source LLM for the Persian language. I needed some evaluation to test the performance and utility of my LLM. It leads me to research and find [this paper](https://arxiv.org/abs/2404.02403). It's great work that they prepared some datasets and evaluation methods to test on ChatGPT. They even shared their code in this [repository](https://github.com/Ipouyall/Benchmarking_ChatGPT_for_Persian).
 
-So, I thought that I should build a handy framework that includes various tasks and datasets for evaluating LLMs based on the Persian language.
+So, I thought that I should build a handy framework that includes various tasks and datasets for evaluating LLMs based on the Persian language. I used some parts of their work (Datasets, Metrics, Basic prompt templates) in this library.
 
 ## Installation
 
@@ -65,6 +65,7 @@ ollama run aya
 Then we benchmark those models using the ParsBench.
 
 ```python
+from parsbench.benchmarks import CustomBenchmark
 from parsbench.models import OpenAIModel
 from parsbench.tasks import ParsiNLUMultipleChoice, PersianMath, ParsiNLUReadingComprehension
 
@@ -108,7 +109,7 @@ result.show_radar_plot()
 | ParsiNLU Machine Translation Fa -> En | Bleu | [ParsiNLU](https://huggingface.co/datasets/persiannlp/parsinlu_translation_fa_en) |
 | PersiNLU Multiple Choice | Exact Match (Accuracy) | [ParsiNLU](https://github.com/persiannlp/parsinlu) |
 | ParsiNLU Reading Comprehension | Common Tokens (F1) | [ParsiNLU](https://huggingface.co/datasets/persiannlp/parsinlu_reading_comprehension) |
-| Persian NER | NER Exact Match (F1) | [ParsiNLU](https://github.com/HaniehP/PersianNER) |
+| Persian NER | NER Exact Match (F1) | [PersianNER](https://github.com/HaniehP/PersianNER) |
 | Persian Math | Math Equivalence (Accuracy) | [Source](https://github.com/Ipouyall/Benchmarking_ChatGPT_for_Persian) |
 | ConjNLI Entailment | Exact Match (F1) | [Source](https://github.com/Ipouyall/Benchmarking_ChatGPT_for_Persian) |
 
@@ -116,11 +117,11 @@ You can import the class of above tasks from `parsbench.tasks` and use it for ev
 
 ## Contributing
 
-Contributions are welcome! Please refer to the [contribution guidelines](contribution.md) for more information on how to contribute.
+Contributions are welcome! Please refer to the [contribution guidelines](docs/contribution.md) for more information on how to contribute.
 
 ## License
 
-ParsBench is distributed under the MIT License.
+ParsBench is distributed under the Apache-2.0 license.
 
 ## Contact Information
 
