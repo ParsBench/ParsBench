@@ -1,6 +1,6 @@
-import re
 from pathlib import Path
 
+import datasets
 from sklearn.metrics import f1_score
 
 from parsbench.tasks.base import (
@@ -13,17 +13,40 @@ from parsbench.tasks.base import (
 )
 
 PROMPTS_PATH = Path(__file__).parent / "prompts"
-ACCEPTED_TARGETS = ["-3", "-2", "-1", "0", "1", "2", "3"]
+
+ACCEPTED_TARGETS = ["POSITIVE", "NEGATIVE", "NEUTRAL", "OTHER"]
+DATASET_TARGETS_MAPPING = {
+    "-2": "NEGATIVE",
+    "-1": "NEGATIVE",
+    "0": "NEUTRAL",
+    "1": "POSITIVE",
+    "2": "POSITIVE",
+    "3": "OTHER",
+}
+
+
+class _SentimentDataLoader(HuggingFaceDataLoader):
+    def load(self) -> list[dict]:
+        ds = datasets.load_dataset(self.data_path, split=self.split)
+        ds = ds.filter(lambda data: data["aspect"] == "کلی")
+
+        def _label_mapper(data):
+            data["label"] = DATASET_TARGETS_MAPPING[data["label"]]
+            return data
+
+        ds = ds.map(_label_mapper)
+
+        return ds.to_list()
 
 
 class ParsiNLUSentimentAnalysis(Task):
     task_name: str = "Sentiment Analysis"
     task_category: TaskCategory = TaskCategory.CLASSIC
 
-    data_loader: HuggingFaceDataLoader = HuggingFaceDataLoader(
+    data_loader: HuggingFaceDataLoader = _SentimentDataLoader(
         data_path="persiannlp/parsinlu_sentiment",
         split="test_food",
-    ).with_filter(lambda data: data["aspect"] == "کلی")
+    )
 
     prompt_template: PromptTemplate = PromptTemplate(
         language_templates=LazyLoadTemplates(
@@ -40,11 +63,10 @@ class ParsiNLUSentimentAnalysis(Task):
 
     def score_matches(self, matches: TaskMatchGroup) -> TaskMatchGroup:
         def _format_completion(completion):
-            completion = completion.replace("'", "")
-            match = re.match(r"(-?\d)", completion)
-            if not match or match[0] not in ACCEPTED_TARGETS:
-                return "-4"
-            return match[0]
+            for target in ACCEPTED_TARGETS:
+                if target in completion:
+                    return target
+            return ""
 
         matches.format_completions(_format_completion)
 
