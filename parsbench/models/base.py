@@ -7,7 +7,7 @@ from tqdm import tqdm
 if TYPE_CHECKING:
     from parsbench.tasks.base import TaskMatch, TaskMatchGroup
 
-DEFUALT_INSTRUCTION_PROMPT = "You are a helpful assistant."
+DEFAULT_INSTRUCTION_PROMPT = "You are a helpful assistant."
 
 
 class Model(ABC):
@@ -21,7 +21,7 @@ class Model(ABC):
     Methods:
         model_name(self) -> str: Abstract method to return the name of the model.
         get_prompt_completion(self, prompt: str) -> str: Abstract method to generate completion for a given prompt.
-        prompt_formater(self, prompt: str) -> Union[str, List[Dict]]: Abstract method to format a prompt.
+        prompt_formatter(self, prompt: str) -> Union[str, List[Dict]]: Abstract method to format a prompt.
         generate_completions(self, matches: TaskMatchGroup, prefer_concurrency: bool = True, n_workers: int = 4) -> TaskMatchGroup: Method to generate completions for a list of matches, optionally using concurrency.
 
     Note:
@@ -40,7 +40,7 @@ class Model(ABC):
         pass
 
     @abstractmethod
-    def prompt_formater(self, prompt: str) -> str | list[dict]:
+    def prompt_formatter(self, prompt: str) -> str | list[dict]:
         pass
 
     def generate_completions(

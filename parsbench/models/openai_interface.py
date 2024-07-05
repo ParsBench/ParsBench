@@ -1,6 +1,6 @@
 from openai import OpenAI
 
-from .base import DEFUALT_INSTRUCTION_PROMPT, Model
+from .base import DEFAULT_INSTRUCTION_PROMPT, Model
 
 
 class OpenAIModel(Model):
@@ -18,7 +18,7 @@ class OpenAIModel(Model):
 
     Methods:
         model_name: Returns the name of the model.
-        prompt_formater: Formats a given prompt into a list of messages.
+        prompt_formatter: Formats a given prompt into a list of messages.
         get_prompt_completion: Generates completion for a given prompt using the OpenAI API.
         generate_completions: Generates completions for a list of TaskMatch objects using ThreadPoolExecutor.
     """
@@ -30,7 +30,7 @@ class OpenAIModel(Model):
         api_base_url: str,
         api_secret_key: str,
         model: str,
-        intruction_prompt: str = DEFUALT_INSTRUCTION_PROMPT,
+        instruction_prompt: str = DEFAULT_INSTRUCTION_PROMPT,
         model_parameters: dict = None,
         completion_parameters: dict = None,
         **kwargs
@@ -38,7 +38,7 @@ class OpenAIModel(Model):
         self.api_base_url = api_base_url
         self.api_secret_key = api_secret_key
         self.model = model
-        self.intruction_prompt = intruction_prompt
+        self.instruction_prompt = instruction_prompt
         self.model_parameters = model_parameters or dict()
         self.completion_parameters = completion_parameters or dict(temperature=0.7)
 
@@ -52,19 +52,19 @@ class OpenAIModel(Model):
     def model_name(self) -> str:
         return self.model
 
-    def prompt_formater(self, prompt: str) -> list[dict]:
+    def prompt_formatter(self, prompt: str) -> list[dict]:
         messages = [
-            {"role": "system", "content": self.intruction_prompt},
+            {"role": "system", "content": self.instruction_prompt},
             {"role": "user", "content": prompt},
         ]
         return messages
 
     def get_prompt_completion(self, prompt: str) -> str:
-        messages = self.prompt_formater(prompt)
+        messages = self.prompt_formatter(prompt)
         completion = self.client.chat.completions.create(
             model=self.model,
             messages=messages,
             **self.completion_parameters,
-            stream=False,  # Alwas override this parameter.
+            stream=False,  # Always override this parameter.
         )
         return completion.choices[0].message.content
