@@ -50,7 +50,7 @@ class PreTrainedTransformerModel(Model):
 
     @property
     def model_name(self) -> str:
-        return self.model.base_model_prefix
+        return self.model.config_class.name_or_path
 
     def prompt_formater(self, prompt: str) -> str:
         messages = [
