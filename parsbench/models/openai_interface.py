@@ -18,7 +18,8 @@ class OpenAIModel(Model):
 
     Methods:
         model_name: Returns the name of the model.
-        prompt_formatter: Formats a given prompt into a list of messages.
+        prompt_formatter: Formats a given prompt into a list of messages. Could be overloaded.
+        completion_formatter: Method to format the model completion. Could be overloaded.
         get_prompt_completion: Generates completion for a given prompt using the OpenAI API.
         generate_completions: Generates completions for a list of TaskMatch objects using ThreadPoolExecutor.
     """

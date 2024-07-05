@@ -20,9 +20,10 @@ class Model(ABC):
 
     Methods:
         model_name(self) -> str: Abstract method to return the name of the model.
-        get_prompt_completion(self, prompt: str) -> str: Abstract method to generate completion for a given prompt.
-        prompt_formatter(self, prompt: str) -> Union[str, List[Dict]]: Abstract method to format a prompt.
-        generate_completions(self, matches: TaskMatchGroup, prefer_concurrency: bool = True, n_workers: int = 4) -> TaskMatchGroup: Method to generate completions for a list of matches, optionally using concurrency.
+        get_prompt_completion (self, prompt: str) -> str: Abstract method to generate completion for a given prompt.
+        prompt_formatter (self, prompt: str) -> Union[str, List[Dict]]: Abstract method to format a prompt.
+        completion_formatter (self, completion: str) -> str: Method to format the model completion.
+        generate_completions (self, matches: TaskMatchGroup, prefer_concurrency: bool = True, n_workers: int = 4) -> TaskMatchGroup: Method to generate completions for a list of matches, optionally using concurrency.
 
     Note:
         This class should be subclassed to implement the abstract methods.
@@ -43,6 +44,9 @@ class Model(ABC):
     def prompt_formatter(self, prompt: str) -> str | list[dict]:
         pass
 
+    def completion_formatter(self, completion: str) -> str:
+        return completion
+
     def generate_completions(
         self,
         matches: "TaskMatchGroup",
@@ -55,14 +59,18 @@ class Model(ABC):
             for match in tqdm(
                 matches, total=len(matches), desc="Generating completions"
             ):
-                match.completion = self.get_prompt_completion(match.prompt)
+                match.completion = self.completion_formatter(
+                    self.get_prompt_completion(match.prompt)
+                )
         return matches
 
     def _gen_with_concurrency(
         self, matches: "TaskMatchGroup", n_workers: int = 4
     ) -> "TaskMatchGroup":
         def _gen_single_match_completion(match: "TaskMatch") -> "TaskMatch":
-            match.completion = self.get_prompt_completion(match.prompt)
+            match.completion = self.completion_formatter(
+                self.get_prompt_completion(match.prompt)
+            )
             return match
 
         with ThreadPoolExecutor(max_workers=n_workers) as executor:

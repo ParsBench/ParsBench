@@ -28,7 +28,8 @@ class PreTrainedTransformerModel(Model):
 
     Methods:
         model_name: Returns the base model prefix of the transformer model.
-        prompt_formatter: Formats a prompt by combining system instruction and user input.
+        prompt_formatter: Formats a prompt by combining system instruction and user input. Could be overloaded.
+        completion_formatter: Method to format the model completion. Could be overloaded.
         get_prompt_completion: Generates a completion for a given prompt using the model and tokenizer.
     """
 
