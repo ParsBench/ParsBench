@@ -735,7 +735,8 @@ You can load any pre-trained model and tokenizer you want and pass it to the <co
 
 <span class="n">tf_model</span> <span class="o">=</span> <span class="n">PreTrainedTransformerModel</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">tokenizer</span><span class="o">=</span><span class="n">tokenizer</span><span class="p">)</span>
 
-<span class="n">result</span> <span class="o">=</span> <span class="n">PersianMath</span><span class="p">()</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">tf_model</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">PersianMath</span><span class="p">()</span> <span class="k">as</span> <span class="n">task</span><span class="p">:</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">task</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">tf_model</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="create-your-own-interface">Create Your Own Interface</h2>
 <p>You can easily create your own model iterface by inheriting the <code>Model</code> abstract class:</p>

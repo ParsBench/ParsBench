@@ -948,16 +948,7 @@
 
               <details class="quote">
                 <summary>Source code in <code>parsbench/tasks/base/task.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">114</span>
-<span class="normal">115</span>
-<span class="normal">116</span>
-<span class="normal">117</span>
-<span class="normal">118</span>
-<span class="normal">119</span>
-<span class="normal">120</span>
-<span class="normal">121</span>
-<span class="normal">122</span>
-<span class="normal">123</span>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">123</span>
 <span class="normal">124</span>
 <span class="normal">125</span>
 <span class="normal">126</span>
@@ -1075,7 +1066,16 @@
 <span class="normal">238</span>
 <span class="normal">239</span>
 <span class="normal">240</span>
-<span class="normal">241</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">Task</span><span class="p">(</span><span class="n">TaskMatchGenerator</span><span class="p">,</span> <span class="n">TaskScorer</span><span class="p">,</span> <span class="n">metaclass</span><span class="o">=</span><span class="n">ABCMeta</span><span class="p">):</span>
+<span class="normal">241</span>
+<span class="normal">242</span>
+<span class="normal">243</span>
+<span class="normal">244</span>
+<span class="normal">245</span>
+<span class="normal">246</span>
+<span class="normal">247</span>
+<span class="normal">248</span>
+<span class="normal">249</span>
+<span class="normal">250</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">Task</span><span class="p">(</span><span class="n">TaskMatchGenerator</span><span class="p">,</span> <span class="n">TaskScorer</span><span class="p">,</span> <span class="n">metaclass</span><span class="o">=</span><span class="n">ABCMeta</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Task class represents a task that combines functionality from TaskMatchGenerator and TaskScorer.</span>
 
@@ -1140,11 +1140,11 @@
             <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">sub_tasks</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Sub tasks are not defined.&quot;</span><span class="p">)</span>
 
-            <span class="n">invalid_sub_tasks</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sub_tasks</span><span class="p">)</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">sub_tasks</span><span class="p">)</span>
+            <span class="n">invalid_sub_tasks</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">sub_tasks</span><span class="p">)</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sub_tasks</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">invalid_sub_tasks</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sub tasks </span><span class="si">{</span><span class="n">invalid_sub_tasks</span><span class="si">}</span><span class="s2"> are not defined.&quot;</span><span class="p">)</span>
 
-        <span class="n">sub_tasks</span> <span class="o">=</span> <span class="n">sub_tasks</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">sub_tasks</span>
+        <span class="n">sub_tasks</span> <span class="o">=</span> <span class="n">sub_tasks</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_selected_sub_tasks</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">sub_tasks</span>
 
         <span class="n">evaluation_results</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">EvaluationResult</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
 
@@ -1444,16 +1444,7 @@
 
             <details class="quote">
               <summary>Source code in <code>parsbench/tasks/base/task.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">129</span>
-<span class="normal">130</span>
-<span class="normal">131</span>
-<span class="normal">132</span>
-<span class="normal">133</span>
-<span class="normal">134</span>
-<span class="normal">135</span>
-<span class="normal">136</span>
-<span class="normal">137</span>
-<span class="normal">138</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">138</span>
 <span class="normal">139</span>
 <span class="normal">140</span>
 <span class="normal">141</span>
@@ -1549,7 +1540,16 @@
 <span class="normal">231</span>
 <span class="normal">232</span>
 <span class="normal">233</span>
-<span class="normal">234</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">evaluate</span><span class="p">(</span>
+<span class="normal">234</span>
+<span class="normal">235</span>
+<span class="normal">236</span>
+<span class="normal">237</span>
+<span class="normal">238</span>
+<span class="normal">239</span>
+<span class="normal">240</span>
+<span class="normal">241</span>
+<span class="normal">242</span>
+<span class="normal">243</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">evaluate</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">model</span><span class="p">:</span> <span class="n">Model</span><span class="p">,</span>
     <span class="n">prompt_lang</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;fa&quot;</span><span class="p">,</span>
@@ -1599,11 +1599,11 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">sub_tasks</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Sub tasks are not defined.&quot;</span><span class="p">)</span>
 
-        <span class="n">invalid_sub_tasks</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sub_tasks</span><span class="p">)</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">sub_tasks</span><span class="p">)</span>
+        <span class="n">invalid_sub_tasks</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">sub_tasks</span><span class="p">)</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sub_tasks</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">invalid_sub_tasks</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sub tasks </span><span class="si">{</span><span class="n">invalid_sub_tasks</span><span class="si">}</span><span class="s2"> are not defined.&quot;</span><span class="p">)</span>
 
-    <span class="n">sub_tasks</span> <span class="o">=</span> <span class="n">sub_tasks</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">sub_tasks</span>
+    <span class="n">sub_tasks</span> <span class="o">=</span> <span class="n">sub_tasks</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_selected_sub_tasks</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">sub_tasks</span>
 
     <span class="n">evaluation_results</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">EvaluationResult</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
 
@@ -3081,7 +3081,13 @@
 <span class="normal">108</span>
 <span class="normal">109</span>
 <span class="normal">110</span>
-<span class="normal">111</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
 <span class="k">class</span> <span class="nc">EvaluationResult</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A data class representing the evaluation result for a model on a specific task, including the model name, task name, task category, score name, prompt shot results, and optional sub-task.</span>
@@ -3147,7 +3153,13 @@
             <span class="n">writer</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
 
     <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Model: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">model_name</span><span class="si">}</span><span class="se">\n</span><span class="s2">Task: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">task_name</span><span class="si">}</span><span class="se">\n</span><span class="s2">Score:</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Model: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">model_name</span><span class="si">}</span><span class="se">\n</span><span class="s2">Task: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">task_name</span><span class="si">}</span><span class="s2">&quot;</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">sub_task</span><span class="p">:</span>
+            <span class="n">text</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot; (</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">sub_task</span><span class="si">}</span><span class="s2">)&quot;</span>
+
+        <span class="n">text</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Score:</span><span class="se">\n</span><span class="s2">&quot;</span>
+
         <span class="k">for</span> <span class="n">psr</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">prompt_shot_results</span><span class="p">:</span>
             <span class="n">text</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot; - </span><span class="si">{</span><span class="n">psr</span><span class="o">.</span><span class="n">n_shots</span><span class="si">}</span><span class="s2">-shot prompt: </span><span class="si">{</span><span class="n">psr</span><span class="o">.</span><span class="n">score</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
         <span class="k">return</span> <span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
