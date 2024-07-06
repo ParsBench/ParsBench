@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.1.3 - 2024-07-06
+
+### Fixed
+
+- Fix `model_name` property in PreTrainedTransformerModel.
+
+### Added
+
+- Add Persian MMLU (Khayyam Challenge) task.
+- Add `select_sub_tasks` to the task class.
+
 ## 0.1.2 - 2024-07-06
 
 ### Fixed

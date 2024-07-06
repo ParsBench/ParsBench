@@ -112,6 +112,7 @@ result.show_radar_plot()
 | Persian NER | NER Exact Match (F1) | [PersianNER](https://github.com/HaniehP/PersianNER) |
 | Persian Math | Math Equivalence (Accuracy) | [Source](https://github.com/Ipouyall/Benchmarking_ChatGPT_for_Persian) |
 | ConjNLI Entailment | Exact Match (F1) | [Source](https://github.com/Ipouyall/Benchmarking_ChatGPT_for_Persian) |
+| Persian MMLU (Khayyam Challenge) | Exact Match (Accuracy) | [Khayyam Challenge](https://huggingface.co/datasets/raia-center/khayyam-challenge) |
 
 You can import the class of above tasks from `parsbench.tasks` and use it for evaluating your model.
 
