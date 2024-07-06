@@ -99,7 +99,13 @@ class EvaluationResult:
             writer.write(self.to_dict())
 
     def __str__(self) -> str:
-        text = f"Model: {self.model_name}\nTask: {self.task_name}\nScore:\n"
+        text = f"Model: {self.model_name}\nTask: {self.task_name}"
+
+        if self.sub_task:
+            text += f" ({self.sub_task})"
+
+        text += "\nScore:\n"
+
         for psr in self.prompt_shot_results:
             text += f" - {psr.n_shots}-shot prompt: {psr.score:.4f}\n"
         return text.strip("\n")

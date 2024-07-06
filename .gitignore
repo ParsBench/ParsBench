@@ -169,3 +169,6 @@ notes/
 
 # DS Store
 .DS_Store
+
+# Local Private Dev Dir
+dev/

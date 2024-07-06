@@ -54,7 +54,8 @@ tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen2-72B-Instruct")
 
 tf_model = PreTrainedTransformerModel(model=model, tokenizer=tokenizer)
 
-result = PersianMath().evaluate(tf_model)
+with PersianMath() as task:
+    results = task.evaluate(tf_model)
 ```
 
 ## Create Your Own Interface

@@ -1,4 +1,5 @@
 from collections import defaultdict
+import inspect
 
 from parsbench.models import Model
 from parsbench.tasks.base import EvaluationResult, Task
@@ -59,10 +60,17 @@ class CustomBenchmark(Benchmark):
         """
         model_evaluations: dict[str, list[EvaluationResult]] = defaultdict(list)
 
-        for task_cls in self.tasks:
-            print(f"Evaluating {task_cls.task_name}:")
+        for task in self.tasks:
+            print(f"Evaluating {task.task_name}:")
 
-            task: Task = task_cls()
+            if inspect.isclass(task):
+                if issubclass(task, Task):
+                    task: Task = task()
+                else:
+                    raise TypeError(
+                        f"{task} is not a subclass/instance of the Task class."
+                    )
+
             with task:
                 for model in self.models:
                     print(f"Model: {model.model_name}")

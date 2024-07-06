@@ -39,7 +39,7 @@ class TaskDataProvider:
         if self._data is None:
             if raise_exc:
                 raise RuntimeError(
-                    "Data is not loaded. You should use this method inside a context manager or muanlly run load_data."
+                    "Data is not loaded. You should use this method inside a context manager or manually run load_data."
                 )
             return False
         return True
@@ -51,6 +51,15 @@ class TaskMatchGenerator(TaskDataProvider):
 
     sub_task_key: str | None = None
     sub_tasks: list[str] | None = None
+    _selected_sub_tasks: list[str] | None = None
+
+    def select_sub_tasks(self, sub_tasks: list[str]) -> "Task":
+        invalid_sub_tasks = set(sub_tasks) - set(self.sub_tasks)
+        if invalid_sub_tasks:
+            raise Exception(f"Sub tasks {invalid_sub_tasks} are not defined.")
+
+        self._selected_sub_tasks = sub_tasks
+        return self
 
     def generate_matches(
         self,
@@ -176,11 +185,11 @@ class Task(TaskMatchGenerator, TaskScorer, metaclass=ABCMeta):
             if not self.sub_tasks:
                 raise Exception("Sub tasks are not defined.")
 
-            invalid_sub_tasks = set(self.sub_tasks) - set(sub_tasks)
+            invalid_sub_tasks = set(sub_tasks) - set(self.sub_tasks)
             if invalid_sub_tasks:
                 raise Exception(f"Sub tasks {invalid_sub_tasks} are not defined.")
 
-        sub_tasks = sub_tasks or self.sub_tasks
+        sub_tasks = sub_tasks or self._selected_sub_tasks or self.sub_tasks
 
         evaluation_results: list[EvaluationResult] = []
 

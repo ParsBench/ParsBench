@@ -41,7 +41,11 @@ class ModelBenchmarkResult:
     def __str__(self) -> str:
         text = f"Model: {self.model_name}\nEvaluation Results:\n"
         for er in self.evaluation_results:
-            text += f"- {er.task_name}:\n"
+            text += f"- {er.task_name}"
+            if er.sub_task:
+                text += f" ({er.sub_task}):\n"
+            else:
+                text += ":\n"
             for psr in er.prompt_shot_results:
                 text += f"  - {psr.n_shots}-shot prompt: {psr.score:.4f}\n"
         return text.strip("\n")

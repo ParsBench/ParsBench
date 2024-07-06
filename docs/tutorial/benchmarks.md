@@ -52,7 +52,6 @@ To benchmark your model based on all existing tasks in the framework. You can us
 ```python
 from parsbench.benchmarks import CustomBenchmark
 from parsbench.models import OpenAIModel
-from parsbench.tasks import ParsiNLUMultipleChoice
 from parsbench.tasks.utils import load_all_tasks
 
 aya_model = OpenAIModel(
