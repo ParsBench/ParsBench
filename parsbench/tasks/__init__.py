@@ -6,7 +6,7 @@ from .machine_translation import (
     ParsiNLUMachineTranslationFaEn,
 )
 from .math import PersianMath
-from .multiple_choice import ParsiNLUMultipleChoice
+from .multiple_choice import ParsiNLUMultipleChoice, PersianMMLU
 from .ner import PersianNER
 from .reading_comprehension import ParsiNLUReadingComprehension
 
@@ -18,6 +18,7 @@ __all__ = [
     "ParsiNLUMachineTranslationEnFa",
     "PersianMath",
     "ParsiNLUMultipleChoice",
+    "PersianMMLU",
     "PersianNER",
     "ParsiNLUReadingComprehension",
     "ParsiNLUSentimentAnalysis",
