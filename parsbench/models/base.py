@@ -86,7 +86,7 @@ class Model(ABC):
             for future in tqdm(
                 as_completed(futures), total=len(futures), desc="Generating completions"
             ):
-                pass
+                future.result()
 
         matches.matches.sort(key=lambda m: m.id)
         return matches
