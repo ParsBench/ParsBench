@@ -1,5 +1,7 @@
 # ParsBench
 
+<img src="imgs/banner-black.svg" height="256px" width="512px">
+
 ## Overview
 
 ParsBench provides toolkits for benchmarking Large Language Models (LLMs) based on the Persian language. It includes various tasks for evaluating LLMs on different topics, benchmarking tools to compare multiple models and rank them, and an easy, fully customizable API for developers to create custom models, tasks, scores, and benchmarks.

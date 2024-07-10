@@ -8,8 +8,11 @@ repo_name: parsbench
 
 theme:
   name: material
+  logo: imgs/logo-black.svg
+  favicon: imgs/logo.svg
   palette:
-    primary: teal
+    primary: white
+    accent: teal
 
 plugins:
   - search
