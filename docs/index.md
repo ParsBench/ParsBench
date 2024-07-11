@@ -1,6 +1,9 @@
 # ParsBench
 
-<img src="imgs/banner-black.svg" height="256px" width="512px">
+[![Beanie](https://raw.githubusercontent.com/shahriarshm/parsbench/main/docs/imgs/banner-black.png)](https://github.com/shahriarshm/parsbench)
+
+[![docs](https://shields.io/badge/-docs-blue)](https://shahriarshm.github.io/parsbench/)
+[![pypi](https://img.shields.io/pypi/v/parsbench.svg)](https://pypi.python.org/pypi/parsbench)
 
 ## Overview
 
