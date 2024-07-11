@@ -1,4 +1,5 @@
-from anthropic import Anthropic
+import time
+from anthropic import Anthropic, RateLimitError
 
 from .base import DEFAULT_INSTRUCTION_PROMPT, Model
 
@@ -14,6 +15,9 @@ class AnthropicModel(Model):
         instruction_prompt (str): The default instruction prompt for the model.
         model_parameters (dict): Additional parameters specific to the model.
         completion_parameters (dict): Parameters for generating completions.
+        retry_on_ratelimit: bool = False,
+        cooldown_interval: int = 10,
+        max_retries: int = 1,
         client (Anthropic): An instance of the Anthropic client for API interactions.
 
     Methods:
@@ -33,6 +37,9 @@ class AnthropicModel(Model):
         instruction_prompt: str = DEFAULT_INSTRUCTION_PROMPT,
         model_parameters: dict = None,
         completion_parameters: dict = None,
+        retry_on_ratelimit: bool = False,
+        cooldown_interval: int = 10,
+        max_retries: int = 1,
         **kwargs
     ):
         self.api_base_url = api_base_url
@@ -43,6 +50,9 @@ class AnthropicModel(Model):
         self.completion_parameters = completion_parameters or dict(
             max_tokens=1024, temperature=0.7
         )
+        self.retry_on_ratelimit = retry_on_ratelimit
+        self.cooldown_interval = cooldown_interval
+        self.max_retries = max_retries
 
         self.client = Anthropic(
             base_url=self.api_base_url,
@@ -62,11 +72,21 @@ class AnthropicModel(Model):
 
     def get_prompt_completion(self, prompt: str) -> str:
         messages = self.prompt_formatter(prompt)
-        message = self.client.messages.create(
-            model=self.model,
-            messages=messages,
-            system=self.instruction_prompt,
-            **self.completion_parameters,
-            stream=False,  # Always override this parameter.
-        )
-        return message.content
+
+        retries = 0
+        while retries < self.max_retries:
+            try:
+                message = self.client.messages.create(
+                    model=self.model,
+                    messages=messages,
+                    system=self.instruction_prompt,
+                    **self.completion_parameters,
+                    stream=False,  # Always override this parameter.
+                )
+                return message.content
+            except RateLimitError as exc:
+                if self.retry_on_ratelimit:
+                    retries += 1
+                    time.sleep(self.cooldown_interval)
+                else:
+                    raise exc

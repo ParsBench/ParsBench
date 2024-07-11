@@ -1,4 +1,5 @@
-from openai import OpenAI
+import time
+from openai import OpenAI, RateLimitError
 
 from .base import DEFAULT_INSTRUCTION_PROMPT, Model
 
@@ -14,6 +15,9 @@ class OpenAIModel(Model):
         instruction_prompt (str): The default instruction prompt for the model.
         model_parameters (dict): Additional parameters specific to the model.
         completion_parameters (dict): Parameters for completion generation.
+        retry_on_ratelimit: bool = False,
+        cooldown_interval: int = 10,
+        max_retries: int = 1,
         client (OpenAI): An instance of the OpenAI client for API interactions.
 
     Methods:
@@ -34,6 +38,9 @@ class OpenAIModel(Model):
         instruction_prompt: str = DEFAULT_INSTRUCTION_PROMPT,
         model_parameters: dict = None,
         completion_parameters: dict = None,
+        retry_on_ratelimit: bool = False,
+        cooldown_interval: int = 10,
+        max_retries: int = 1,
         **kwargs
     ):
         self.api_base_url = api_base_url
@@ -42,6 +49,9 @@ class OpenAIModel(Model):
         self.instruction_prompt = instruction_prompt
         self.model_parameters = model_parameters or dict()
         self.completion_parameters = completion_parameters or dict(temperature=0.7)
+        self.retry_on_ratelimit = retry_on_ratelimit
+        self.cooldown_interval = cooldown_interval
+        self.max_retries = max_retries
 
         self.client = OpenAI(
             base_url=self.api_base_url,
@@ -62,10 +72,20 @@ class OpenAIModel(Model):
 
     def get_prompt_completion(self, prompt: str) -> str:
         messages = self.prompt_formatter(prompt)
-        completion = self.client.chat.completions.create(
-            model=self.model,
-            messages=messages,
-            **self.completion_parameters,
-            stream=False,  # Always override this parameter.
-        )
-        return completion.choices[0].message.content
+
+        retries = 0
+        while retries < self.max_retries:
+            try:
+                completion = self.client.chat.completions.create(
+                    model=self.model,
+                    messages=messages,
+                    **self.completion_parameters,
+                    stream=False,  # Always override this parameter.
+                )
+                return completion.choices[0].message.content
+            except RateLimitError as exc:
+                if self.retry_on_ratelimit:
+                    retries += 1
+                    time.sleep(self.cooldown_interval)
+                else:
+                    raise exc
