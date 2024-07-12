@@ -1,6 +1,6 @@
 # ParsBench
 
-<div style="text-align: center;">
+<div align="center">
     <a href="https://github.com/shahriarshm/parsbench">
         <img src="https://raw.githubusercontent.com/shahriarshm/parsbench/main/docs/imgs/banner-black.png" alt="Beanie" width="480" height="240">
     </a>

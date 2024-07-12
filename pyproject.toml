@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "parsbench"
-version = "0.1.3"
+version = "0.1.4"
 description = "ParsBench provides toolkits for benchmarking LLMs based on the Persian language tasks."
 authors = ["Shahriar Shariati <shahriarshm81@gmail.com>"]
 readme = "README.md"

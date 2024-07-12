@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.1.4 - 2024-07-12
+
+### Fixed
+
+- Fix `load_all_tasks` returning empty list.
+
+### Added
+
+- Add Anthropic model interface.
+- Add retry on rate limit to API-based models.
+- Add `skip_existing_matches` to the task evaluate function. It skips matches that are already generated and scored.
+
 ## 0.1.3 - 2024-07-06
 
 ### Fixed
