@@ -45,8 +45,15 @@ class TaskMatchGroup:
         return len(self.matches)
 
     @classmethod
-    def from_file(cls, path: str, n_shots: int) -> "TaskMatchGroup":
-        with jsonlines.open(path, "r") as reader:
+    def from_file(
+        cls, path: str, n_shots: int, sub_task: str | None
+    ) -> "TaskMatchGroup":
+        if sub_task:
+            matches_path = path / f"matches_{sub_task}_{n_shots}_shot.jsonl"
+        else:
+            matches_path = path / f"matches_{n_shots}_shot.jsonl"
+
+        with jsonlines.open(matches_path, "r") as reader:
             matches: list[TaskMatch] = []
             for row in reader.iter(type=dict, skip_invalid=True):
                 matches.append(TaskMatch.from_dict(row))

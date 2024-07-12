@@ -79,7 +79,7 @@ class EvaluationResult:
             {
                 "model_name": self.model_name,
                 "task_name": self.task_name,
-                "task_category": self.task_category,
+                "task_category": self.task_category.value,
                 "sub_task": self.sub_task,
                 "n_shots": psr.n_shots,
                 "score_name": self.score_name,

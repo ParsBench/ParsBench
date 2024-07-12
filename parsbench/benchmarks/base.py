@@ -22,6 +22,7 @@ class Benchmark(ABC):
         save_evaluation: bool = False,
         save_benchmark: bool = False,
         output_path: str = None,
+        skip_existing_matches: bool = False,
         prefer_concurrency: bool = True,
         n_workers: int = 4,
     ) -> BenchmarkResult:
@@ -35,6 +36,7 @@ class Benchmark(ABC):
             sort_by_score (bool, optional): Whether to sort the model benchmarks by average score (default is True).
             save_matches (bool, optional): Flag to save the generated matches (default is False).
             save_evaluation (bool, optional): Flag to save the evaluation results (default is False).
+            skip_existing_matches (bool, optional): Flag to skip already generated matches in the output path (default is False).
             output_path (str, optional): The output path to save the matches and evaluation results.
             prefer_concurrency (bool, optional): The flag to use concurrent processing if the model and task support that (default is True).
             n_workers (int, optional): The number of workers for concurrent processing (default is 4).

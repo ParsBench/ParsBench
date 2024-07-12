@@ -9,7 +9,7 @@ from parsbench.scores.base import Scorer
 
 from .data_loader import DataLoader
 from .evaluation_result import EvaluationResult, PromptShotEvaluationResult
-from .helpers import get_task_path
+from .helpers import get_task_path, check_task_matches_exists
 from .prompt_template import PromptTemplate
 from .task_category import TaskCategory
 from .task_match import TaskMatch, TaskMatchGroup
@@ -145,6 +145,7 @@ class Task(TaskMatchGenerator, TaskScorer, metaclass=ABCMeta):
         save_matches: bool = False,
         save_evaluation: bool = False,
         output_path: str = None,
+        skip_existing_matches: bool = False,
         prefer_concurrency: bool = True,
         n_workers: int = 4,
     ) -> list[EvaluationResult]:
@@ -160,6 +161,7 @@ class Task(TaskMatchGenerator, TaskScorer, metaclass=ABCMeta):
             save_matches (bool, optional): Flag to save the generated matches (default is False).
             save_evaluation (bool, optional): Flag to save the evaluation results (default is False).
             output_path (str, optional): The output path to save the matches and evaluation results.
+            skip_existing_matches (bool, optional): Flag to skip already generated matches in the output path (default is False).
             prefer_concurrency (bool, optional): The flag to use concurrent processing if the model and task support that (default is True).
             n_workers (int, optional): The number of workers for concurrent processing (default is 4).
 
@@ -168,11 +170,18 @@ class Task(TaskMatchGenerator, TaskScorer, metaclass=ABCMeta):
 
         Raises:
             Exception: If output_path is not provided when saving matches or evaluation.
+            Exception: If output_path is not provided when skipping existing matches.
             Exception: If sub tasks are not defined or if invalid sub tasks are provided.
+
         """
         if (save_matches or save_evaluation) and not output_path:
             raise Exception(
                 "You should set the output path to save matches/evaluation."
+            )
+
+        if skip_existing_matches and not output_path:
+            raise Exception(
+                "Cannot find already generated matches when output_path is not set."
             )
 
         task_path = None
@@ -197,12 +206,20 @@ class Task(TaskMatchGenerator, TaskScorer, metaclass=ABCMeta):
             match_groups: list[TaskMatchGroup] = []
 
             for shots in prompt_shots:
-                match_group = self.generate_matches(
-                    prompt_lang,
-                    n_shots=shots,
-                    n_first=n_first,
-                    sub_task=sub_task,
-                )
+                if skip_existing_matches and check_task_matches_exists(
+                    task_path, shots, sub_task=sub_task
+                ):
+                    match_group = TaskMatchGroup.from_file(
+                        task_path, shots, sub_task=sub_task
+                    )
+                    match_group._loaded_locally = True
+                else:
+                    match_group = self.generate_matches(
+                        prompt_lang,
+                        n_shots=shots,
+                        n_first=n_first,
+                        sub_task=sub_task,
+                    )
                 match_groups.append(match_group)
 
             for match_group in match_groups:
@@ -211,15 +228,20 @@ class Task(TaskMatchGenerator, TaskScorer, metaclass=ABCMeta):
                     eval_desc = f"sub task '{sub_task}' with " + eval_desc
                 desc = f"Evaluating {eval_desc} prompt:"
                 print(desc)
-                model.generate_completions(
-                    match_group,
-                    prefer_concurrency=prefer_concurrency,
-                    n_workers=n_workers,
-                )
-                self.score_matches(match_group)
 
-                if save_matches:
-                    match_group.save(task_path, sub_task=sub_task)
+                if getattr(match_group, "_loaded_locally", False):
+                    print("Skipped generating completions. Loaded from local.")
+                    print("Skipped scoring matches. Loaded from local.")
+                else:
+                    model.generate_completions(
+                        match_group,
+                        prefer_concurrency=prefer_concurrency,
+                        n_workers=n_workers,
+                    )
+                    self.score_matches(match_group)
+
+                    if save_matches:
+                        match_group.save(task_path, sub_task=sub_task)
 
             evaluation_result = EvaluationResult(
                 model_name=model.model_name,
