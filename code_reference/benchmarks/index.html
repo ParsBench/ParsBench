@@ -841,7 +841,9 @@
 <span class="normal">42</span>
 <span class="normal">43</span>
 <span class="normal">44</span>
-<span class="normal">45</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">Benchmark</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">Benchmark</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This abstract class defines the structure for a benchmarking task. Subclasses of Benchmark must implement the &#39;run&#39; method, which takes in various parameters related to the benchmarking task and returns a BenchmarkResult object.</span>
 
@@ -860,6 +862,7 @@
         <span class="n">save_evaluation</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
         <span class="n">save_benchmark</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
         <span class="n">output_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">skip_existing_matches</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
         <span class="n">prefer_concurrency</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
         <span class="n">n_workers</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BenchmarkResult</span><span class="p">:</span>
@@ -873,6 +876,7 @@
 <span class="sd">            sort_by_score (bool, optional): Whether to sort the model benchmarks by average score (default is True).</span>
 <span class="sd">            save_matches (bool, optional): Flag to save the generated matches (default is False).</span>
 <span class="sd">            save_evaluation (bool, optional): Flag to save the evaluation results (default is False).</span>
+<span class="sd">            skip_existing_matches (bool, optional): Flag to skip already generated matches in the output path (default is False).</span>
 <span class="sd">            output_path (str, optional): The output path to save the matches and evaluation results.</span>
 <span class="sd">            prefer_concurrency (bool, optional): The flag to use concurrent processing if the model and task support that (default is True).</span>
 <span class="sd">            n_workers (int, optional): The number of workers for concurrent processing (default is 4).</span>
@@ -900,7 +904,7 @@
 
 
 <h2 id="parsbench.benchmarks.base.Benchmark.run" class="doc doc-heading">
-            <code class="highlight language-python"><span class="n">run</span><span class="p">(</span><span class="n">prompt_lang</span><span class="o">=</span><span class="s1">&#39;fa&#39;</span><span class="p">,</span> <span class="n">prompt_shots</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">n_first</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sort_by_score</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">save_matches</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">save_evaluation</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">save_benchmark</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">output_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">prefer_concurrency</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">n_workers</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span></code>
+            <code class="highlight language-python"><span class="n">run</span><span class="p">(</span><span class="n">prompt_lang</span><span class="o">=</span><span class="s1">&#39;fa&#39;</span><span class="p">,</span> <span class="n">prompt_shots</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">n_first</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sort_by_score</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">save_matches</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">save_evaluation</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">save_benchmark</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">output_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">skip_existing_matches</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">prefer_concurrency</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">n_workers</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span></code>
 
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-abstractmethod"><code>abstractmethod</code></small>
@@ -1010,6 +1014,20 @@
             </td>
           </tr>
           <tr class="doc-section-item">
+            <td><code>skip_existing_matches</code></td>
+            <td>
+                  <code>bool</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Flag to skip already generated matches in the output path (default is False).</p>
+              </div>
+            </td>
+            <td>
+                  <code>False</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
             <td><code>output_path</code></td>
             <td>
                   <code>str</code>
@@ -1110,7 +1128,9 @@
 <span class="normal">42</span>
 <span class="normal">43</span>
 <span class="normal">44</span>
-<span class="normal">45</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@abstractmethod</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@abstractmethod</span>
 <span class="k">def</span> <span class="nf">run</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">prompt_lang</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;fa&quot;</span><span class="p">,</span>
@@ -1121,6 +1141,7 @@
     <span class="n">save_evaluation</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">save_benchmark</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">output_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">skip_existing_matches</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">prefer_concurrency</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">n_workers</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BenchmarkResult</span><span class="p">:</span>
@@ -1134,6 +1155,7 @@
 <span class="sd">        sort_by_score (bool, optional): Whether to sort the model benchmarks by average score (default is True).</span>
 <span class="sd">        save_matches (bool, optional): Flag to save the generated matches (default is False).</span>
 <span class="sd">        save_evaluation (bool, optional): Flag to save the evaluation results (default is False).</span>
+<span class="sd">        skip_existing_matches (bool, optional): Flag to skip already generated matches in the output path (default is False).</span>
 <span class="sd">        output_path (str, optional): The output path to save the matches and evaluation results.</span>
 <span class="sd">        prefer_concurrency (bool, optional): The flag to use concurrent processing if the model and task support that (default is True).</span>
 <span class="sd">        n_workers (int, optional): The number of workers for concurrent processing (default is 4).</span>
@@ -1323,7 +1345,11 @@
 <span class="normal">104</span>
 <span class="normal">105</span>
 <span class="normal">106</span>
-<span class="normal">107</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">CustomBenchmark</span><span class="p">(</span><span class="n">Benchmark</span><span class="p">):</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">CustomBenchmark</span><span class="p">(</span><span class="n">Benchmark</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    CustomBenchmark class represents a custom benchmarking task that extends the Benchmark abstract class. It defines the run method to execute the benchmarking process for a given list of models and tasks.</span>
 
@@ -1353,6 +1379,7 @@
         <span class="n">save_evaluation</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
         <span class="n">save_benchmark</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
         <span class="n">output_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">skip_existing_matches</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
         <span class="n">prefer_concurrency</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
         <span class="n">n_workers</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BenchmarkResult</span><span class="p">:</span>
@@ -1367,12 +1394,14 @@
 <span class="sd">            save_matches (bool, optional): Flag to save the generated matches (default is False).</span>
 <span class="sd">            save_evaluation (bool, optional): Flag to save the evaluation results (default is False).</span>
 <span class="sd">            output_path (str, optional): The output path to save the matches and evaluation results.</span>
+<span class="sd">            skip_existing_matches (bool, optional): Flag to skip already generated matches in the output path (default is False).</span>
 <span class="sd">            prefer_concurrency (bool, optional): The flag to use concurrent processing if the model and task support that (default is True).</span>
 <span class="sd">            n_workers (int, optional): The number of workers for concurrent processing (default is 4).</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            BenchmarkResult: The result of the benchmarking process.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+
         <span class="n">model_evaluations</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="n">EvaluationResult</span><span class="p">]]</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
 
         <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tasks</span><span class="p">:</span>
@@ -1398,6 +1427,7 @@
                         <span class="n">save_matches</span><span class="o">=</span><span class="n">save_matches</span><span class="p">,</span>
                         <span class="n">save_evaluation</span><span class="o">=</span><span class="n">save_evaluation</span><span class="p">,</span>
                         <span class="n">output_path</span><span class="o">=</span><span class="n">output_path</span><span class="p">,</span>
+                        <span class="n">skip_existing_matches</span><span class="o">=</span><span class="n">skip_existing_matches</span><span class="p">,</span>
                         <span class="n">prefer_concurrency</span><span class="o">=</span><span class="n">prefer_concurrency</span><span class="p">,</span>
                         <span class="n">n_workers</span><span class="o">=</span><span class="n">n_workers</span><span class="p">,</span>
                     <span class="p">)</span>
@@ -1439,7 +1469,7 @@
 
 
 <h2 id="parsbench.benchmarks.custom_benchmark.CustomBenchmark.run" class="doc doc-heading">
-            <code class="highlight language-python"><span class="n">run</span><span class="p">(</span><span class="n">prompt_lang</span><span class="o">=</span><span class="s1">&#39;fa&#39;</span><span class="p">,</span> <span class="n">prompt_shots</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">n_first</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sort_by_score</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">save_matches</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">save_evaluation</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">save_benchmark</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">output_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">prefer_concurrency</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">n_workers</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span></code>
+            <code class="highlight language-python"><span class="n">run</span><span class="p">(</span><span class="n">prompt_lang</span><span class="o">=</span><span class="s1">&#39;fa&#39;</span><span class="p">,</span> <span class="n">prompt_shots</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">n_first</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sort_by_score</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">save_matches</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">save_evaluation</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">save_benchmark</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">output_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">skip_existing_matches</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">prefer_concurrency</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">n_workers</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span></code>
 
 </h2>
 
@@ -1556,6 +1586,20 @@
             </td>
             <td>
                   <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code>skip_existing_matches</code></td>
+            <td>
+                  <code>bool</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Flag to skip already generated matches in the output path (default is False).</p>
+              </div>
+            </td>
+            <td>
+                  <code>False</code>
             </td>
           </tr>
           <tr class="doc-section-item">
@@ -1690,7 +1734,11 @@
 <span class="normal">104</span>
 <span class="normal">105</span>
 <span class="normal">106</span>
-<span class="normal">107</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">run</span><span class="p">(</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">run</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">prompt_lang</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;fa&quot;</span><span class="p">,</span>
     <span class="n">prompt_shots</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -1700,6 +1748,7 @@
     <span class="n">save_evaluation</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">save_benchmark</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">output_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">skip_existing_matches</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">prefer_concurrency</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">n_workers</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BenchmarkResult</span><span class="p">:</span>
@@ -1714,12 +1763,14 @@
 <span class="sd">        save_matches (bool, optional): Flag to save the generated matches (default is False).</span>
 <span class="sd">        save_evaluation (bool, optional): Flag to save the evaluation results (default is False).</span>
 <span class="sd">        output_path (str, optional): The output path to save the matches and evaluation results.</span>
+<span class="sd">        skip_existing_matches (bool, optional): Flag to skip already generated matches in the output path (default is False).</span>
 <span class="sd">        prefer_concurrency (bool, optional): The flag to use concurrent processing if the model and task support that (default is True).</span>
 <span class="sd">        n_workers (int, optional): The number of workers for concurrent processing (default is 4).</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        BenchmarkResult: The result of the benchmarking process.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="n">model_evaluations</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="n">EvaluationResult</span><span class="p">]]</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
 
     <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tasks</span><span class="p">:</span>
@@ -1745,6 +1796,7 @@
                     <span class="n">save_matches</span><span class="o">=</span><span class="n">save_matches</span><span class="p">,</span>
                     <span class="n">save_evaluation</span><span class="o">=</span><span class="n">save_evaluation</span><span class="p">,</span>
                     <span class="n">output_path</span><span class="o">=</span><span class="n">output_path</span><span class="p">,</span>
+                    <span class="n">skip_existing_matches</span><span class="o">=</span><span class="n">skip_existing_matches</span><span class="p">,</span>
                     <span class="n">prefer_concurrency</span><span class="o">=</span><span class="n">prefer_concurrency</span><span class="p">,</span>
                     <span class="n">n_workers</span><span class="o">=</span><span class="n">n_workers</span><span class="p">,</span>
                 <span class="p">)</span>
