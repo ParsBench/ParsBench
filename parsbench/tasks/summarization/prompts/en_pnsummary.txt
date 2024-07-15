@@ -1,0 +1,7 @@
+Task Description:
+You will be given an article content and your task is to summarize it. The summarization should be helpful and contain key points of the article.
+
+{exmple_shots}
+
+Article: ```{article}```
+Summarization: 

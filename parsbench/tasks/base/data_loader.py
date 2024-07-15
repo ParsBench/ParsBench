@@ -1,6 +1,6 @@
 import csv
 from abc import ABC, abstractmethod
-from typing import Callable
+from typing import Any, Callable
 
 import datasets
 import jsonlines
@@ -111,13 +111,14 @@ class HuggingFaceDataLoader(DataLoader):
         with_filter(self, func: Callable[..., bool]) -> "HuggingFaceDataLoader": Adds a filter function to apply when loading the dataset.
     """
 
-    def __init__(self, data_path: str, split: str | None = None) -> None:
+    def __init__(self, data_path: str, split: str | None = None, **optional_parameters: dict[str, Any]) -> None:
         super().__init__(data_path)
         self.split = split
+        self.optional_parameters = optional_parameters
         self._filters = []
 
     def load(self) -> list[dict]:
-        dataset = datasets.load_dataset(self.data_path, split=self.split)
+        dataset = datasets.load_dataset(self.data_path, split=self.split, **self.optional_parameters)
         if len(self._filters):
             for filter_ in self._filters:
                 dataset = dataset.filter(filter_)

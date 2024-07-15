@@ -9,6 +9,7 @@ from .math import PersianMath
 from .multiple_choice import ParsiNLUMultipleChoice, PersianMMLU
 from .ner import PersianNER
 from .reading_comprehension import ParsiNLUReadingComprehension
+from .summarization import PersianNewsSummary
 
 __all__ = [
     "Task",
@@ -23,4 +24,5 @@ __all__ = [
     "PersianNER",
     "ParsiNLUReadingComprehension",
     "ParsiNLUSentimentAnalysis",
+    "PersianNewsSummary",
 ]

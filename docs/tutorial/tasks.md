@@ -17,6 +17,7 @@ Tasks are used to test and evaluate the Model responses. They come with a datase
 | ConjNLI Entailment | Exact Match (F1) | [Source](https://github.com/Ipouyall/Benchmarking_ChatGPT_for_Persian) |
 | Persian MMLU (Khayyam Challenge) | Exact Match (Accuracy) | [Khayyam Challenge](https://huggingface.co/datasets/raia-center/khayyam-challenge) |
 | FarsTail Entailment | Exact Match (F1) | [FarsTail](https://github.com/dml-qom/FarsTail) |
+| Persian News Summary | Rouge | [PNSummary](https://huggingface.co/datasets/HooshvareLab/pn_summary) |
 
 You can import the class of above tasks from `parsbench.tasks` and use it for evaluating your model.
 

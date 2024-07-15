@@ -6,3 +6,4 @@ class TaskCategory(str, Enum):
     REASONING = "reasoning"
     MATH = "math"
     KNOWLEDGE = "knowledge"
+    LANGUAGE = "language"
