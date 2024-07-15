@@ -1,3 +1,4 @@
+import csv
 from abc import ABC, abstractmethod
 from typing import Callable
 
@@ -5,6 +6,37 @@ import datasets
 import jsonlines
 import requests
 from tqdm import tqdm
+
+
+def _fetch_text_file(path) -> str:
+    if path.startswith("http"):
+        headers = {
+            "Accept-Encoding": "identity",
+            "Accept": "*/*",
+        }
+        response = requests.get(path, headers=headers, stream=True)
+        total_size = int(response.headers.get("content-length", 0))
+        chunk_size = 1024
+        content = bytearray()
+
+        with tqdm(
+            desc="Downloading data",
+            total=total_size,
+            unit="iB",
+            unit_scale=True,
+            unit_divisor=chunk_size,
+        ) as bar:
+            for data in response.iter_content(chunk_size):
+                content.extend(data)
+                bar.update(len(data))
+
+        assert len(content) == total_size, f"{len(content)} != {total_size}"
+
+        return content.decode()
+
+    with open(path, encoding="utf-8") as f:
+        content = f.read()
+        return content
 
 
 class DataLoader(ABC):
@@ -38,44 +70,32 @@ class JSONLineDataLoader(DataLoader):
     """
 
     def load(self) -> list[dict]:
-        if self.data_path.startswith("http"):
-            content = self._download()
-        else:
-            content = self._local()
+        content = _fetch_text_file(self.data_path)
 
         reader = jsonlines.Reader(content.split("\n"))
         return list(reader.iter(type=dict, skip_invalid=True, skip_empty=True))
 
-    def _download(self) -> str:
-        headers = {
-            "Accept-Encoding": "identity",
-            "Accept": "*/*",
-        }
-        response = requests.get(self.data_path, headers=headers, stream=True)
-        total_size = int(response.headers.get("content-length", 0))
-        chunk_size = 1024
-        content = bytearray()
 
-        response = requests.get(self.data_path, stream=True)
+class CSVDataLoader(DataLoader):
+    """
+    A data loader class for loading CSV line data from either a local file or a URL.
 
-        with tqdm(
-            desc="Downloading data",
-            total=total_size,
-            unit="iB",
-            unit_scale=True,
-            unit_divisor=chunk_size,
-        ) as bar:
-            for data in response.iter_content(chunk_size):
-                content.extend(data)
-                bar.update(len(data))
+    Attributes:
+        data_path (str): The path to the CSV line data source.
 
-        assert len(content) == total_size, f"{len(content)} != {total_size}"
+    Methods:
+        load(self) -> list[dict]: Loads the CSV line data from the specified source.
+    """
 
-        return content.decode()
+    def __init__(self, data_path: str, csv_arguments: dict | None = None, **kwargs):
+        super().__init__(data_path)
+        self.csv_arguments = csv_arguments or {}
 
-    def _local(self) -> str:
-        with open(self.data_path, encoding="utf-8") as f:
-            return f.read()
+    def load(self) -> list[dict]:
+        content = _fetch_text_file(self.data_path)
+
+        csv_reader = csv.DictReader(content.split("\n"), **self.csv_arguments)
+        return list(csv_reader)
 
 
 class HuggingFaceDataLoader(DataLoader):

@@ -1,6 +1,6 @@
 from .base import Task
 from .classification import ParsiNLUSentimentAnalysis
-from .entailment import ConjNLIEntailment, ParsiNLUEntailment
+from .entailment import ConjNLIEntailment, FarsTailEntailment, ParsiNLUEntailment
 from .machine_translation import (
     ParsiNLUMachineTranslationEnFa,
     ParsiNLUMachineTranslationFaEn,
@@ -14,6 +14,7 @@ __all__ = [
     "Task",
     "ConjNLIEntailment",
     "ParsiNLUEntailment",
+    "FarsTailEntailment",
     "ParsiNLUMachineTranslationFaEn",
     "ParsiNLUMachineTranslationEnFa",
     "PersianMath",

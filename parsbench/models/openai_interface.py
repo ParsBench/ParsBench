@@ -1,4 +1,5 @@
 import time
+
 from openai import OpenAI, RateLimitError
 
 from .base import DEFAULT_INSTRUCTION_PROMPT, Model

@@ -1,4 +1,9 @@
-from .data_loader import DataLoader, HuggingFaceDataLoader, JSONLineDataLoader
+from .data_loader import (
+    CSVDataLoader,
+    DataLoader,
+    HuggingFaceDataLoader,
+    JSONLineDataLoader,
+)
 from .evaluation_result import EvaluationResult, PromptShotEvaluationResult
 from .prompt_template import ConstantPromptVariable, LazyLoadTemplates, PromptTemplate
 from .task import Task
@@ -11,6 +16,7 @@ __all__ = [
     "DataLoader",
     "JSONLineDataLoader",
     "HuggingFaceDataLoader",
+    "CSVDataLoader",
     "PromptTemplate",
     "ConstantPromptVariable",
     "LazyLoadTemplates",

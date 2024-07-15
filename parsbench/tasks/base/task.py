@@ -9,7 +9,7 @@ from parsbench.scores.base import Scorer
 
 from .data_loader import DataLoader
 from .evaluation_result import EvaluationResult, PromptShotEvaluationResult
-from .helpers import get_task_path, check_task_matches_exists
+from .helpers import check_task_matches_exists, get_task_path
 from .prompt_template import PromptTemplate
 from .task_category import TaskCategory
 from .task_match import TaskMatch, TaskMatchGroup

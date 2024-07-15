@@ -1,5 +1,5 @@
-from collections import defaultdict
 import inspect
+from collections import defaultdict
 
 from parsbench.models import Model
 from parsbench.tasks.base import EvaluationResult, Task
