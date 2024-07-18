@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.1.5 - 2024-07-18
+
+### Added
+
+- Add FarsTail entailment task.
+- Add Persian News Summary task.
+- Add XL-Sum task.
+- Add ParsiNLUBenchmark. It is a sub class of CustomBenchmark with hard-coded ParsiNLU tasks.
+
 ## 0.1.4 - 2024-07-12
 
 ### Fixed

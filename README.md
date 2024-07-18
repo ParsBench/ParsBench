@@ -110,7 +110,7 @@ result = benchmark.run(
 result.show_radar_plot()
 ```
 
-![Benchmark Bar Plot](docs/imgs/radarplot.png)
+![Benchmark Bar Plot](https://raw.githubusercontent.com/shahriarshm/parsbench/main/docs/imgs/radarplot.png)
 
 ## Available Tasks
 
