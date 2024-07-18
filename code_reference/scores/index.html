@@ -926,8 +926,12 @@ Calculates the score between the completion and target strings using the wrapped
 <span class="normal">11</span>
 <span class="normal">12</span>
 <span class="normal">13</span>
-<span class="normal">14</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@wrap_scorer</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@wrap_scorer</span>
 <span class="k">def</span> <span class="nf">english_sentence_bleu</span><span class="p">(</span><span class="n">completion</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">target</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;punkt&quot;</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
     <span class="n">reference_translation</span> <span class="o">=</span> <span class="p">[</span><span class="n">nltk</span><span class="o">.</span><span class="n">word_tokenize</span><span class="p">(</span><span class="n">target</span><span class="p">)]</span>
     <span class="n">model_translation</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">word_tokenize</span><span class="p">(</span><span class="n">completion</span><span class="p">)</span>
     <span class="n">bleu_score</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">translate</span><span class="o">.</span><span class="n">bleu</span><span class="p">(</span>
@@ -949,9 +953,7 @@ Calculates the score between the completion and target strings using the wrapped
 
             <details class="quote">
               <summary>Source code in <code>parsbench/scores/machine_translation.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">19</span>
 <span class="normal">20</span>
 <span class="normal">21</span>
 <span class="normal">22</span>
@@ -960,8 +962,6 @@ Calculates the score between the completion and target strings using the wrapped
 <span class="normal">25</span>
 <span class="normal">26</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@wrap_scorer</span>
 <span class="k">def</span> <span class="nf">persian_sentence_bleu</span><span class="p">(</span><span class="n">completion</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">target</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-    <span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;punkt&quot;</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
     <span class="n">reference_translation</span> <span class="o">=</span> <span class="p">[</span><span class="n">hazm</span><span class="o">.</span><span class="n">word_tokenize</span><span class="p">(</span><span class="n">target</span><span class="p">)]</span>
     <span class="n">model_translation</span> <span class="o">=</span> <span class="n">hazm</span><span class="o">.</span><span class="n">word_tokenize</span><span class="p">(</span><span class="n">completion</span><span class="p">)</span>
     <span class="n">bleu_score</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">translate</span><span class="o">.</span><span class="n">bleu</span><span class="p">(</span>
