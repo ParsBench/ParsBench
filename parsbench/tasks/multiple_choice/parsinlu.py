@@ -34,7 +34,7 @@ class _MultipleChoicePromptTemplate(PromptTemplate):
 
 
 class ParsiNLUMultipleChoice(Task):
-    task_name: str = "PersiNLU Multiple Choice"
+    task_name: str = "ParsiNLU Multiple Choice"
     task_category: TaskCategory = TaskCategory.KNOWLEDGE
 
     data_loader: JSONLineDataLoader = JSONLineDataLoader(data_path=DATA_URL)
