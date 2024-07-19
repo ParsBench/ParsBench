@@ -40,7 +40,7 @@ class _SentimentDataLoader(HuggingFaceDataLoader):
 
 
 class ParsiNLUSentimentAnalysis(Task):
-    task_name: str = "Sentiment Analysis"
+    task_name: str = "ParsiNLU Sentiment Analysis"
     task_category: TaskCategory = TaskCategory.CLASSIC
 
     data_loader: HuggingFaceDataLoader = _SentimentDataLoader(
