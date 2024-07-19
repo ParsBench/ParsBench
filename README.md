@@ -11,6 +11,9 @@
     <a href="https://pypi.python.org/pypi/parsbench">
         <img src="https://img.shields.io/pypi/v/parsbench.svg" alt="pypi">
     </a>
+    <a href="https://huggingface.co/ParsBench">
+        <img src="https://huggingface.co/datasets/huggingface/badges/resolve/main/follow-me-on-HF-md-dark.svg" alt="huggingface">
+    </a>
 </div>
 
 ParsBench provides toolkits for benchmarking Large Language Models (LLMs) based on the Persian language. It includes various tasks for evaluating LLMs on different topics, benchmarking tools to compare multiple models and rank them, and an easy, fully customizable API for developers to create custom models, tasks, scores, and benchmarks.
