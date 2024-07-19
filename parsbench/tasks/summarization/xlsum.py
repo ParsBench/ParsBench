@@ -24,7 +24,7 @@ class XLSummary(Task):
         split="test",
         name="persian",
     )
-    data_target_key: str = "text"
+    data_target_key: str = "summary"
 
     prompt_template: PromptTemplate = PromptTemplate(
         language_templates=LazyLoadTemplates(
