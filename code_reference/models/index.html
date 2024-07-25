@@ -1563,7 +1563,8 @@
 <span class="normal">85</span>
 <span class="normal">86</span>
 <span class="normal">87</span>
-<span class="normal">88</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">PreTrainedTransformerModel</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+<span class="normal">88</span>
+<span class="normal">89</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">PreTrainedTransformerModel</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A model interface for pre-trained transformer models.</span>
 
@@ -1624,6 +1625,7 @@
         <span class="n">generated_ids</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span>
             <span class="n">model_inputs</span><span class="o">.</span><span class="n">input_ids</span><span class="p">,</span>
             <span class="n">generation_config</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">generation_config</span><span class="p">,</span>
+            <span class="n">attention_mask</span><span class="o">=</span><span class="n">model_inputs</span><span class="o">.</span><span class="n">attention_mask</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="n">generated_ids</span> <span class="o">=</span> <span class="p">[</span>
             <span class="n">output_ids</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">input_ids</span><span class="p">)</span> <span class="p">:]</span>
