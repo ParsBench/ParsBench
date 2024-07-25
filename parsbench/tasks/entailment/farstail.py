@@ -40,7 +40,7 @@ class FarsTailEntailment(Task):
             "premise": "premise",
             "hypothesis": "hypothesis",
         },
-        target_variables_mapping={"label": "label"},
+        target_variables_mapping={"target": "label"},
     )
 
     def score_matches(self, matches: TaskMatchGroup) -> TaskMatchGroup:
