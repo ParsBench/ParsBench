@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.1.6 - 2024-07-25
+
+### Fixed
+
+- Fix misspell in ParsiNLUMultipleChoice task name.
+- Fix wrong target key in the XLSummary.
+- Add org prefix to the sentiment analysis task.
+- Fix FarsTailEntailment prompt target key.
+
+### Added
+
+- Add `attention_mask` to the transformer model `generate` function.
+
 ## 0.1.5 - 2024-07-18
 
 ### Added
