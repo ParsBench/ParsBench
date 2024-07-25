@@ -76,6 +76,7 @@ class PreTrainedTransformerModel(Model):
         generated_ids = self.model.generate(
             model_inputs.input_ids,
             generation_config=self.generation_config,
+            attention_mask=model_inputs.attention_mask,
         )
         generated_ids = [
             output_ids[len(input_ids) :]
