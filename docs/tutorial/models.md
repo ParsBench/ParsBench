@@ -1,6 +1,6 @@
 # Models
 
-Models are the interefaces that enable you to generate completions using LLMs.
+Models are the interfaces that enable you to generate completions using LLMs.
 
 ## OpenAIModel
 
@@ -34,6 +34,19 @@ model = OpenAIModel(
 )
 ```
 
+## AnthropicModel
+
+The `AnthropicModel` is an interface for using Anthropic-like APIs to generate completions.
+
+```python
+from parsbench.models import AnthropicModel
+
+model = AnthropicModel(
+    api_secret_key="{SECRET_KEY}",
+    model="claude3.5-sonnet",
+)
+```
+
 ## PreTrainedTransformerModel
 
 The `PreTrainedTransformerModel` is an interface for the `PreTrainedModel` of the [transformers](https://huggingface.co/docs/transformers) framework.
@@ -60,7 +73,7 @@ with PersianMath() as task:
 
 ## Create Your Own Interface
 
-You can easily create your own model iterface by inheriting the `Model` abstract class:
+You can easily create your own model interface by inheriting the `Model` abstract class:
 
 ```python
 from parsbench.models import Model
@@ -75,4 +88,7 @@ class CustomModel(Model):
 
     def prompt_formater(self, prompt: str) -> str | list[dict]:
         return prompt  # No format
+
+    def completion_formatter(self, completion: str) -> str:
+        return completion.strip().replace("'", "")
 ```

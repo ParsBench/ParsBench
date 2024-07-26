@@ -96,3 +96,14 @@ with PersianMath() as task:
         output_path="results/",
     )
 ```
+
+The output directory structure should be like this:
+
+```txt
+results
+└── qwen2:latest
+    └── Persian_Math
+        ├── evaluation.jsonl
+        ├── matches_0_shot.jsonl
+        └── matches_5_shot.jsonl
+```

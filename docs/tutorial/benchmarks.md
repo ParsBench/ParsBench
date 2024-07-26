@@ -90,7 +90,7 @@ model_name                                                                     q
 n_shots                                                                                   0         3
 task_category task_name                      sub_task         score_name                             
 classic       ParsiNLU Reading Comprehension NaN              Common Tokens         0.46231  0.588274
-knowladge     PersiNLU Multiple Choice       common_knowledge Exact Match           0.30000  0.000000
+knowledge     PersiNLU Multiple Choice       common_knowledge Exact Match           0.30000  0.000000
                                              literature       Exact Match           0.20000  0.428571
                                              math_and_logic   Exact Match           0.60000  0.285714
 math          Persian Math                   NaN              Math Equivalence      0.00000  0.142857
@@ -100,7 +100,7 @@ Note: It would look better if you run it in a Jupyter Notebook.
 
 ### Radar Plot (Spider Plot)
 
-For a better comparsion between models performance on different tasks. You can use `show_radar_plot` to visulize the benchmark.
+For a better comparison between models performance on different tasks. You can use `show_radar_plot` to visualize the benchmark.
 
 ```python
 result.show_radar_plot()
@@ -109,3 +109,49 @@ result.show_radar_plot()
 Output should be like:
 
 ![Benchmark Bar Plot](../imgs/radarplot.png)
+
+### Save Result
+
+To save the matches, evaluations and benchmark results during the benchmarking process, you can set `save_matches`, `save_evaluation` and `save_benchmark`.
+
+```python
+benchmark = CustomBenchmark(
+    models=[aya_model, qwen2_model],
+    tasks=[PersianMath, FarsTailEntailment],
+)
+result = benchmark.run(
+    prompt_lang="fa",
+    prompt_shots=[0, 5],
+    n_first=100,
+    save_matches=True,
+    save_evaluation=True,
+    save_benchmark=True,
+    output_path="results",
+    sort_by_score=True,
+)
+```
+
+The output directory structure should be like this:
+
+```txt
+results
+├── aya:latest
+│   ├── FarsTail_Entailment
+│   │   ├── evaluation.jsonl
+│   │   ├── matches_0_shot.jsonl
+│   │   └── matches_5_shot.jsonl
+│   └── Persian_Math
+│       ├── evaluation.jsonl
+│       ├── matches_0_shot.jsonl
+│       └── matches_5_shot.jsonl
+├── qwen2:latest
+│   ├── FarsTail_Entailment
+│   │   ├── evaluation.jsonl
+│   │   ├── matches_0_shot.jsonl
+│   │   └── matches_5_shot.jsonl
+│   └── Persian_Math
+│       ├── evaluation.jsonl
+│       ├── matches_0_shot.jsonl
+│       └── matches_5_shot.jsonl
+└── benchmark.jsonl
+```
