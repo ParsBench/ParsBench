@@ -359,6 +359,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#anthropicmodel" class="md-nav__link">
+    <span class="md-ellipsis">
+      AnthropicModel
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#pretrainedtransformermodel" class="md-nav__link">
     <span class="md-ellipsis">
       PreTrainedTransformerModel
@@ -657,6 +666,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#anthropicmodel" class="md-nav__link">
+    <span class="md-ellipsis">
+      AnthropicModel
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#pretrainedtransformermodel" class="md-nav__link">
     <span class="md-ellipsis">
       PreTrainedTransformerModel
@@ -693,7 +711,7 @@
 
 
 <h1 id="models">Models</h1>
-<p>Models are the interefaces that enable you to generate completions using LLMs.</p>
+<p>Models are the interfaces that enable you to generate completions using LLMs.</p>
 <h2 id="openaimodel">OpenAIModel</h2>
 <p>The <code>OpenAIModel</code> is an interface for using OpenAI-like APIs to generate completions.</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">parsbench.models</span> <span class="kn">import</span> <span class="n">OpenAIModel</span>
@@ -714,6 +732,15 @@
     <span class="n">api_base_url</span><span class="o">=</span><span class="s2">&quot;http://localhost:11434/v1/&quot;</span><span class="p">,</span>
     <span class="n">api_secret_key</span><span class="o">=</span><span class="s2">&quot;ollama&quot;</span><span class="p">,</span>
     <span class="n">model</span><span class="o">=</span><span class="s2">&quot;llama3:latest&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div>
+<h2 id="anthropicmodel">AnthropicModel</h2>
+<p>The <code>AnthropicModel</code> is an interface for using Anthropic-like APIs to generate completions.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">parsbench.models</span> <span class="kn">import</span> <span class="n">AnthropicModel</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">AnthropicModel</span><span class="p">(</span>
+    <span class="n">api_secret_key</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">{SECRET_KEY}</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="n">model</span><span class="o">=</span><span class="s2">&quot;claude3.5-sonnet&quot;</span><span class="p">,</span>
 <span class="p">)</span>
 </code></pre></div>
 <h2 id="pretrainedtransformermodel">PreTrainedTransformerModel</h2>
@@ -737,7 +764,7 @@ You can load any pre-trained model and tokenizer you want and pass it to the <co
     <span class="n">results</span> <span class="o">=</span> <span class="n">task</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">tf_model</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="create-your-own-interface">Create Your Own Interface</h2>
-<p>You can easily create your own model iterface by inheriting the <code>Model</code> abstract class:</p>
+<p>You can easily create your own model interface by inheriting the <code>Model</code> abstract class:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">parsbench.models</span> <span class="kn">import</span> <span class="n">Model</span>
 
 <span class="k">class</span> <span class="nc">CustomModel</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
@@ -750,6 +777,9 @@ You can load any pre-trained model and tokenizer you want and pass it to the <co
 
     <span class="k">def</span> <span class="nf">prompt_formater</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prompt</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>
         <span class="k">return</span> <span class="n">prompt</span>  <span class="c1"># No format</span>
+
+    <span class="k">def</span> <span class="nf">completion_formatter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">completion</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">completion</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;&#39;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
 </code></pre></div>
 
 

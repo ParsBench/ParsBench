@@ -428,6 +428,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#save-result" class="md-nav__link">
+    <span class="md-ellipsis">
+      Save Result
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -699,6 +708,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#save-result" class="md-nav__link">
+    <span class="md-ellipsis">
+      Save Result
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -798,18 +816,57 @@ model_name                                                                     q
 n_shots                                                                                   0         3
 task_category task_name                      sub_task         score_name                             
 classic       ParsiNLU Reading Comprehension NaN              Common Tokens         0.46231  0.588274
-knowladge     PersiNLU Multiple Choice       common_knowledge Exact Match           0.30000  0.000000
+knowledge     PersiNLU Multiple Choice       common_knowledge Exact Match           0.30000  0.000000
                                              literature       Exact Match           0.20000  0.428571
                                              math_and_logic   Exact Match           0.60000  0.285714
 math          Persian Math                   NaN              Math Equivalence      0.00000  0.142857
 </code></pre></div>
 <p>Note: It would look better if you run it in a Jupyter Notebook.</p>
 <h3 id="radar-plot-spider-plot">Radar Plot (Spider Plot)</h3>
-<p>For a better comparsion between models performance on different tasks. You can use <code>show_radar_plot</code> to visulize the benchmark.</p>
+<p>For a better comparison between models performance on different tasks. You can use <code>show_radar_plot</code> to visualize the benchmark.</p>
 <div class="highlight"><pre><span></span><code><span class="n">result</span><span class="o">.</span><span class="n">show_radar_plot</span><span class="p">()</span>
 </code></pre></div>
 <p>Output should be like:</p>
 <p><img alt="Benchmark Bar Plot" src="../../imgs/radarplot.png" /></p>
+<h3 id="save-result">Save Result</h3>
+<p>To save the matches, evaluations and benchmark results during the benchmarking process, you can set <code>save_matches</code>, <code>save_evaluation</code> and <code>save_benchmark</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">benchmark</span> <span class="o">=</span> <span class="n">CustomBenchmark</span><span class="p">(</span>
+    <span class="n">models</span><span class="o">=</span><span class="p">[</span><span class="n">aya_model</span><span class="p">,</span> <span class="n">qwen2_model</span><span class="p">],</span>
+    <span class="n">tasks</span><span class="o">=</span><span class="p">[</span><span class="n">PersianMath</span><span class="p">,</span> <span class="n">FarsTailEntailment</span><span class="p">],</span>
+<span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">benchmark</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="n">prompt_lang</span><span class="o">=</span><span class="s2">&quot;fa&quot;</span><span class="p">,</span>
+    <span class="n">prompt_shots</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
+    <span class="n">n_first</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+    <span class="n">save_matches</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">save_evaluation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">save_benchmark</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">output_path</span><span class="o">=</span><span class="s2">&quot;results&quot;</span><span class="p">,</span>
+    <span class="n">sort_by_score</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>The output directory structure should be like this:</p>
+<div class="highlight"><pre><span></span><code>results
+├── aya:latest
+│   ├── FarsTail_Entailment
+│   │   ├── evaluation.jsonl
+│   │   ├── matches_0_shot.jsonl
+│   │   └── matches_5_shot.jsonl
+│   └── Persian_Math
+│       ├── evaluation.jsonl
+│       ├── matches_0_shot.jsonl
+│       └── matches_5_shot.jsonl
+├── qwen2:latest
+│   ├── FarsTail_Entailment
+│   │   ├── evaluation.jsonl
+│   │   ├── matches_0_shot.jsonl
+│   │   └── matches_5_shot.jsonl
+│   └── Persian_Math
+│       ├── evaluation.jsonl
+│       ├── matches_0_shot.jsonl
+│       └── matches_5_shot.jsonl
+└── benchmark.jsonl
+</code></pre></div>
 
 
 

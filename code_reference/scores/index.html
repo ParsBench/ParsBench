@@ -561,6 +561,24 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#parsbench.scores.summarization.english_rouge" class="md-nav__link">
+    <span class="md-ellipsis">
+      english_rouge
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parsbench.scores.summarization.persian_rouge" class="md-nav__link">
+    <span class="md-ellipsis">
+      persian_rouge
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -705,6 +723,24 @@
   <a href="#parsbench.scores.machine_translation.persian_sentence_bleu" class="md-nav__link">
     <span class="md-ellipsis">
       persian_sentence_bleu
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parsbench.scores.summarization.english_rouge" class="md-nav__link">
+    <span class="md-ellipsis">
+      english_rouge
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parsbench.scores.summarization.persian_rouge" class="md-nav__link">
+    <span class="md-ellipsis">
+      persian_rouge
     </span>
   </a>
   
@@ -968,6 +1004,66 @@ Calculates the score between the completion and target strings using the wrapped
         <span class="n">reference_translation</span><span class="p">,</span> <span class="n">model_translation</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,)</span>
     <span class="p">)</span>
     <span class="k">return</span> <span class="n">bleu_score</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<a id="parsbench.scores.summarization.english_rouge"></a>
+    <div class="doc doc-contents first">
+
+            <details class="quote">
+              <summary>Source code in <code>parsbench/scores/summarization.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@wrap_scorer</span>
+<span class="k">def</span> <span class="nf">english_rouge</span><span class="p">(</span><span class="n">completion</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">target</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;punkt&quot;</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">tokenizer</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">tokenize</span><span class="o">.</span><span class="n">NLTKWordTokenizer</span><span class="p">()</span>
+
+    <span class="n">scorer</span> <span class="o">=</span> <span class="n">rouge_scorer</span><span class="o">.</span><span class="n">RougeScorer</span><span class="p">([</span><span class="s2">&quot;rouge1&quot;</span><span class="p">],</span> <span class="n">tokenizer</span><span class="o">=</span><span class="n">tokenizer</span><span class="p">)</span>
+    <span class="n">scores</span> <span class="o">=</span> <span class="n">scorer</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">completion</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">scores</span><span class="p">[</span><span class="s2">&quot;rouge1&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">fmeasure</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<a id="parsbench.scores.summarization.persian_rouge"></a>
+    <div class="doc doc-contents first">
+
+            <details class="quote">
+              <summary>Source code in <code>parsbench/scores/summarization.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@wrap_scorer</span>
+<span class="k">def</span> <span class="nf">persian_rouge</span><span class="p">(</span><span class="n">completion</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">target</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="n">tokenizer</span> <span class="o">=</span> <span class="n">hazm</span><span class="o">.</span><span class="n">WordTokenizer</span><span class="p">()</span>
+
+    <span class="n">scorer</span> <span class="o">=</span> <span class="n">rouge_scorer</span><span class="o">.</span><span class="n">RougeScorer</span><span class="p">([</span><span class="s2">&quot;rouge1&quot;</span><span class="p">],</span> <span class="n">tokenizer</span><span class="o">=</span><span class="n">tokenizer</span><span class="p">)</span>
+    <span class="n">scores</span> <span class="o">=</span> <span class="n">scorer</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">completion</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">scores</span><span class="p">[</span><span class="s2">&quot;rouge1&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">fmeasure</span>
 </code></pre></div></td></tr></table></div>
             </details>
     </div>

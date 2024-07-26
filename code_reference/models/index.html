@@ -514,6 +514,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#parsbench.models.anthropic_interface.AnthropicModel" class="md-nav__link">
+    <span class="md-ellipsis">
+      AnthropicModel
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#parsbench.models.transformers_interface.PreTrainedTransformerModel" class="md-nav__link">
     <span class="md-ellipsis">
       PreTrainedTransformerModel
@@ -660,6 +669,15 @@
   <a href="#parsbench.models.openai_interface.OpenAIModel" class="md-nav__link">
     <span class="md-ellipsis">
       OpenAIModel
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parsbench.models.anthropic_interface.AnthropicModel" class="md-nav__link">
+    <span class="md-ellipsis">
+      AnthropicModel
     </span>
   </a>
   
@@ -1336,6 +1354,380 @@
                     <span class="n">stream</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>  <span class="c1"># Always override this parameter.</span>
                 <span class="p">)</span>
                 <span class="k">return</span> <span class="n">completion</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">content</span>
+            <span class="k">except</span> <span class="n">RateLimitError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">retry_on_ratelimit</span><span class="p">:</span>
+                    <span class="n">retries</span> <span class="o">+=</span> <span class="mi">1</span>
+                    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cooldown_interval</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="n">exc</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<a id="parsbench.models.anthropic_interface.AnthropicModel"></a>
+    <div class="doc doc-contents first">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="parsbench.models.base.Model" href="#parsbench.models.base.Model">Model</a></code></p>
+
+
+      <p>A model interface for Anthropic-like APIs.</p>
+
+
+<p><span class="doc-section-title">Attributes:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code><span title="parsbench.models.anthropic_interface.AnthropicModel.api_base_url">api_base_url</span></code></td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The base URL for the Anthropic API.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="parsbench.models.anthropic_interface.AnthropicModel.api_secret_key">api_secret_key</span></code></td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The secret key for accessing the Anthropic API.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="parsbench.models.anthropic_interface.AnthropicModel.model">model</span></code></td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The name of the model.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="parsbench.models.anthropic_interface.AnthropicModel.instruction_prompt">instruction_prompt</span></code></td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The default instruction prompt for the model.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="parsbench.models.anthropic_interface.AnthropicModel.model_parameters">model_parameters</span></code></td>
+            <td>
+                  <code>dict</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Additional parameters specific to the model.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="parsbench.models.anthropic_interface.AnthropicModel.completion_parameters">completion_parameters</span></code></td>
+            <td>
+                  <code>dict</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Parameters for generating completions.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="parsbench.models.anthropic_interface.AnthropicModel.retry_on_ratelimit">retry_on_ratelimit</span></code></td>
+            <td>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>bool = False,</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="parsbench.models.anthropic_interface.AnthropicModel.cooldown_interval">cooldown_interval</span></code></td>
+            <td>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>int = 10,</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="parsbench.models.anthropic_interface.AnthropicModel.max_retries">max_retries</span></code></td>
+            <td>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>int = 1,</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="parsbench.models.anthropic_interface.AnthropicModel.client">client</span></code></td>
+            <td>
+                  <code><span title="anthropic.Anthropic">Anthropic</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>An instance of the Anthropic client for API interactions.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Methods:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+            <tr class="doc-section-item">
+              <td><code><span title="parsbench.models.anthropic_interface.AnthropicModel.model_name">model_name</span></code></td>
+              <td>
+                <div class="doc-md-description">
+                  <p>Returns the name of the model.</p>
+                </div>
+              </td>
+            </tr>
+            <tr class="doc-section-item">
+              <td><code><span title="parsbench.models.anthropic_interface.AnthropicModel.prompt_formatter">prompt_formatter</span></code></td>
+              <td>
+                <div class="doc-md-description">
+                  <p>str) -&gt; list[dict]: Formats the prompt into a list of messages.</p>
+                </div>
+              </td>
+            </tr>
+            <tr class="doc-section-item">
+              <td><code><span title="parsbench.models.anthropic_interface.AnthropicModel.get_prompt_completion">get_prompt_completion</span></code></td>
+              <td>
+                <div class="doc-md-description">
+                  <p>str) -&gt; str: Generates completion for a given prompt.</p>
+                </div>
+              </td>
+            </tr>
+            <tr class="doc-section-item">
+              <td><code><span title="parsbench.models.anthropic_interface.AnthropicModel.generate_completions">generate_completions</span></code></td>
+              <td>
+                <div class="doc-md-description">
+                  <p>TaskMatchGroup, prefer_concurrency: bool = True, n_workers: int = 4) -&gt; TaskMatchGroup: Generates completions for a list of matches.</p>
+                </div>
+              </td>
+            </tr>
+      </tbody>
+    </table>
+
+              <details class="quote">
+                <summary>Source code in <code>parsbench/models/anthropic_interface.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span>
+<span class="normal">80</span>
+<span class="normal">81</span>
+<span class="normal">82</span>
+<span class="normal">83</span>
+<span class="normal">84</span>
+<span class="normal">85</span>
+<span class="normal">86</span>
+<span class="normal">87</span>
+<span class="normal">88</span>
+<span class="normal">89</span>
+<span class="normal">90</span>
+<span class="normal">91</span>
+<span class="normal">92</span>
+<span class="normal">93</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">AnthropicModel</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A model interface for Anthropic-like APIs.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        api_base_url (str): The base URL for the Anthropic API.</span>
+<span class="sd">        api_secret_key (str): The secret key for accessing the Anthropic API.</span>
+<span class="sd">        model (str): The name of the model.</span>
+<span class="sd">        instruction_prompt (str): The default instruction prompt for the model.</span>
+<span class="sd">        model_parameters (dict): Additional parameters specific to the model.</span>
+<span class="sd">        completion_parameters (dict): Parameters for generating completions.</span>
+<span class="sd">        retry_on_ratelimit: bool = False,</span>
+<span class="sd">        cooldown_interval: int = 10,</span>
+<span class="sd">        max_retries: int = 1,</span>
+<span class="sd">        client (Anthropic): An instance of the Anthropic client for API interactions.</span>
+
+<span class="sd">    Methods:</span>
+<span class="sd">        model_name(self) -&gt; str: Returns the name of the model.</span>
+<span class="sd">        prompt_formatter(self, prompt: str) -&gt; list[dict]: Formats the prompt into a list of messages.</span>
+<span class="sd">        get_prompt_completion(self, prompt: str) -&gt; str: Generates completion for a given prompt.</span>
+<span class="sd">        generate_completions(self, matches: TaskMatchGroup, prefer_concurrency: bool = True, n_workers: int = 4) -&gt; TaskMatchGroup: Generates completions for a list of matches.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">support_concurrency</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">api_secret_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">model</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">api_base_url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">instruction_prompt</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">DEFAULT_INSTRUCTION_PROMPT</span><span class="p">,</span>
+        <span class="n">model_parameters</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">completion_parameters</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">retry_on_ratelimit</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">cooldown_interval</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+        <span class="n">max_retries</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span>
+    <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">api_base_url</span> <span class="o">=</span> <span class="n">api_base_url</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">api_secret_key</span> <span class="o">=</span> <span class="n">api_secret_key</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">instruction_prompt</span> <span class="o">=</span> <span class="n">instruction_prompt</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model_parameters</span> <span class="o">=</span> <span class="n">model_parameters</span> <span class="ow">or</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">completion_parameters</span> <span class="o">=</span> <span class="n">completion_parameters</span> <span class="ow">or</span> <span class="nb">dict</span><span class="p">(</span>
+            <span class="n">max_tokens</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="mf">0.7</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">retry_on_ratelimit</span> <span class="o">=</span> <span class="n">retry_on_ratelimit</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cooldown_interval</span> <span class="o">=</span> <span class="n">cooldown_interval</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_retries</span> <span class="o">=</span> <span class="n">max_retries</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span> <span class="o">=</span> <span class="n">Anthropic</span><span class="p">(</span>
+            <span class="n">base_url</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">api_base_url</span><span class="p">,</span>
+            <span class="n">api_key</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">api_secret_key</span><span class="p">,</span>
+            <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">model_parameters</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">model_name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span>
+
+    <span class="k">def</span> <span class="nf">prompt_formatter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prompt</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>
+        <span class="n">messages</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">prompt</span><span class="p">},</span>
+        <span class="p">]</span>
+        <span class="k">return</span> <span class="n">messages</span>
+
+    <span class="k">def</span> <span class="nf">get_prompt_completion</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prompt</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="n">messages</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">prompt_formatter</span><span class="p">(</span><span class="n">prompt</span><span class="p">)</span>
+
+        <span class="n">retries</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="n">retries</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_retries</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">message</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">messages</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+                    <span class="n">model</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">,</span>
+                    <span class="n">messages</span><span class="o">=</span><span class="n">messages</span><span class="p">,</span>
+                    <span class="n">system</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">instruction_prompt</span><span class="p">,</span>
+                    <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">completion_parameters</span><span class="p">,</span>
+                    <span class="n">stream</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>  <span class="c1"># Always override this parameter.</span>
+                <span class="p">)</span>
+                <span class="k">return</span> <span class="n">message</span><span class="o">.</span><span class="n">content</span>
             <span class="k">except</span> <span class="n">RateLimitError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
                 <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">retry_on_ratelimit</span><span class="p">:</span>
                     <span class="n">retries</span> <span class="o">+=</span> <span class="mi">1</span>
