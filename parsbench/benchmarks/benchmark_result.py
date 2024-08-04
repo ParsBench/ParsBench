@@ -1,3 +1,8 @@
+import glob
+import itertools
+import os
+import re
+from collections import defaultdict
 from dataclasses import asdict, dataclass
 from itertools import groupby
 from pathlib import Path
@@ -6,7 +11,9 @@ import jsonlines
 import numpy as np
 import pandas as pd
 
-from parsbench.tasks.base import EvaluationResult
+from parsbench.tasks.base import EvaluationResult, TaskMatchGroup
+from parsbench.tasks.base.evaluation_result import PromptShotEvaluationResult
+from parsbench.tasks.utils import load_all_tasks
 
 
 @dataclass
@@ -78,6 +85,118 @@ class BenchmarkResult:
         return cls(model_benchmarks=model_benchmarks)
 
     @classmethod
+    def from_evaluation_files(cls, path: str) -> "BenchmarkResult":
+        models = [(d.name, d.path) for d in os.scandir(path) if d.is_dir()]
+        model_benchmarks = []
+
+        for model_name, model_path in models:
+            eval_paths = [d.path for d in os.scandir(model_path) if d.is_dir()]
+
+            evaluation_results = []
+
+            for eval_path in eval_paths:
+                eval_files = [
+                    f
+                    for f in os.scandir(eval_path)
+                    if f.is_file() and f.name.startswith("evaluation")
+                ]
+                evaluation_results.extend(
+                    [
+                        EvaluationResult.from_file(eval_file.path)
+                        for eval_file in eval_files
+                    ]
+                )
+
+            model_benchmarks.append(
+                ModelBenchmarkResult(
+                    model_name=model_name,
+                    evaluation_results=evaluation_results,
+                )
+            )
+
+        return BenchmarkResult(model_benchmarks=model_benchmarks)
+
+    @classmethod
+    def from_matches_files(cls, path: str) -> "BenchmarkResult":
+        task_cls_mapping = {
+            task_cls.task_name.replace("-", " "): task_cls
+            for task_cls in load_all_tasks()
+        }
+
+        _with_subtask_pattern = re.compile(r"matches_([\w\s]+)_(\d+)_shot\.jsonl")
+        _without_subtask_pattern = re.compile(r"matches_(\d+)_shot\.jsonl")
+
+        matches_paths = glob.glob(f"{path}/*/*/matches*.jsonl")
+
+        model_evals: list[tuple[str, str, str | None, int, float]] = []
+
+        for match_path in matches_paths:
+            match_file = os.path.basename(match_path)
+            task_name = os.path.basename(os.path.dirname(match_path)).replace("_", " ")
+            model_name = os.path.basename(os.path.dirname(os.path.dirname(match_path)))
+            sub_task = None
+            n_shots = 0
+
+            if m := _with_subtask_pattern.match(match_file):
+                sub_task = m.group(1)
+                n_shots = int(m.group(2))
+            elif m := _without_subtask_pattern.match(match_file):
+                n_shots = int(m.group(1))
+            else:
+                raise Exception(
+                    f"Matches file '{match_file}' doesn't match the expected pattern."
+                )
+
+            task_matches = TaskMatchGroup.from_file(
+                Path(match_path).parent, n_shots=n_shots, sub_task=sub_task
+            )
+
+            task_cls = task_cls_mapping.get(task_name, None)
+            assert task_cls is not None, f"No task class found for '{task_name}'."
+
+            score = task_cls().get_overall_score(task_matches)
+
+            model_evals.append((model_name, task_name, sub_task, n_shots, score))
+
+        model_benchmarks: list[ModelBenchmarkResult] = []
+
+        for model_name, task_evals in itertools.groupby(
+            model_evals, key=lambda t: t[0]
+        ):
+            evaluation_results: list[EvaluationResult] = []
+
+            for task_name, sub_task_evals in itertools.groupby(
+                task_evals, key=lambda t: t[1]
+            ):
+                task_cls = task_cls_mapping[task_name]()
+                prompt_shot_evals = defaultdict(list)
+
+                for _, _, sub_task, n_shots, score in sub_task_evals:
+                    prompt_shot_evals[sub_task].append(
+                        PromptShotEvaluationResult(n_shots=n_shots, score=score)
+                    )
+
+                evaluation_results.extend(
+                    EvaluationResult(
+                        model_name=model_name,
+                        task_name=task_name,
+                        task_category=task_cls.task_category,
+                        score_name=task_cls.score_name,
+                        prompt_shot_results=prompt_shot_results,
+                        sub_task=sub_task,
+                    )
+                    for sub_task, prompt_shot_results in prompt_shot_evals.items()
+                )
+
+            model_benchmarks.append(
+                ModelBenchmarkResult(
+                    model_name=model_name, evaluation_results=evaluation_results
+                )
+            )
+
+        return BenchmarkResult(model_benchmarks=model_benchmarks)
+
+    @classmethod
     def from_dict(cls, data: dict) -> "BenchmarkResult":
         model_benchmarks = [
             ModelBenchmarkResult.from_dict(mbr) for mbr in data.pop("model_benchmarks")
@@ -102,6 +221,8 @@ class BenchmarkResult:
 
     def show_radar_plot(self, title="Radar Plot"):
         data = []
+        categories = set()
+
         for mb in self.model_benchmarks:
             values = []
             for _, evals in groupby(mb.evaluation_results, key=lambda e: e.task_name):
@@ -110,8 +231,7 @@ class BenchmarkResult:
                 values.append(score)
 
             data.append({"name": mb.model_name, "values": values})
-
-        categories = set(e.task_name for e in mb.evaluation_results)
+            categories |= set(e.task_name for e in mb.evaluation_results)
 
         _radar_plot(data, categories, title)
 
