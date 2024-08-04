@@ -2,6 +2,7 @@ from .base import Benchmark
 from .benchmark_result import (
     BenchmarkResult,
     ModelBenchmarkResult,
+    build_leaderboard_from_benchmark,
     merge_benchmark_results,
 )
 from .custom_benchmark import CustomBenchmark
@@ -14,4 +15,5 @@ __all__ = [
     "ModelBenchmarkResult",
     "BenchmarkResult",
     "merge_benchmark_results",
+    "build_leaderboard_from_benchmark",
 ]

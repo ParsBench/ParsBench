@@ -1,6 +1,4 @@
 from parsbench.models import Model
-from .custom_benchmark import CustomBenchmark
-
 from parsbench.tasks import (
     ParsiNLUEntailment,
     ParsiNLUMachineTranslationEnFa,
@@ -9,6 +7,8 @@ from parsbench.tasks import (
     ParsiNLUReadingComprehension,
     ParsiNLUSentimentAnalysis,
 )
+
+from .custom_benchmark import CustomBenchmark
 
 
 class ParsiNLUBenchmark(CustomBenchmark):

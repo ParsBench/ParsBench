@@ -66,6 +66,7 @@ class EvaluationResult:
             PromptShotEvaluationResult.from_dict(psr)
             for psr in data.pop("prompt_shot_results")
         ]
+        data["task_category"] = TaskCategory[data["task_category"].upper()]
         return cls(**data, prompt_shot_results=prompt_shot_results)
 
     def to_dict(self) -> dict:
@@ -115,3 +116,7 @@ class EvaluationResult:
         return sum([psr.score for psr in self.prompt_shot_results]) / len(
             self.prompt_shot_results
         )
+
+    @property
+    def max_score(self) -> float:
+        return max([psr.score for psr in self.prompt_shot_results])

@@ -1,5 +1,7 @@
+import datetime
 import glob
 import itertools
+import json
 import os
 import re
 from collections import defaultdict
@@ -10,6 +12,7 @@ from pathlib import Path
 import jsonlines
 import numpy as np
 import pandas as pd
+import pytz
 
 from parsbench.tasks.base import EvaluationResult, TaskMatchGroup
 from parsbench.tasks.base.evaluation_result import PromptShotEvaluationResult
@@ -281,6 +284,60 @@ def merge_benchmark_results(
         model_benchmarks.sort(key=lambda m: m.average_score, reverse=True)
 
     return BenchmarkResult(model_benchmarks=model_benchmarks)
+
+
+def build_leaderboard_from_benchmark(
+    benchmark_result: BenchmarkResult, leaderboard_path: str
+):
+    """
+    This function generates leaderboard data from the benchmark result object.
+
+    Parameters:
+        benchmark_result (BenchmarkResult): BenchmarkResult object.
+        leaderboard_path (str): Path to store the leaderboard data.
+    """
+    requests_path = Path(leaderboard_path) / "requests"
+    results_path = Path(leaderboard_path) / "results"
+
+    requests_path.mkdir(exist_ok=True)
+    results_path.mkdir(exist_ok=True)
+
+    now = datetime.datetime.now(pytz.UTC).isoformat(timespec="seconds")
+
+    for mb in benchmark_result.model_benchmarks:
+        model_name = mb.model_name
+
+        os.makedirs(results_path / model_name, exist_ok=True)
+
+        request = {
+            "model": model_name,
+            "base_model": "",
+            "revision": "main",
+            "private": False,
+            "precision": "?",
+            "weight_type": "Original",
+            "status": "FINISHED",
+            "submitted_time": now,
+            "model_type": "\ud83d\udfe2 : pretrained",
+            "likes": 0,
+            "params": 0.1,
+            "license": "custom",
+        }
+        with open(
+            requests_path / f"{model_name}_eval_request_nshot.json", "wt"
+        ) as writer:
+            writer.write(json.dumps(request))
+
+        result = {
+            "config": {"model_dtype": "", "model_name": model_name, "model_sha": ""},
+            "results": {
+                er.task_name: {er.score_name: round(er.max_score, 3)}
+                for er in mb.evaluation_results
+            },
+        }
+
+        with open(results_path / model_name / f"results_{now}.json", "wt") as writer:
+            writer.write(json.dumps(result))
 
 
 def _radar_plot(data, categories, title="Radar Plot"):

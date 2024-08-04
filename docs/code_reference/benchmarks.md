@@ -6,3 +6,4 @@
 ::: parsbench.benchmarks.benchmark_result.ModelBenchmarkResult
 ::: parsbench.benchmarks.benchmark_result.BenchmarkResult
 ::: parsbench.benchmarks.benchmark_result.merge_benchmark_results
+::: parsbench.benchmarks.benchmark_result.build_leaderboard_from_benchmark
