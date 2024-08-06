@@ -229,17 +229,23 @@ class Task(TaskMatchGenerator, TaskScorer, metaclass=ABCMeta):
                 desc = f"Evaluating {eval_desc} prompt:"
                 print(desc)
 
-                if getattr(match_group, "_loaded_locally", False):
-                    print("Skipped generating completions. Loaded from local.")
-                    print("Skipped scoring matches. Loaded from local.")
-                else:
+                is_loaded_locally = getattr(match_group, "_loaded_locally", False)
+
+                if is_loaded_locally:
+                    total_skipped = sum(m.completion is not None for m in match_group)
+                    print(
+                        f"{total_skipped} of {len(match_group)} match completions will be loaded from local."
+                    )
+
+                try:
                     model.generate_completions(
                         match_group,
                         prefer_concurrency=prefer_concurrency,
+                        skip_existing=is_loaded_locally,
                         n_workers=n_workers,
                     )
                     self.score_matches(match_group)
-
+                finally:
                     if save_matches:
                         match_group.save(task_path, sub_task=sub_task)
 

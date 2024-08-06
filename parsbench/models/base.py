@@ -51,21 +51,29 @@ class Model(ABC):
         self,
         matches: "TaskMatchGroup",
         prefer_concurrency: bool = True,
+        skip_existing: bool = False,
         n_workers: int = 4,
     ) -> "TaskMatchGroup":
         if prefer_concurrency and self.support_concurrency:
-            matches = self._gen_with_concurrency(matches, n_workers=n_workers)
+            matches = self._gen_with_concurrency(
+                matches, n_workers=n_workers, skip_existing=skip_existing
+            )
         else:
             for match in tqdm(
                 matches, total=len(matches), desc="Generating completions"
             ):
+                if match.completion is not None and skip_existing:
+                    continue
                 match.completion = self.completion_formatter(
                     self.get_prompt_completion(match.prompt)
                 )
         return matches
 
     def _gen_with_concurrency(
-        self, matches: "TaskMatchGroup", n_workers: int = 4
+        self,
+        matches: "TaskMatchGroup",
+        n_workers: int = 4,
+        skip_existing: bool = False,
     ) -> "TaskMatchGroup":
         def _gen_single_match_completion(match: "TaskMatch") -> "TaskMatch":
             match.completion = self.completion_formatter(
@@ -77,6 +85,8 @@ class Model(ABC):
             futures = []
 
             for match in matches:
+                if match.completion is not None and skip_existing:
+                    continue
                 future = executor.submit(
                     _gen_single_match_completion,
                     match,
