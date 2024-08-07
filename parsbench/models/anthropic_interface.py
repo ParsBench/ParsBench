@@ -84,7 +84,7 @@ class AnthropicModel(Model):
                     **self.completion_parameters,
                     stream=False,  # Always override this parameter.
                 )
-                return message.content
+                return message.content[0].text
             except RateLimitError as exc:
                 if self.retry_on_ratelimit:
                     retries += 1
