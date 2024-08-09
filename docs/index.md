@@ -41,7 +41,7 @@ So, I thought that I should build a handy framework that includes various tasks 
 
 ## Sponsors
 
-Here are the names of companies/people who helped us to keep maintaining this project.
+Here are the names of companies/people who helped us to keep maintaining this project. If you want to donate this project, see [this page](https://shahriarshm.github.io/parsbench/donation/).
 
 - [AavalAI](https://avalai.ir/): They gave us free OpenAI API credit two times in their "AvalAward" program. It helped us for doing R&D and benchmarking GPT models.
 - [Basalam](https://basalam.com/): They voluntarily helped us to run the benchmarks on open-weight models and build the [ParsBench Leaderboard](https://huggingface.co/spaces/ParsBench/leaderboard).
