@@ -39,6 +39,13 @@ So, I thought that I should build a handy framework that includes various tasks 
 - Benchmark [Dorna](https://huggingface.co/PartAI) models: [![dorna](https://colab.research.google.com/assets/colab-badge.svg)](https://drive.google.com/file/d/1f64d0GnmcQIZ-tlN8cg49pPdiwlVlWvi/view?usp=sharing)
 - Benchmark [MaralGPT](https://huggingface.co/MaralGPT) models: [![maralgpt](https://colab.research.google.com/assets/colab-badge.svg)](https://drive.google.com/file/d/1ZfjxPa4CfAZdQgtPaEt3nnX180A825ZF/view?usp=sharing)
 
+## Sponsors
+
+Here are the names of companies/people who helped us to keep maintaining this project.
+
+- [AavalAI](https://avalai.ir/): They gave us free OpenAI API credit two times in their "AvalAward" program. It helped us for doing R&D and benchmarking GPT models.
+- [Basalam](https://basalam.com/): They voluntarily helped us to run the benchmarks on open-weight models and build the [ParsBench Leaderboard](https://huggingface.co/spaces/ParsBench/leaderboard).
+
 ## Contributing
 
 Contributions are welcome! Please refer to the [contribution guidelines](contribution.md) for more information on how to contribute.
