@@ -630,6 +630,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#parsbench.benchmarks.benchmark_result.build_leaderboard_from_benchmark" class="md-nav__link">
+    <span class="md-ellipsis">
+      build_leaderboard_from_benchmark
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -658,6 +667,26 @@
   
   <span class="md-ellipsis">
     Changelog
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../donation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Donation
   </span>
   
 
@@ -759,6 +788,15 @@
   <a href="#parsbench.benchmarks.benchmark_result.merge_benchmark_results" class="md-nav__link">
     <span class="md-ellipsis">
       merge_benchmark_results
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parsbench.benchmarks.benchmark_result.build_leaderboard_from_benchmark" class="md-nav__link">
+    <span class="md-ellipsis">
+      build_leaderboard_from_benchmark
     </span>
   </a>
   
@@ -2023,17 +2061,7 @@
 
               <details class="quote">
                 <summary>Source code in <code>parsbench/benchmarks/benchmark_result.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span>
-<span class="normal">21</span>
-<span class="normal">22</span>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">22</span>
 <span class="normal">23</span>
 <span class="normal">24</span>
 <span class="normal">25</span>
@@ -2068,7 +2096,17 @@
 <span class="normal">54</span>
 <span class="normal">55</span>
 <span class="normal">56</span>
-<span class="normal">57</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
 <span class="k">class</span> <span class="nc">ModelBenchmarkResult</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Represents the results of benchmarking a model across multiple evaluations.</span>
@@ -2174,17 +2212,7 @@
 
               <details class="quote">
                 <summary>Source code in <code>parsbench/benchmarks/benchmark_result.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 60</span>
-<span class="normal"> 61</span>
-<span class="normal"> 62</span>
-<span class="normal"> 63</span>
-<span class="normal"> 64</span>
-<span class="normal"> 65</span>
-<span class="normal"> 66</span>
-<span class="normal"> 67</span>
-<span class="normal"> 68</span>
-<span class="normal"> 69</span>
-<span class="normal"> 70</span>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 70</span>
 <span class="normal"> 71</span>
 <span class="normal"> 72</span>
 <span class="normal"> 73</span>
@@ -2243,7 +2271,135 @@
 <span class="normal">126</span>
 <span class="normal">127</span>
 <span class="normal">128</span>
-<span class="normal">129</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span>
+<span class="normal">187</span>
+<span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span>
+<span class="normal">194</span>
+<span class="normal">195</span>
+<span class="normal">196</span>
+<span class="normal">197</span>
+<span class="normal">198</span>
+<span class="normal">199</span>
+<span class="normal">200</span>
+<span class="normal">201</span>
+<span class="normal">202</span>
+<span class="normal">203</span>
+<span class="normal">204</span>
+<span class="normal">205</span>
+<span class="normal">206</span>
+<span class="normal">207</span>
+<span class="normal">208</span>
+<span class="normal">209</span>
+<span class="normal">210</span>
+<span class="normal">211</span>
+<span class="normal">212</span>
+<span class="normal">213</span>
+<span class="normal">214</span>
+<span class="normal">215</span>
+<span class="normal">216</span>
+<span class="normal">217</span>
+<span class="normal">218</span>
+<span class="normal">219</span>
+<span class="normal">220</span>
+<span class="normal">221</span>
+<span class="normal">222</span>
+<span class="normal">223</span>
+<span class="normal">224</span>
+<span class="normal">225</span>
+<span class="normal">226</span>
+<span class="normal">227</span>
+<span class="normal">228</span>
+<span class="normal">229</span>
+<span class="normal">230</span>
+<span class="normal">231</span>
+<span class="normal">232</span>
+<span class="normal">233</span>
+<span class="normal">234</span>
+<span class="normal">235</span>
+<span class="normal">236</span>
+<span class="normal">237</span>
+<span class="normal">238</span>
+<span class="normal">239</span>
+<span class="normal">240</span>
+<span class="normal">241</span>
+<span class="normal">242</span>
+<span class="normal">243</span>
+<span class="normal">244</span>
+<span class="normal">245</span>
+<span class="normal">246</span>
+<span class="normal">247</span>
+<span class="normal">248</span>
+<span class="normal">249</span>
+<span class="normal">250</span>
+<span class="normal">251</span>
+<span class="normal">252</span>
+<span class="normal">253</span>
+<span class="normal">254</span>
+<span class="normal">255</span>
+<span class="normal">256</span>
+<span class="normal">257</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
 <span class="k">class</span> <span class="nc">BenchmarkResult</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Represents the results of benchmarking multiple models across various evaluations.</span>
@@ -2262,6 +2418,123 @@
                 <span class="n">model_benchmarks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ModelBenchmarkResult</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">row</span><span class="p">))</span>
 
         <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">model_benchmarks</span><span class="o">=</span><span class="n">model_benchmarks</span><span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_evaluation_files</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;BenchmarkResult&quot;</span><span class="p">:</span>
+        <span class="n">models</span> <span class="o">=</span> <span class="p">[(</span><span class="n">d</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">path</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">scandir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="k">if</span> <span class="n">d</span><span class="o">.</span><span class="n">is_dir</span><span class="p">()]</span>
+        <span class="n">model_benchmarks</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">model_name</span><span class="p">,</span> <span class="n">model_path</span> <span class="ow">in</span> <span class="n">models</span><span class="p">:</span>
+            <span class="n">eval_paths</span> <span class="o">=</span> <span class="p">[</span><span class="n">d</span><span class="o">.</span><span class="n">path</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">scandir</span><span class="p">(</span><span class="n">model_path</span><span class="p">)</span> <span class="k">if</span> <span class="n">d</span><span class="o">.</span><span class="n">is_dir</span><span class="p">()]</span>
+
+            <span class="n">evaluation_results</span> <span class="o">=</span> <span class="p">[]</span>
+
+            <span class="k">for</span> <span class="n">eval_path</span> <span class="ow">in</span> <span class="n">eval_paths</span><span class="p">:</span>
+                <span class="n">eval_files</span> <span class="o">=</span> <span class="p">[</span>
+                    <span class="n">f</span>
+                    <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">scandir</span><span class="p">(</span><span class="n">eval_path</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">f</span><span class="o">.</span><span class="n">is_file</span><span class="p">()</span> <span class="ow">and</span> <span class="n">f</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;evaluation&quot;</span><span class="p">)</span>
+                <span class="p">]</span>
+                <span class="n">evaluation_results</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span>
+                    <span class="p">[</span>
+                        <span class="n">EvaluationResult</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span><span class="n">eval_file</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
+                        <span class="k">for</span> <span class="n">eval_file</span> <span class="ow">in</span> <span class="n">eval_files</span>
+                    <span class="p">]</span>
+                <span class="p">)</span>
+
+            <span class="n">model_benchmarks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="n">ModelBenchmarkResult</span><span class="p">(</span>
+                    <span class="n">model_name</span><span class="o">=</span><span class="n">model_name</span><span class="p">,</span>
+                    <span class="n">evaluation_results</span><span class="o">=</span><span class="n">evaluation_results</span><span class="p">,</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">BenchmarkResult</span><span class="p">(</span><span class="n">model_benchmarks</span><span class="o">=</span><span class="n">model_benchmarks</span><span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_matches_files</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">rescore</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;BenchmarkResult&quot;</span><span class="p">:</span>
+        <span class="n">task_cls_mapping</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">task_cls</span><span class="o">.</span><span class="n">task_name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">):</span> <span class="n">task_cls</span>
+            <span class="k">for</span> <span class="n">task_cls</span> <span class="ow">in</span> <span class="n">load_all_tasks</span><span class="p">()</span>
+        <span class="p">}</span>
+
+        <span class="n">_with_subtask_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;matches_([\w\s]+)_(\d+)_shot\.jsonl&quot;</span><span class="p">)</span>
+        <span class="n">_without_subtask_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;matches_(\d+)_shot\.jsonl&quot;</span><span class="p">)</span>
+
+        <span class="n">matches_paths</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">/*/*/matches*.jsonl&quot;</span><span class="p">)</span>
+
+        <span class="n">model_evals</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">match_path</span> <span class="ow">in</span> <span class="n">matches_paths</span><span class="p">:</span>
+            <span class="n">match_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">match_path</span><span class="p">)</span>
+            <span class="n">task_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">match_path</span><span class="p">))</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">)</span>
+            <span class="n">model_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">match_path</span><span class="p">)))</span>
+            <span class="n">sub_task</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">n_shots</span> <span class="o">=</span> <span class="mi">0</span>
+
+            <span class="k">if</span> <span class="n">m</span> <span class="o">:=</span> <span class="n">_with_subtask_pattern</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">match_file</span><span class="p">):</span>
+                <span class="n">sub_task</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+                <span class="n">n_shots</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+            <span class="k">elif</span> <span class="n">m</span> <span class="o">:=</span> <span class="n">_without_subtask_pattern</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">match_file</span><span class="p">):</span>
+                <span class="n">n_shots</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;Matches file &#39;</span><span class="si">{</span><span class="n">match_file</span><span class="si">}</span><span class="s2">&#39; doesn&#39;t match the expected pattern.&quot;</span>
+                <span class="p">)</span>
+
+            <span class="n">task_matches</span> <span class="o">=</span> <span class="n">TaskMatchGroup</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span>
+                <span class="n">Path</span><span class="p">(</span><span class="n">match_path</span><span class="p">)</span><span class="o">.</span><span class="n">parent</span><span class="p">,</span> <span class="n">n_shots</span><span class="o">=</span><span class="n">n_shots</span><span class="p">,</span> <span class="n">sub_task</span><span class="o">=</span><span class="n">sub_task</span>
+            <span class="p">)</span>
+
+            <span class="n">task_cls</span> <span class="o">=</span> <span class="n">task_cls_mapping</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">task_name</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="k">assert</span> <span class="n">task_cls</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;No task class found for &#39;</span><span class="si">{</span><span class="n">task_name</span><span class="si">}</span><span class="s2">&#39;.&quot;</span>
+
+            <span class="n">task</span> <span class="o">=</span> <span class="n">task_cls</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">rescore</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2">: Re-scoring </span><span class="si">{</span><span class="n">task_name</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
+                <span class="n">task</span><span class="o">.</span><span class="n">score_matches</span><span class="p">(</span><span class="n">task_matches</span><span class="p">)</span>
+
+            <span class="n">score</span> <span class="o">=</span> <span class="n">task</span><span class="o">.</span><span class="n">get_overall_score</span><span class="p">(</span><span class="n">task_matches</span><span class="p">)</span>
+
+            <span class="n">model_evals</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">model_name</span><span class="p">,</span> <span class="n">task_name</span><span class="p">,</span> <span class="n">sub_task</span><span class="p">,</span> <span class="n">n_shots</span><span class="p">,</span> <span class="n">score</span><span class="p">))</span>
+
+        <span class="n">model_benchmarks</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">ModelBenchmarkResult</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">model_name</span><span class="p">,</span> <span class="n">task_evals</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span>
+            <span class="n">model_evals</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="p">):</span>
+            <span class="n">evaluation_results</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">EvaluationResult</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+
+            <span class="k">for</span> <span class="n">task_name</span><span class="p">,</span> <span class="n">sub_task_evals</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span>
+                <span class="n">task_evals</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="p">):</span>
+                <span class="n">task_cls</span> <span class="o">=</span> <span class="n">task_cls_mapping</span><span class="p">[</span><span class="n">task_name</span><span class="p">]()</span>
+                <span class="n">prompt_shot_evals</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+
+                <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">sub_task</span><span class="p">,</span> <span class="n">n_shots</span><span class="p">,</span> <span class="n">score</span> <span class="ow">in</span> <span class="n">sub_task_evals</span><span class="p">:</span>
+                    <span class="n">prompt_shot_evals</span><span class="p">[</span><span class="n">sub_task</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                        <span class="n">PromptShotEvaluationResult</span><span class="p">(</span><span class="n">n_shots</span><span class="o">=</span><span class="n">n_shots</span><span class="p">,</span> <span class="n">score</span><span class="o">=</span><span class="n">score</span><span class="p">)</span>
+                    <span class="p">)</span>
+
+                <span class="n">evaluation_results</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span>
+                    <span class="n">EvaluationResult</span><span class="p">(</span>
+                        <span class="n">model_name</span><span class="o">=</span><span class="n">model_name</span><span class="p">,</span>
+                        <span class="n">task_name</span><span class="o">=</span><span class="n">task_name</span><span class="p">,</span>
+                        <span class="n">task_category</span><span class="o">=</span><span class="n">task_cls</span><span class="o">.</span><span class="n">task_category</span><span class="p">,</span>
+                        <span class="n">score_name</span><span class="o">=</span><span class="n">task_cls</span><span class="o">.</span><span class="n">score_name</span><span class="p">,</span>
+                        <span class="n">prompt_shot_results</span><span class="o">=</span><span class="n">prompt_shot_results</span><span class="p">,</span>
+                        <span class="n">sub_task</span><span class="o">=</span><span class="n">sub_task</span><span class="p">,</span>
+                    <span class="p">)</span>
+                    <span class="k">for</span> <span class="n">sub_task</span><span class="p">,</span> <span class="n">prompt_shot_results</span> <span class="ow">in</span> <span class="n">prompt_shot_evals</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+                <span class="p">)</span>
+
+            <span class="n">model_benchmarks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="n">ModelBenchmarkResult</span><span class="p">(</span>
+                    <span class="n">model_name</span><span class="o">=</span><span class="n">model_name</span><span class="p">,</span> <span class="n">evaluation_results</span><span class="o">=</span><span class="n">evaluation_results</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">BenchmarkResult</span><span class="p">(</span><span class="n">model_benchmarks</span><span class="o">=</span><span class="n">model_benchmarks</span><span class="p">)</span>
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;BenchmarkResult&quot;</span><span class="p">:</span>
@@ -2288,6 +2561,8 @@
 
     <span class="k">def</span> <span class="nf">show_radar_plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Radar Plot&quot;</span><span class="p">):</span>
         <span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">categories</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+
         <span class="k">for</span> <span class="n">mb</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_benchmarks</span><span class="p">:</span>
             <span class="n">values</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">evals</span> <span class="ow">in</span> <span class="n">groupby</span><span class="p">(</span><span class="n">mb</span><span class="o">.</span><span class="n">evaluation_results</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">e</span><span class="p">:</span> <span class="n">e</span><span class="o">.</span><span class="n">task_name</span><span class="p">):</span>
@@ -2296,8 +2571,7 @@
                 <span class="n">values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
 
             <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">mb</span><span class="o">.</span><span class="n">model_name</span><span class="p">,</span> <span class="s2">&quot;values&quot;</span><span class="p">:</span> <span class="n">values</span><span class="p">})</span>
-
-        <span class="n">categories</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">task_name</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">mb</span><span class="o">.</span><span class="n">evaluation_results</span><span class="p">)</span>
+            <span class="n">categories</span> <span class="o">|=</span> <span class="nb">set</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">task_name</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">mb</span><span class="o">.</span><span class="n">evaluation_results</span><span class="p">)</span>
 
         <span class="n">_radar_plot</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">categories</span><span class="p">,</span> <span class="n">title</span><span class="p">)</span>
 
@@ -2427,38 +2701,38 @@
 
             <details class="quote">
               <summary>Source code in <code>parsbench/benchmarks/benchmark_result.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">132</span>
-<span class="normal">133</span>
-<span class="normal">134</span>
-<span class="normal">135</span>
-<span class="normal">136</span>
-<span class="normal">137</span>
-<span class="normal">138</span>
-<span class="normal">139</span>
-<span class="normal">140</span>
-<span class="normal">141</span>
-<span class="normal">142</span>
-<span class="normal">143</span>
-<span class="normal">144</span>
-<span class="normal">145</span>
-<span class="normal">146</span>
-<span class="normal">147</span>
-<span class="normal">148</span>
-<span class="normal">149</span>
-<span class="normal">150</span>
-<span class="normal">151</span>
-<span class="normal">152</span>
-<span class="normal">153</span>
-<span class="normal">154</span>
-<span class="normal">155</span>
-<span class="normal">156</span>
-<span class="normal">157</span>
-<span class="normal">158</span>
-<span class="normal">159</span>
-<span class="normal">160</span>
-<span class="normal">161</span>
-<span class="normal">162</span>
-<span class="normal">163</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">merge_benchmark_results</span><span class="p">(</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">260</span>
+<span class="normal">261</span>
+<span class="normal">262</span>
+<span class="normal">263</span>
+<span class="normal">264</span>
+<span class="normal">265</span>
+<span class="normal">266</span>
+<span class="normal">267</span>
+<span class="normal">268</span>
+<span class="normal">269</span>
+<span class="normal">270</span>
+<span class="normal">271</span>
+<span class="normal">272</span>
+<span class="normal">273</span>
+<span class="normal">274</span>
+<span class="normal">275</span>
+<span class="normal">276</span>
+<span class="normal">277</span>
+<span class="normal">278</span>
+<span class="normal">279</span>
+<span class="normal">280</span>
+<span class="normal">281</span>
+<span class="normal">282</span>
+<span class="normal">283</span>
+<span class="normal">284</span>
+<span class="normal">285</span>
+<span class="normal">286</span>
+<span class="normal">287</span>
+<span class="normal">288</span>
+<span class="normal">289</span>
+<span class="normal">290</span>
+<span class="normal">291</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">merge_benchmark_results</span><span class="p">(</span>
     <span class="n">benchmarks</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">BenchmarkResult</span><span class="p">],</span> <span class="n">sort</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">keep_duplicates</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BenchmarkResult</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
@@ -2490,6 +2764,169 @@
         <span class="n">model_benchmarks</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">m</span><span class="p">:</span> <span class="n">m</span><span class="o">.</span><span class="n">average_score</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">BenchmarkResult</span><span class="p">(</span><span class="n">model_benchmarks</span><span class="o">=</span><span class="n">model_benchmarks</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<a id="parsbench.benchmarks.benchmark_result.build_leaderboard_from_benchmark"></a>
+    <div class="doc doc-contents first">
+
+      <p>This function generates leaderboard data from the benchmark result object.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code>benchmark_result</code></td>
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="parsbench.benchmarks.benchmark_result.BenchmarkResult" href="#parsbench.benchmarks.benchmark_result.BenchmarkResult">BenchmarkResult</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>BenchmarkResult object.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code>leaderboard_path</code></td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Path to store the leaderboard data.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+            <details class="quote">
+              <summary>Source code in <code>parsbench/benchmarks/benchmark_result.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">294</span>
+<span class="normal">295</span>
+<span class="normal">296</span>
+<span class="normal">297</span>
+<span class="normal">298</span>
+<span class="normal">299</span>
+<span class="normal">300</span>
+<span class="normal">301</span>
+<span class="normal">302</span>
+<span class="normal">303</span>
+<span class="normal">304</span>
+<span class="normal">305</span>
+<span class="normal">306</span>
+<span class="normal">307</span>
+<span class="normal">308</span>
+<span class="normal">309</span>
+<span class="normal">310</span>
+<span class="normal">311</span>
+<span class="normal">312</span>
+<span class="normal">313</span>
+<span class="normal">314</span>
+<span class="normal">315</span>
+<span class="normal">316</span>
+<span class="normal">317</span>
+<span class="normal">318</span>
+<span class="normal">319</span>
+<span class="normal">320</span>
+<span class="normal">321</span>
+<span class="normal">322</span>
+<span class="normal">323</span>
+<span class="normal">324</span>
+<span class="normal">325</span>
+<span class="normal">326</span>
+<span class="normal">327</span>
+<span class="normal">328</span>
+<span class="normal">329</span>
+<span class="normal">330</span>
+<span class="normal">331</span>
+<span class="normal">332</span>
+<span class="normal">333</span>
+<span class="normal">334</span>
+<span class="normal">335</span>
+<span class="normal">336</span>
+<span class="normal">337</span>
+<span class="normal">338</span>
+<span class="normal">339</span>
+<span class="normal">340</span>
+<span class="normal">341</span>
+<span class="normal">342</span>
+<span class="normal">343</span>
+<span class="normal">344</span>
+<span class="normal">345</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">build_leaderboard_from_benchmark</span><span class="p">(</span>
+    <span class="n">benchmark_result</span><span class="p">:</span> <span class="n">BenchmarkResult</span><span class="p">,</span> <span class="n">leaderboard_path</span><span class="p">:</span> <span class="nb">str</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This function generates leaderboard data from the benchmark result object.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        benchmark_result (BenchmarkResult): BenchmarkResult object.</span>
+<span class="sd">        leaderboard_path (str): Path to store the leaderboard data.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">requests_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">leaderboard_path</span><span class="p">)</span> <span class="o">/</span> <span class="s2">&quot;requests&quot;</span>
+    <span class="n">results_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">leaderboard_path</span><span class="p">)</span> <span class="o">/</span> <span class="s2">&quot;results&quot;</span>
+
+    <span class="n">requests_path</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">results_path</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">now</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(</span><span class="n">pytz</span><span class="o">.</span><span class="n">UTC</span><span class="p">)</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(</span><span class="n">timespec</span><span class="o">=</span><span class="s2">&quot;seconds&quot;</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">mb</span> <span class="ow">in</span> <span class="n">benchmark_result</span><span class="o">.</span><span class="n">model_benchmarks</span><span class="p">:</span>
+        <span class="n">model_name</span> <span class="o">=</span> <span class="n">mb</span><span class="o">.</span><span class="n">model_name</span>
+
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">results_path</span> <span class="o">/</span> <span class="n">model_name</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="n">request</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="n">model_name</span><span class="p">,</span>
+            <span class="s2">&quot;base_model&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;revision&quot;</span><span class="p">:</span> <span class="s2">&quot;main&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;private&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="s2">&quot;precision&quot;</span><span class="p">:</span> <span class="s2">&quot;?&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;weight_type&quot;</span><span class="p">:</span> <span class="s2">&quot;Original&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;FINISHED&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;submitted_time&quot;</span><span class="p">:</span> <span class="n">now</span><span class="p">,</span>
+            <span class="s2">&quot;model_type&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="se">\ud83d\udfe2</span><span class="s2"> : pretrained&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;likes&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">&quot;params&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+            <span class="s2">&quot;license&quot;</span><span class="p">:</span> <span class="s2">&quot;custom&quot;</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span>
+            <span class="n">requests_path</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2">_eval_request_nshot.json&quot;</span><span class="p">,</span> <span class="s2">&quot;wt&quot;</span>
+        <span class="p">)</span> <span class="k">as</span> <span class="n">writer</span><span class="p">:</span>
+            <span class="n">writer</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
+
+        <span class="n">result</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;config&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;model_dtype&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;model_name&quot;</span><span class="p">:</span> <span class="n">model_name</span><span class="p">,</span> <span class="s2">&quot;model_sha&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">},</span>
+            <span class="s2">&quot;results&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="n">er</span><span class="o">.</span><span class="n">task_name</span><span class="p">:</span> <span class="p">{</span><span class="n">er</span><span class="o">.</span><span class="n">score_name</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">er</span><span class="o">.</span><span class="n">max_score</span><span class="p">,</span> <span class="mi">3</span><span class="p">)}</span>
+                <span class="k">for</span> <span class="n">er</span> <span class="ow">in</span> <span class="n">mb</span><span class="o">.</span><span class="n">evaluation_results</span>
+            <span class="p">},</span>
+        <span class="p">}</span>
+
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">results_path</span> <span class="o">/</span> <span class="n">model_name</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;results_</span><span class="si">{</span><span class="n">now</span><span class="si">}</span><span class="s2">.json&quot;</span><span class="p">,</span> <span class="s2">&quot;wt&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">writer</span><span class="p">:</span>
+            <span class="n">writer</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">result</span><span class="p">))</span>
 </code></pre></div></td></tr></table></div>
             </details>
     </div>
