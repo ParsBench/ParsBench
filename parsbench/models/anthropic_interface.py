@@ -91,3 +91,5 @@ class AnthropicModel(Model):
                     time.sleep(self.cooldown_interval)
                 else:
                     raise exc
+
+        raise Exception("Max retries exceeded.")
