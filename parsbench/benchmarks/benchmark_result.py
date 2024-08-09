@@ -120,7 +120,7 @@ class BenchmarkResult:
         return BenchmarkResult(model_benchmarks=model_benchmarks)
 
     @classmethod
-    def from_matches_files(cls, path: str) -> "BenchmarkResult":
+    def from_matches_files(cls, path: str, rescore: bool = False) -> "BenchmarkResult":
         task_cls_mapping = {
             task_cls.task_name.replace("-", " "): task_cls
             for task_cls in load_all_tasks()
@@ -157,7 +157,12 @@ class BenchmarkResult:
             task_cls = task_cls_mapping.get(task_name, None)
             assert task_cls is not None, f"No task class found for '{task_name}'."
 
-            score = task_cls().get_overall_score(task_matches)
+            task = task_cls()
+            if rescore:
+                print(f"{model_name}: Re-scoring {task_name}...")
+                task.score_matches(task_matches)
+
+            score = task.get_overall_score(task_matches)
 
             model_evals.append((model_name, task_name, sub_task, n_shots, score))
 
