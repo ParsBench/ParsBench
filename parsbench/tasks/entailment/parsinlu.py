@@ -46,9 +46,15 @@ class ParsiNLUEntailment(Task):
             "تناظر": "e",
             "ناشناخته": "n",
         }
-        matches.format_completions(
-            lambda c: completion_mapper.get(c.strip().strip("'").lower(), "")
-        )
+
+        def _find_letter(completion: str) -> str:
+            completion = completion.lower()
+            for word in completion_mapper:
+                if word in completion:
+                    return completion_mapper[word]
+            return ""
+
+        matches.format_completions(_find_letter)
         return super().score_matches(matches)
 
     def get_overall_score(cls, matches: TaskMatchGroup) -> float:

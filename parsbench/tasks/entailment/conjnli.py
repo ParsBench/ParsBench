@@ -40,7 +40,14 @@ class ConjNLIEntailment(Task):
     )
 
     def score_matches(self, matches: TaskMatchGroup) -> TaskMatchGroup:
-        matches.format_completions(lambda c: c.strip(" ").strip("'").lower())
+        def _find_letter(completion: str) -> str:
+            completion = completion.lower()
+            for letter in ACCEPTED_TARGETS:
+                if letter in completion:
+                    return letter
+            return ""
+
+        matches.format_completions(_find_letter)
         return super().score_matches(matches)
 
     def get_overall_score(self, matches: TaskMatchGroup) -> float:

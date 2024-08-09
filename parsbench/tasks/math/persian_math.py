@@ -79,9 +79,12 @@ class PersianMath(Task):
 
     def score_matches(self, matches: TaskMatchGroup) -> TaskMatchGroup:
         def _format_completion(completion):
-            idx = max(completion.rfind("[پاسخ]"), completion.rfind("[answer]"))
-            completion = completion[idx:]
-            return _preserve_digit(completion)
+            try:
+                idx = max(completion.rfind("[پاسخ]"), completion.rfind("[answer]"))
+                completion = completion[idx:]
+                return _preserve_digit(completion)
+            except:
+                return ""
 
         matches.format_completions(_format_completion)
 
