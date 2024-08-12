@@ -131,7 +131,7 @@ class BenchmarkResult:
 
         matches_paths = glob.glob(f"{path}/*/*/matches*.jsonl")
 
-        model_evals: list[tuple[str, str, str | None, int, float]] = []
+        model_evals: list[tuple[str, str, str, TaskMatchGroup]] = []
 
         for match_path in matches_paths:
             match_file = os.path.basename(match_path)
@@ -153,43 +153,46 @@ class BenchmarkResult:
             task_matches = TaskMatchGroup.from_file(
                 Path(match_path).parent, n_shots=n_shots, sub_task=sub_task
             )
+            assert (
+                task_name is not task_cls_mapping
+            ), f"No task class found for '{task_name}'."
 
-            task_cls = task_cls_mapping.get(task_name, None)
-            assert task_cls is not None, f"No task class found for '{task_name}'."
-
-            task = task_cls()
-            if rescore:
-                print(f"{model_name}: Re-scoring {task_name}...")
-                task.score_matches(task_matches)
-
-            score = task.get_overall_score(task_matches)
-
-            model_evals.append((model_name, task_name, sub_task, n_shots, score))
+            model_evals.append((model_name, task_name, sub_task, task_matches))
 
         model_benchmarks: list[ModelBenchmarkResult] = []
 
         for model_name, task_evals in itertools.groupby(
             model_evals, key=lambda t: t[0]
         ):
+            print(f"Model: {model_name}")
             evaluation_results: list[EvaluationResult] = []
 
-            for task_name, sub_task_evals in itertools.groupby(
+            for task_name, task_matches_group in itertools.groupby(
                 task_evals, key=lambda t: t[1]
             ):
-                task_cls = task_cls_mapping[task_name]()
+                print(f"Re-scoring {task_name}:")
+                task = task_cls_mapping[task_name]()
                 prompt_shot_evals = defaultdict(list)
 
-                for _, _, sub_task, n_shots, score in sub_task_evals:
+                for _, _, sub_task, task_matches in task_matches_group:
+                    print(f"{sub_task} {task_matches.n_shots}-shot prompt:")
+                    if rescore:
+                        task_matches = task.score_matches(task_matches)
+
+                    score = task.get_overall_score(task_matches)
+
                     prompt_shot_evals[sub_task].append(
-                        PromptShotEvaluationResult(n_shots=n_shots, score=score)
+                        PromptShotEvaluationResult(
+                            n_shots=task_matches.n_shots, score=score
+                        )
                     )
 
                 evaluation_results.extend(
                     EvaluationResult(
                         model_name=model_name,
                         task_name=task_name,
-                        task_category=task_cls.task_category,
-                        score_name=task_cls.score_name,
+                        task_category=task.task_category,
+                        score_name=task.score_name,
                         prompt_shot_results=prompt_shot_results,
                         sub_task=sub_task,
                     )
@@ -201,6 +204,7 @@ class BenchmarkResult:
                     model_name=model_name, evaluation_results=evaluation_results
                 )
             )
+            print("-" * 10)
 
         return BenchmarkResult(model_benchmarks=model_benchmarks)
 
