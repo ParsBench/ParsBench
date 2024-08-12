@@ -103,7 +103,7 @@ class TaskScorer:
 
     def score_matches(self, matches: TaskMatchGroup) -> list[TaskMatchGroup]:
         for match in tqdm(matches, desc="Scoring matches"):
-            match.score = self.score_completion(match.completion, match.target)
+            match.score = self.score_completion(match.cleaned_completion, match.target)
 
         return matches
 

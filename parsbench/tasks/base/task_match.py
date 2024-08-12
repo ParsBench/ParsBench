@@ -11,6 +11,7 @@ class TaskMatch:
     prompt: str
     target: str
     completion: str | None = None
+    formatted_completion: str | None = None
     score: int | None = None
 
     @classmethod
@@ -18,7 +19,7 @@ class TaskMatch:
         return cls(**data)
 
     def format_completion(self, formatter: Callable[[str], str]):
-        self.completion = formatter(self.completion)
+        self.formatted_completion = formatter(self.completion)
 
     def format_prompt(self, formatter: Callable[[str], str]):
         self.prompt = formatter(self.prompt)
@@ -31,6 +32,10 @@ class TaskMatch:
 
     def to_pandas(self) -> pd.DataFrame:
         return pd.DataFrame([self])
+
+    @property
+    def cleaned_completion(self) -> str | None:
+        return self.formatted_completion or self.completion
 
 
 @dataclass
