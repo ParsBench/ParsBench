@@ -45,5 +45,5 @@ class ParsiNLUMachineTranslationEnFa(Task):
     scorer: Scorer = scores.persian_sentence_bleu
 
     def score_matches(self, matches: TaskMatchGroup) -> TaskMatchGroup:
-        matches.format_targets(lambda ts: ts[0])
+        matches.format_targets(lambda ts: ts[0] if isinstance(ts, list) else ts)
         return super().score_matches(matches)

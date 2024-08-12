@@ -51,6 +51,9 @@ def _compute_f1(prediction, truth):
 def common_tokens(completion: str, target: list[dict]) -> float:
     normalizer = Normalizer()
 
+    if not isinstance(target, list):
+        target = [(0, target)]
+
     model_ans = _preprocess_text(completion, normalizer)
     correct_ans = [_preprocess_text(t[1], normalizer) for t in target]
     f1 = max(_compute_f1(model_ans, answer) for answer in correct_ans)

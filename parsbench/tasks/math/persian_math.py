@@ -81,11 +81,13 @@ class PersianMath(Task):
         def _format_completion(completion):
             try:
                 idx = max(completion.rfind("[پاسخ]"), completion.rfind("[answer]"))
-                completion = completion[idx:]
+                if idx > -1:
+                    completion = completion[idx:]
                 return _preserve_digit(completion)
             except:
                 return ""
 
         matches.format_completions(_format_completion)
+        matches.format_targets(_preserve_digit)
 
         return super().score_matches(matches)
