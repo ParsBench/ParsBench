@@ -2399,7 +2399,11 @@
 <span class="normal">254</span>
 <span class="normal">255</span>
 <span class="normal">256</span>
-<span class="normal">257</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
+<span class="normal">257</span>
+<span class="normal">258</span>
+<span class="normal">259</span>
+<span class="normal">260</span>
+<span class="normal">261</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span>
 <span class="k">class</span> <span class="nc">BenchmarkResult</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Represents the results of benchmarking multiple models across various evaluations.</span>
@@ -2463,7 +2467,7 @@
 
         <span class="n">matches_paths</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">/*/*/matches*.jsonl&quot;</span><span class="p">)</span>
 
-        <span class="n">model_evals</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">model_evals</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">TaskMatchGroup</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
 
         <span class="k">for</span> <span class="n">match_path</span> <span class="ow">in</span> <span class="n">matches_paths</span><span class="p">:</span>
             <span class="n">match_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">match_path</span><span class="p">)</span>
@@ -2485,43 +2489,46 @@
             <span class="n">task_matches</span> <span class="o">=</span> <span class="n">TaskMatchGroup</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span>
                 <span class="n">Path</span><span class="p">(</span><span class="n">match_path</span><span class="p">)</span><span class="o">.</span><span class="n">parent</span><span class="p">,</span> <span class="n">n_shots</span><span class="o">=</span><span class="n">n_shots</span><span class="p">,</span> <span class="n">sub_task</span><span class="o">=</span><span class="n">sub_task</span>
             <span class="p">)</span>
+            <span class="k">assert</span> <span class="p">(</span>
+                <span class="n">task_name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">task_cls_mapping</span>
+            <span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;No task class found for &#39;</span><span class="si">{</span><span class="n">task_name</span><span class="si">}</span><span class="s2">&#39;.&quot;</span>
 
-            <span class="n">task_cls</span> <span class="o">=</span> <span class="n">task_cls_mapping</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">task_name</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-            <span class="k">assert</span> <span class="n">task_cls</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;No task class found for &#39;</span><span class="si">{</span><span class="n">task_name</span><span class="si">}</span><span class="s2">&#39;.&quot;</span>
-
-            <span class="n">task</span> <span class="o">=</span> <span class="n">task_cls</span><span class="p">()</span>
-            <span class="k">if</span> <span class="n">rescore</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2">: Re-scoring </span><span class="si">{</span><span class="n">task_name</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
-                <span class="n">task</span><span class="o">.</span><span class="n">score_matches</span><span class="p">(</span><span class="n">task_matches</span><span class="p">)</span>
-
-            <span class="n">score</span> <span class="o">=</span> <span class="n">task</span><span class="o">.</span><span class="n">get_overall_score</span><span class="p">(</span><span class="n">task_matches</span><span class="p">)</span>
-
-            <span class="n">model_evals</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">model_name</span><span class="p">,</span> <span class="n">task_name</span><span class="p">,</span> <span class="n">sub_task</span><span class="p">,</span> <span class="n">n_shots</span><span class="p">,</span> <span class="n">score</span><span class="p">))</span>
+            <span class="n">model_evals</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">model_name</span><span class="p">,</span> <span class="n">task_name</span><span class="p">,</span> <span class="n">sub_task</span><span class="p">,</span> <span class="n">task_matches</span><span class="p">))</span>
 
         <span class="n">model_benchmarks</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">ModelBenchmarkResult</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
 
         <span class="k">for</span> <span class="n">model_name</span><span class="p">,</span> <span class="n">task_evals</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span>
             <span class="n">model_evals</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Model: </span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
             <span class="n">evaluation_results</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">EvaluationResult</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
 
-            <span class="k">for</span> <span class="n">task_name</span><span class="p">,</span> <span class="n">sub_task_evals</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span>
+            <span class="k">for</span> <span class="n">task_name</span><span class="p">,</span> <span class="n">task_matches_group</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span>
                 <span class="n">task_evals</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
             <span class="p">):</span>
-                <span class="n">task_cls</span> <span class="o">=</span> <span class="n">task_cls_mapping</span><span class="p">[</span><span class="n">task_name</span><span class="p">]()</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Re-scoring </span><span class="si">{</span><span class="n">task_name</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
+                <span class="n">task</span> <span class="o">=</span> <span class="n">task_cls_mapping</span><span class="p">[</span><span class="n">task_name</span><span class="p">]()</span>
                 <span class="n">prompt_shot_evals</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
 
-                <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">sub_task</span><span class="p">,</span> <span class="n">n_shots</span><span class="p">,</span> <span class="n">score</span> <span class="ow">in</span> <span class="n">sub_task_evals</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">sub_task</span><span class="p">,</span> <span class="n">task_matches</span> <span class="ow">in</span> <span class="n">task_matches_group</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">sub_task</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">task_matches</span><span class="o">.</span><span class="n">n_shots</span><span class="si">}</span><span class="s2">-shot prompt:&quot;</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">rescore</span><span class="p">:</span>
+                        <span class="n">task_matches</span> <span class="o">=</span> <span class="n">task</span><span class="o">.</span><span class="n">score_matches</span><span class="p">(</span><span class="n">task_matches</span><span class="p">)</span>
+
+                    <span class="n">score</span> <span class="o">=</span> <span class="n">task</span><span class="o">.</span><span class="n">get_overall_score</span><span class="p">(</span><span class="n">task_matches</span><span class="p">)</span>
+
                     <span class="n">prompt_shot_evals</span><span class="p">[</span><span class="n">sub_task</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-                        <span class="n">PromptShotEvaluationResult</span><span class="p">(</span><span class="n">n_shots</span><span class="o">=</span><span class="n">n_shots</span><span class="p">,</span> <span class="n">score</span><span class="o">=</span><span class="n">score</span><span class="p">)</span>
+                        <span class="n">PromptShotEvaluationResult</span><span class="p">(</span>
+                            <span class="n">n_shots</span><span class="o">=</span><span class="n">task_matches</span><span class="o">.</span><span class="n">n_shots</span><span class="p">,</span> <span class="n">score</span><span class="o">=</span><span class="n">score</span>
+                        <span class="p">)</span>
                     <span class="p">)</span>
 
                 <span class="n">evaluation_results</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span>
                     <span class="n">EvaluationResult</span><span class="p">(</span>
                         <span class="n">model_name</span><span class="o">=</span><span class="n">model_name</span><span class="p">,</span>
                         <span class="n">task_name</span><span class="o">=</span><span class="n">task_name</span><span class="p">,</span>
-                        <span class="n">task_category</span><span class="o">=</span><span class="n">task_cls</span><span class="o">.</span><span class="n">task_category</span><span class="p">,</span>
-                        <span class="n">score_name</span><span class="o">=</span><span class="n">task_cls</span><span class="o">.</span><span class="n">score_name</span><span class="p">,</span>
+                        <span class="n">task_category</span><span class="o">=</span><span class="n">task</span><span class="o">.</span><span class="n">task_category</span><span class="p">,</span>
+                        <span class="n">score_name</span><span class="o">=</span><span class="n">task</span><span class="o">.</span><span class="n">score_name</span><span class="p">,</span>
                         <span class="n">prompt_shot_results</span><span class="o">=</span><span class="n">prompt_shot_results</span><span class="p">,</span>
                         <span class="n">sub_task</span><span class="o">=</span><span class="n">sub_task</span><span class="p">,</span>
                     <span class="p">)</span>
@@ -2533,6 +2540,7 @@
                     <span class="n">model_name</span><span class="o">=</span><span class="n">model_name</span><span class="p">,</span> <span class="n">evaluation_results</span><span class="o">=</span><span class="n">evaluation_results</span>
                 <span class="p">)</span>
             <span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">10</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">BenchmarkResult</span><span class="p">(</span><span class="n">model_benchmarks</span><span class="o">=</span><span class="n">model_benchmarks</span><span class="p">)</span>
 
@@ -2701,11 +2709,7 @@
 
             <details class="quote">
               <summary>Source code in <code>parsbench/benchmarks/benchmark_result.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">260</span>
-<span class="normal">261</span>
-<span class="normal">262</span>
-<span class="normal">263</span>
-<span class="normal">264</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">264</span>
 <span class="normal">265</span>
 <span class="normal">266</span>
 <span class="normal">267</span>
@@ -2732,7 +2736,11 @@
 <span class="normal">288</span>
 <span class="normal">289</span>
 <span class="normal">290</span>
-<span class="normal">291</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">merge_benchmark_results</span><span class="p">(</span>
+<span class="normal">291</span>
+<span class="normal">292</span>
+<span class="normal">293</span>
+<span class="normal">294</span>
+<span class="normal">295</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">merge_benchmark_results</span><span class="p">(</span>
     <span class="n">benchmarks</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">BenchmarkResult</span><span class="p">],</span> <span class="n">sort</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">keep_duplicates</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BenchmarkResult</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
@@ -2824,11 +2832,7 @@
 
             <details class="quote">
               <summary>Source code in <code>parsbench/benchmarks/benchmark_result.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">294</span>
-<span class="normal">295</span>
-<span class="normal">296</span>
-<span class="normal">297</span>
-<span class="normal">298</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">298</span>
 <span class="normal">299</span>
 <span class="normal">300</span>
 <span class="normal">301</span>
@@ -2875,7 +2879,11 @@
 <span class="normal">342</span>
 <span class="normal">343</span>
 <span class="normal">344</span>
-<span class="normal">345</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">build_leaderboard_from_benchmark</span><span class="p">(</span>
+<span class="normal">345</span>
+<span class="normal">346</span>
+<span class="normal">347</span>
+<span class="normal">348</span>
+<span class="normal">349</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">build_leaderboard_from_benchmark</span><span class="p">(</span>
     <span class="n">benchmark_result</span><span class="p">:</span> <span class="n">BenchmarkResult</span><span class="p">,</span> <span class="n">leaderboard_path</span><span class="p">:</span> <span class="nb">str</span>
 <span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
