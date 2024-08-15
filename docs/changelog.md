@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.1.7 - 2024-08-15
+
+### Fixed
+
+- Fix typos in prompt templates.
+- Fix error on using formatted targets while scoring matches.
+- Improve `from_matches_files` function speed in BenchmarkResult.
+- Fix returning list in AnthropicModel completion function.
+
+### Added
+
+- Add `formatted_completion` field to task matches.
+- Update completion formatters in tasks.
+- Add re-score option to `from_matches_files` in BenchmarkResult.
+- Add max retries exceeded error in API-based models.
+- Add snapshot functionality to save matches on error.
+- Add leaderboard builder function.
+- Add build from file functions to the BenchmarkResult class.
+
 ## 0.1.6 - 2024-07-25
 
 ### Fixed

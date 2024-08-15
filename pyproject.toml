@@ -1,13 +1,13 @@
 [tool.poetry]
 name = "parsbench"
-version = "0.1.6"
+version = "0.1.7"
 description = "ParsBench provides toolkits for benchmarking LLMs based on the Persian language tasks."
 authors = ["Shahriar Shariati <shahriarshm81@gmail.com>"]
 readme = "README.md"
-license = "LICENSE"
-homepage = "https://shahriarshm.github.io/parsbench"
-repository = "https://github.com/shahriarshm/parsbench"
-documentation = "https://shahriarshm.github.io/parsbench"
+license = "Apache-2.0"
+homepage = "https://parsbench.github.io/ParsBench"
+repository = "https://github.com/ParsBench/ParsBench"
+documentation = "https://parsbench.github.io/ParsBench"
 keywords = ["llm", "benchmarking", "persian"]
 classifiers = [
     "Topic :: Scientific/Engineering :: Artificial Intelligence",
