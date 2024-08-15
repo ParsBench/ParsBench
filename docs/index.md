@@ -1,8 +1,8 @@
 # ParsBench
 
 <div align="center">
-    <a href="https://github.com/shahriarshm/parsbench">
-        <img src="https://raw.githubusercontent.com/shahriarshm/parsbench/main/docs/imgs/banner-black.png" alt="Beanie" width="480" height="240">
+    <a href="https://github.com/ParsBench/ParsBench">
+        <img src="https://raw.githubusercontent.com/ParsBench/ParsBench/main/docs/imgs/banner-black.png" alt="Beanie" width="480" height="240">
     </a>
     <br>
     <a href="https://shahriarshm.github.io/parsbench/">

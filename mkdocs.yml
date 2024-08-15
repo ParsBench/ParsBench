@@ -2,9 +2,9 @@ site_name: ParsBench Documentation
 site_description: ParsBench provides toolkits for benchmarking LLMs based on the Persian language.
 site_author: Shahriar Shariati
 
-repo_url: https://github.com/shahriarshm/parsbench
+repo_url: https://github.com/ParsBench/ParsBench
 remote_branch: main
-repo_name: parsbench
+repo_name: ParsBench
 
 theme:
   name: material
