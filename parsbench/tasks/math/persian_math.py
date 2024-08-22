@@ -88,6 +88,6 @@ class PersianMath(Task):
                 return ""
 
         matches.format_completions(_format_completion)
-        matches.format_targets(_preserve_digit)
+        # matches.format_targets(_preserve_digit)
 
         return super().score_matches(matches)
