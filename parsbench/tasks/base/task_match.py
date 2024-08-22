@@ -35,7 +35,9 @@ class TaskMatch:
 
     @property
     def cleaned_completion(self) -> str | None:
-        return self.formatted_completion or self.completion
+        if self.formatted_completion is not None:
+            return self.formatted_completion
+        return self.completion
 
 
 @dataclass
@@ -119,7 +121,7 @@ class TaskMatchGroup:
 
     @property
     def completions(self) -> list[str | None]:
-        return [m.completion for m in self.matches]
+        return [m.cleaned_completion for m in self.matches]
 
     @property
     def scores(self) -> list[int | None]:
