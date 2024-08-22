@@ -247,6 +247,22 @@ class BenchmarkResult:
 
         _radar_plot(data, categories, title)
 
+    def show_bar_plot(self, title="Bar Plot"):
+        data = []
+        categories = set()
+
+        for mb in self.model_benchmarks:
+            values = []
+            for _, evals in groupby(mb.evaluation_results, key=lambda e: e.task_name):
+                evals = list(evals)
+                score = sum(e.average_score for e in evals) / len(evals)
+                values.append(score)
+
+            data.append({"name": mb.model_name, "values": values})
+            categories |= set(e.task_name for e in mb.evaluation_results)
+
+        _bar_plot(data, categories, title)
+
     def save(self, path: str):
         benchmark_path = Path(path) / "benchmark.jsonl"
 
@@ -380,4 +396,39 @@ def _radar_plot(data, categories, title="Radar Plot"):
     plt.title(title)
     plt.legend(loc="upper right", bbox_to_anchor=(0.1, 0.1))
 
+    plt.show()
+
+
+def _bar_plot(data, categories, title="Bar Plot"):
+    try:
+        from matplotlib import pyplot as plt
+        import numpy as np
+    except ImportError:
+        raise RuntimeError("The matplotlib and numpy libraries are not installed.")
+
+    num_vars = len(categories)
+    bar_width = 0.2  # Width of each bar
+
+    # Set up figure and axis with larger size for better spacing
+    fig, ax = plt.subplots(figsize=(10, 6))
+
+    # Set up positions for the bars on the x-axis
+    index = np.arange(num_vars)
+
+    # Plot each dataset as a group of bars
+    for i, d in enumerate(data):
+        values = d["values"]
+        ax.bar(index + i * bar_width, values, bar_width, label=d["name"])
+
+    # Add labels, title, and legend
+    ax.set_xlabel("Categories")
+    ax.set_ylabel("Values")
+    ax.set_title(title)
+    ax.set_xticks(index + bar_width * (len(data) - 1) / 2)
+    ax.set_xticklabels(categories, rotation=45, ha="right")  # Rotate labels
+
+    ax.set_ylim(0, 1)
+    ax.legend(loc="best")
+
+    plt.tight_layout()
     plt.show()
