@@ -222,6 +222,7 @@ class Task(TaskMatchGenerator, TaskScorer, metaclass=ABCMeta):
                     )
                 match_groups.append(match_group)
 
+            has_error = False
             for match_group in match_groups:
                 eval_desc = f"{match_group.n_shots}-shot"
                 if sub_task:
@@ -245,28 +246,31 @@ class Task(TaskMatchGenerator, TaskScorer, metaclass=ABCMeta):
                         n_workers=n_workers,
                     )
                     self.score_matches(match_group)
+                except Exception:
+                    has_error = True
                 finally:
                     if save_matches:
                         match_group.save(task_path, sub_task=sub_task)
 
-            evaluation_result = EvaluationResult(
-                model_name=model.model_name,
-                task_name=self.task_name,
-                task_category=self.task_category,
-                score_name=self.score_name,
-                sub_task=sub_task,
-                prompt_shot_results=[
-                    PromptShotEvaluationResult(
-                        n_shots=m.n_shots,
-                        score=self.get_overall_score(m),
+                if not has_error:
+                    evaluation_result = EvaluationResult(
+                        model_name=model.model_name,
+                        task_name=self.task_name,
+                        task_category=self.task_category,
+                        score_name=self.score_name,
+                        sub_task=sub_task,
+                        prompt_shot_results=[
+                            PromptShotEvaluationResult(
+                                n_shots=m.n_shots,
+                                score=self.get_overall_score(m),
+                            )
+                            for m in match_groups
+                        ],
                     )
-                    for m in match_groups
-                ],
-            )
-            evaluation_results.append(evaluation_result)
+                    evaluation_results.append(evaluation_result)
 
-            if save_evaluation:
-                evaluation_result.save(task_path)
+                    if save_evaluation:
+                        evaluation_result.save(task_path)
 
         return evaluation_results
 
