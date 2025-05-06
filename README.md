@@ -153,6 +153,23 @@ Here are the names of companies/people who helped us to keep maintaining this pr
 
 Contributions are welcome! Please refer to the [contribution guidelines](docs/contribution.md) for more information on how to contribute.
 
+## Citation
+
+If you use ParsBench in your research, please cite it as follows:
+
+```bibtex
+@software{parsbench2025,
+  author = {Shahriar Shariati Motlagh},
+  title = {ParsBench: A Toolkit for Benchmarking Persian Language Models},
+  url = {https://github.com/ParsBench/ParsBench},
+  year = {2025},
+}
+```
+
+Or in text format:
+
+Shariati Motlagh, S. (2025). ParsBench: A Toolkit for Benchmarking Persian Language Models. GitHub repository: https://github.com/ParsBench/ParsBench
+
 ## License
 
 ParsBench is distributed under the Apache-2.0 license.
