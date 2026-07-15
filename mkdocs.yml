@@ -3,7 +3,7 @@ site_description: ParsBench provides toolkits for benchmarking LLMs based on the
 site_author: Shahriar Shariati
 
 repo_url: https://github.com/ParsBench/ParsBench
-remote_branch: main
+remote_branch: gh-pages
 repo_name: ParsBench
 
 theme:
