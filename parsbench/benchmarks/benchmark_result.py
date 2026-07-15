@@ -12,7 +12,6 @@ from pathlib import Path
 import jsonlines
 import numpy as np
 import pandas as pd
-import pytz
 
 from parsbench.tasks.base import EvaluationResult, TaskMatchGroup
 from parsbench.tasks.base.evaluation_result import PromptShotEvaluationResult
@@ -154,10 +153,13 @@ class BenchmarkResult:
                 Path(match_path).parent, n_shots=n_shots, sub_task=sub_task
             )
             assert (
-                task_name is not task_cls_mapping
+                task_name in task_cls_mapping
             ), f"No task class found for '{task_name}'."
 
             model_evals.append((model_name, task_name, sub_task, task_matches))
+
+        # groupby only groups consecutive keys, so sort by (model, task) first.
+        model_evals.sort(key=lambda t: (t[0], t[1]))
 
         model_benchmarks: list[ModelBenchmarkResult] = []
 
@@ -297,13 +299,12 @@ def merge_benchmark_results(
 
     if not keep_duplicates:
         model_names = set()
-        skipped = 0
-        for index in range(len(model_benchmarks)):
-            mbr = model_benchmarks[index - skipped]
-            if mbr.model_name in model_names:
-                skipped += 1
-                model_benchmarks.pop(index - skipped)
-            model_names.add(mbr.model_name)
+        deduped: list[ModelBenchmarkResult] = []
+        for mbr in model_benchmarks:
+            if mbr.model_name not in model_names:
+                model_names.add(mbr.model_name)
+                deduped.append(mbr)
+        model_benchmarks = deduped
 
     if sort:
         model_benchmarks.sort(key=lambda m: m.average_score, reverse=True)
@@ -327,7 +328,7 @@ def build_leaderboard_from_benchmark(
     requests_path.mkdir(exist_ok=True)
     results_path.mkdir(exist_ok=True)
 
-    now = datetime.datetime.now(pytz.UTC).isoformat(timespec="seconds")
+    now = datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="seconds")
 
     for mb in benchmark_result.model_benchmarks:
         model_name = mb.model_name
@@ -401,8 +402,8 @@ def _radar_plot(data, categories, title="Radar Plot"):
 
 def _bar_plot(data, categories, title="Bar Plot"):
     try:
-        from matplotlib import pyplot as plt
         import numpy as np
+        from matplotlib import pyplot as plt
     except ImportError:
         raise RuntimeError("The matplotlib and numpy libraries are not installed.")
 

@@ -1,12 +1,19 @@
+from functools import cache
+
 import hazm
 import nltk
 
 from .base import wrap_scorer
 
 
+@cache
+def _ensure_punkt():
+    nltk.download("punkt", quiet=True)
+
+
 @wrap_scorer
 def english_sentence_bleu(completion: str, target: str) -> float:
-    nltk.download("punkt", quiet=True)
+    _ensure_punkt()
 
     reference_translation = [nltk.word_tokenize(target)]
     model_translation = nltk.word_tokenize(completion)

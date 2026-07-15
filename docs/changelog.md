@@ -1,5 +1,26 @@
 # Changelog
 
+## 0.2.0 - 2026-07-15
+
+### Changed
+
+- Support current library versions: transformers 5.x, datasets 5.x, openai 2.x, anthropic, and numpy 2.
+- **Breaking:** drop Python 3.10/3.11 support; Python >= 3.12 is now required (needed by hazm >= 0.11 and numpy 2).
+- Bump hazm to 0.12, drop the unused `scipy` pin, and declare the `numpy`/`pandas`/`requests`/`tqdm`/`nltk` dependencies that were previously only installed transitively.
+
+### Fixed
+
+- Fix evaluation and merge correctness bugs, and cache the summarization/NER scorers.
+- Use cleaned completions when scoring matches.
+- Replace the undeclared `pytz` dependency with the standard library (`pandas` 3 no longer ships it).
+- Remove format targets in the Persian Math task.
+- Import the optional `math_equivalence` package lazily so `import parsbench` no longer fails when it is not installed.
+
+### Added
+
+- Add `show_bar_plot` to `BenchmarkResult`.
+- Add a mechanism to skip evaluation results on error.
+
 ## 0.1.7 - 2024-08-15
 
 ### Fixed

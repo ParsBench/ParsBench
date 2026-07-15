@@ -30,7 +30,8 @@ def _fetch_text_file(path) -> str:
                 content.extend(data)
                 bar.update(len(data))
 
-        assert len(content) == total_size, f"{len(content)} != {total_size}"
+        if total_size:
+            assert len(content) == total_size, f"{len(content)} != {total_size}"
 
         return content.decode()
 
