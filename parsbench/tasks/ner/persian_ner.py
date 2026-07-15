@@ -1,3 +1,4 @@
+import ast
 from pathlib import Path
 
 from parsbench.scores.base import Scorer, wrap_scorer
@@ -27,15 +28,15 @@ def ner_exact_match(completion: str, target: str) -> float:
     ]
     tag2index = {t: i for i, t in enumerate(tags)}
 
+    mapper = lambda t: (t[0], tag2index.get(t[1], -2))
     try:
-        completion_ner = eval(completion)
-        target_ner = eval(target)
-    except:
+        completion_ner = dict(map(mapper, ast.literal_eval(completion)))
+        target_ner = dict(map(mapper, ast.literal_eval(target)))
+    except Exception:
         return 0
 
-    mapper = lambda t: (t[0], tag2index.get(t[1], -2))
-    completion_ner = dict(map(mapper, completion_ner))
-    target_ner = dict(map(mapper, target_ner))
+    if not completion_ner:
+        return 0
 
     score = sum(
         [1 if target_ner.get(t, -1) == idx else 0 for t, idx in completion_ner.items()]

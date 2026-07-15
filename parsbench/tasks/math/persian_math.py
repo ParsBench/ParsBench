@@ -84,7 +84,7 @@ class PersianMath(Task):
                 if idx > -1:
                     completion = completion[idx:]
                 return _preserve_digit(completion)
-            except:
+            except Exception:
                 return ""
 
         matches.format_completions(_format_completion)
