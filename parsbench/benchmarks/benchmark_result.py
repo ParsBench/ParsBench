@@ -12,7 +12,6 @@ from pathlib import Path
 import jsonlines
 import numpy as np
 import pandas as pd
-import pytz
 
 from parsbench.tasks.base import EvaluationResult, TaskMatchGroup
 from parsbench.tasks.base.evaluation_result import PromptShotEvaluationResult
@@ -329,7 +328,7 @@ def build_leaderboard_from_benchmark(
     requests_path.mkdir(exist_ok=True)
     results_path.mkdir(exist_ok=True)
 
-    now = datetime.datetime.now(pytz.UTC).isoformat(timespec="seconds")
+    now = datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="seconds")
 
     for mb in benchmark_result.model_benchmarks:
         model_name = mb.model_name

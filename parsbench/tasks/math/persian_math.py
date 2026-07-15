@@ -1,14 +1,5 @@
 from pathlib import Path
 
-try:
-    import math_equivalence as math_metric
-except ImportError:
-    raise Exception(
-        "The math_equivalence package is not installed."
-        "You should install it manually by `pip install git+https://github.com/hendrycks/math.git`"
-    )
-
-
 from parsbench.scores.base import Scorer, wrap_scorer
 from parsbench.tasks.base import (
     JSONLineDataLoader,
@@ -25,6 +16,13 @@ DATA_URL = "https://raw.githubusercontent.com/Ipouyall/Benchmarking_ChatGPT_for_
 
 @wrap_scorer
 def math_equivalence(completion: str, target: str):
+    try:
+        import math_equivalence as math_metric
+    except ImportError as exc:
+        raise ImportError(
+            "The math_equivalence package is required to score the Persian Math task. "
+            "Install it manually: `pip install git+https://github.com/hendrycks/math.git`"
+        ) from exc
     return math_metric.is_equiv(completion, target)
 
 
