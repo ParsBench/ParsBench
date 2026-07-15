@@ -887,11 +887,14 @@
 
 <h1 id="getting-started">Getting Started</h1>
 <h2 id="installation">Installation</h2>
-<p>Install <a href="https://github.com/hendrycks/math">Math Equivalence</a> package manually:</p>
-<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>git+https://github.com/hendrycks/math.git
-</code></pre></div>
+<blockquote>
+<p><strong>Requires Python ≥ 3.12.</strong> ParsBench 0.2.x targets current library versions (transformers 5, datasets 5, numpy 2), which need Python 3.12+. If you're on Python 3.10/3.11, pin the previous release: <code>pip install "parsbench==0.1.7"</code>.</p>
+</blockquote>
 <p>Install ParsBench using pip:</p>
 <div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>parsbench
+</code></pre></div>
+<p>The <a href="https://github.com/hendrycks/math">Persian Math</a> task additionally needs the Math Equivalence package, installed manually:</p>
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>git+https://github.com/hendrycks/math.git
 </code></pre></div>
 <h2 id="usage">Usage</h2>
 <h3 id="evaluating-a-pretrained-model">Evaluating a PreTrained Model</h3>
