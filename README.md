@@ -32,16 +32,18 @@ So, I thought that I should build a handy framework that includes various tasks 
 
 ## Installation
 
-Install [Math Equivalence](https://github.com/hendrycks/math) package manually:
-
-```bash
-pip install git+https://github.com/hendrycks/math.git
-```
+> **Requires Python ≥ 3.12.** ParsBench 0.2.x targets current library versions (transformers 5, datasets 5, numpy 2), which need Python 3.12+. If you're on Python 3.10/3.11, pin the previous release: `pip install "parsbench==0.1.7"`.
 
 Install ParsBench using pip:
 
 ```bash
 pip install parsbench
+```
+
+The [Persian Math](https://github.com/hendrycks/math) task additionally needs the Math Equivalence package, installed manually:
+
+```bash
+pip install git+https://github.com/hendrycks/math.git
 ```
 
 ## Usage
