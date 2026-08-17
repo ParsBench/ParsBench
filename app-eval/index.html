@@ -1,0 +1,1327 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="ParsBench provides toolkits for benchmarking LLMs based on the Persian language.">
+      
+      
+        <meta name="author" content="Shahriar Shariati">
+      
+      
+      
+        <link rel="prev" href="../getting-started/">
+      
+      
+        <link rel="next" href="../tutorial/models/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../imgs/logo.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Evaluating Your App - ParsBench Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="teal">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#evaluating-your-ai-app" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="ParsBench Documentation" class="md-header__button md-logo" aria-label="ParsBench Documentation" data-md-component="logo">
+      
+  <img src="../imgs/logo-black.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ParsBench Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Evaluating Your App
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/ParsBench/ParsBench" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ParsBench
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="ParsBench Documentation" class="md-nav__button md-logo" aria-label="ParsBench Documentation" data-md-component="logo">
+      
+  <img src="../imgs/logo-black.svg" alt="logo">
+
+    </a>
+    ParsBench Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/ParsBench/ParsBench" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ParsBench
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../getting-started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Evaluating Your App
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Evaluating Your App
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#sixty-seconds-no-api-key" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sixty seconds, no API key
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#two-ways-in" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Two ways in
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#golden-fields" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Golden fields
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-judge" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The judge
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#frameworks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Frameworks
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#multi-turn-simulation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Multi-turn simulation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#generating-goldens-from-your-docs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Generating goldens from your docs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#calibrating-the-judge" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Calibrating the judge
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ci" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CI
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#viewing-runs-parsbench-view" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Viewing runs — parsbench view
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tutorial
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorial/models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Models
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorial/tasks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tasks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorial/benchmarks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Benchmarks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorial/advanced/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Advanced
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contribution/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contribution
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Code Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Code Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../code_reference/models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Models
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../code_reference/scores/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../code_reference/tasks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tasks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../code_reference/benchmarks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Benchmarks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../changelog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Changelog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../donation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Donation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#sixty-seconds-no-api-key" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sixty seconds, no API key
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#two-ways-in" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Two ways in
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#golden-fields" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Golden fields
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-judge" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The judge
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#frameworks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Frameworks
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#multi-turn-simulation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Multi-turn simulation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#generating-goldens-from-your-docs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Generating goldens from your docs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#calibrating-the-judge" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Calibrating the judge
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ci" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CI
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#viewing-runs-parsbench-view" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Viewing runs — parsbench view
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="evaluating-your-ai-app">Evaluating your AI app</h1>
+<p>ParsBench's app evaluation layer tests <strong>your Persian chatbot or agent</strong> —
+whatever framework it is built with. It is the part of ParsBench you wire into
+CI so a prompt tweak that breaks tool calls, leaks a forbidden answer, or
+quotes the wrong price never reaches production.</p>
+<p>English-shaped eval harnesses silently fail on Persian apps: they treat
+«۲۵۰ هزار تومان» and «۲٬۵۰۰٬۰۰۰ ریال» as different answers, «۵ مهر ۱۴۰۵» and
+<code>2026-09-27</code> as different dates, and «می‌روم» / «می روم» / «میروم» as different
+words. ParsBench's normalization layer makes those equivalences hold in every
+check, on both text answers and tool-call arguments.</p>
+<p>Like the rest of ParsBench, the API is class-based: an <code>AppEvaluator</code> holds
+your goldens the way a <code>Task</code> holds its dataset, and <code>evaluate()</code> takes the
+thing under test — your app instead of a model.</p>
+<h2 id="sixty-seconds-no-api-key">Sixty seconds, no API key</h2>
+<p>Your app is any function that takes a user message and returns a string, a
+<code>Trace</code>, or an OpenAI-format message list:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">parsbench.appeval</span><span class="w"> </span><span class="kn">import</span> <span class="n">AppEvaluator</span><span class="p">,</span> <span class="n">Golden</span><span class="p">,</span> <span class="n">ToolCall</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">my_bot</span><span class="p">(</span><span class="n">message</span><span class="p">):</span>          <span class="c1"># stand-in for your app</span>
+    <span class="k">return</span> <span class="p">[</span>
+        <span class="p">{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;assistant&quot;</span><span class="p">,</span> <span class="s2">&quot;tool_calls&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;function&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;search_flights&quot;</span><span class="p">,</span>
+                                     <span class="s2">&quot;arguments&quot;</span><span class="p">:</span> <span class="s1">&#39;{&quot;date&quot;: &quot;1405-07-05&quot;}&#39;</span><span class="p">}}]},</span>
+        <span class="p">{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;tool&quot;</span><span class="p">,</span> <span class="s2">&quot;tool_call_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;پرواز PY-101&quot;</span><span class="p">},</span>
+        <span class="p">{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;assistant&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;پرواز ساعت ۸ صبح، قیمت ۲٬۵۰۰٬۰۰۰ ریال&quot;</span><span class="p">},</span>
+    <span class="p">]</span>
+
+<span class="n">evaluator</span> <span class="o">=</span> <span class="n">AppEvaluator</span><span class="p">(</span><span class="n">goldens</span><span class="o">=</span><span class="p">[</span>
+    <span class="n">Golden</span><span class="p">(</span>
+        <span class="nb">input</span><span class="o">=</span><span class="s2">&quot;بلیط تهران-مشهد برای ۵ مهر ۱۴۰۵ می‌خوام. قیمتش چنده؟&quot;</span><span class="p">,</span>
+        <span class="n">tools</span><span class="o">=</span><span class="p">[</span><span class="n">ToolCall</span><span class="p">(</span><span class="s2">&quot;search_flights&quot;</span><span class="p">,</span> <span class="n">date</span><span class="o">=</span><span class="s2">&quot;2026-09-27&quot;</span><span class="p">)],</span>  <span class="c1"># Jalali == Gregorian</span>
+        <span class="n">contains</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;250 هزار تومان&quot;</span><span class="p">],</span>                            <span class="c1"># rials == tomans</span>
+        <span class="n">forbidden_tools</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;book_flight&quot;</span><span class="p">],</span>
+    <span class="p">),</span>
+<span class="p">])</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">evaluator</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">my_bot</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</code></pre></div>
+<p>Every filled <code>Golden</code> field switches on its check — there is no separate
+metric configuration and no YAML.</p>
+<h2 id="two-ways-in">Two ways in</h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># 1. run-for-me: hand evaluate() your function (sync or async)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">evaluator</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">bot</span><span class="p">)</span>
+
+<span class="c1"># 2. traces mode: run the app yourself, score what happened</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">evaluator</span><span class="o">.</span><span class="n">score_traces</span><span class="p">([</span><span class="n">trace_or_message_list</span><span class="p">])</span>
+</code></pre></div>
+<p>A crash inside your app is reported as a failing <code>app_error</code> check on that
+golden — one broken case never aborts the suite. Async apps work everywhere,
+including notebooks and servers with a running event loop.</p>
+<h2 id="golden-fields">Golden fields</h2>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Check</th>
+<th>Passes when</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>output=</code></td>
+<td><code>correctness</code></td>
+<td>a judge scores the answer consistent with the reference</td>
+</tr>
+<tr>
+<td><code>contains=[...]</code></td>
+<td><code>contains</code></td>
+<td>each needle appears — normalized, money- and date-equivalent</td>
+</tr>
+<tr>
+<td><code>not_contains=[...]</code></td>
+<td><code>not_contains</code></td>
+<td>no needle appears (same equivalences)</td>
+</tr>
+<tr>
+<td><code>format=Model</code></td>
+<td><code>format</code></td>
+<td>the output parses/validates against a pydantic schema</td>
+</tr>
+<tr>
+<td><code>tools=[ToolCall(...)]</code></td>
+<td><code>tools</code></td>
+<td>expected calls happened; args compared date→number→text</td>
+</tr>
+<tr>
+<td><code>forbidden_tools=[...]</code></td>
+<td><code>forbidden_tools</code></td>
+<td>none of these tools were called</td>
+</tr>
+<tr>
+<td><code>context=[...]</code></td>
+<td><code>faithfulness</code></td>
+<td>a judge finds every claim supported by the context</td>
+</tr>
+<tr>
+<td><code>refuses=True</code></td>
+<td><code>refusal</code></td>
+<td>a judge confirms the request was declined</td>
+</tr>
+<tr>
+<td><code>max_steps/latency/cost</code></td>
+<td><code>budget:*</code></td>
+<td>the trace stayed within the budget</td>
+</tr>
+<tr>
+<td><code>check=fn</code></td>
+<td><code>custom</code></td>
+<td>your <code>Trace -&gt; bool | float</code> returns truthy/1.0</td>
+</tr>
+</tbody>
+</table>
+<p><code>AppEvaluator(goldens, metrics=["tools:strict", "contains"])</code> filters or
+re-modes checks; unknown names raise instead of silently passing, and Golden
+field names (<code>max_steps</code>, <code>refuses</code>, …) work as aliases.</p>
+<h2 id="the-judge">The judge</h2>
+<p>Deterministic checks always run. Judge checks (<code>output=</code>, <code>context=</code>,
+<code>refuses=</code>) need a judge model and <strong>skip gracefully</strong> without one:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">PARSBENCH_JUDGE</span><span class="o">=</span>gpt-4.1-mini<span class="w">      </span><span class="c1"># any OpenAI-compatible model name</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">OPENAI_BASE_URL</span><span class="o">=</span>...<span class="w">               </span><span class="c1"># AvalAI, OpenRouter, Ollama, …</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">OPENAI_API_KEY</span><span class="o">=</span>...
+<span class="c1"># or judge-specific: PARSBENCH_JUDGE_BASE_URL / PARSBENCH_JUDGE_API_KEY</span>
+</code></pre></div>
+<p><code>judge=</code> also accepts any parsbench <code>Model</code> (e.g. an <code>OpenAIModel</code>) or a plain
+<code>prompt -&gt; str</code> callable. Judge prompts are authored in Persian and importable
+(<code>parsbench.appeval.prompts_fa</code>) if you want to edit the rubrics. The built-in
+client retries transient failures and bounds each call
+(<code>PARSBENCH_MAX_RETRIES</code>, <code>PARSBENCH_TIMEOUT</code> override the defaults of 5 and
+120s). Before trusting judge scores at scale,
+<a href="#calibrating-the-judge">calibrate them</a>.</p>
+<h2 id="frameworks">Frameworks</h2>
+<p>Every adapter is duck-typed — importing it never requires the framework:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">parsbench.integrations</span><span class="w"> </span><span class="kn">import</span> <span class="n">openai_agents</span><span class="p">,</span> <span class="n">langgraph</span><span class="p">,</span> <span class="n">pydantic_ai</span><span class="p">,</span> <span class="n">agno</span>
+
+<span class="n">trace</span> <span class="o">=</span> <span class="n">openai_agents</span><span class="o">.</span><span class="n">to_trace</span><span class="p">(</span><span class="n">run_result</span><span class="p">)</span>     <span class="c1"># OpenAI Agents SDK RunResult</span>
+<span class="n">trace</span> <span class="o">=</span> <span class="n">langgraph</span><span class="o">.</span><span class="n">to_trace</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>              <span class="c1"># LangGraph graph state</span>
+<span class="n">trace</span> <span class="o">=</span> <span class="n">pydantic_ai</span><span class="o">.</span><span class="n">to_trace</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>           <span class="c1"># Pydantic AI AgentRunResult</span>
+<span class="n">trace</span> <span class="o">=</span> <span class="n">agno</span><span class="o">.</span><span class="n">to_trace</span><span class="p">(</span><span class="n">run</span><span class="p">)</span>                     <span class="c1"># Agno RunOutput</span>
+</code></pre></div>
+<p>Anything OTel-instrumented (CrewAI, LlamaIndex, Google ADK, instrumented
+LangChain) feeds through the universal collector — no adapter needed:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">parsbench.integrations.otel</span><span class="w"> </span><span class="kn">import</span> <span class="n">TraceCollector</span>
+
+<span class="n">collector</span> <span class="o">=</span> <span class="n">TraceCollector</span><span class="p">()</span>
+<span class="n">tracer_provider</span><span class="o">.</span><span class="n">add_span_processor</span><span class="p">(</span><span class="n">collector</span><span class="p">)</span>
+<span class="o">...</span>   <span class="c1"># run your app</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">evaluator</span><span class="o">.</span><span class="n">score_traces</span><span class="p">([</span><span class="n">collector</span><span class="o">.</span><span class="n">to_trace</span><span class="p">()])</span>
+</code></pre></div>
+<p>Runnable end-to-end examples for each framework live in
+<a href="https://github.com/ParsBench/ParsBench/tree/main/examples"><code>examples/</code></a>, and
+<a href="https://github.com/ParsBench/ParsBench/tree/main/examples/industry"><code>examples/industry/</code></a>
+shows vertical-specific evaluations — banking, e-commerce, healthcare, telecom
+simulation, and knowledge-base RAG.</p>
+<h2 id="multi-turn-simulation">Multi-turn simulation</h2>
+<p><code>SimulationEvaluator</code> drives your bot with an LLM playing an Iranian user —
+taarof openings, toman/rial confusion, Jalali dates, Finglish switches, typos
+— then judges the finished conversation against the goal:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">parsbench.appeval</span><span class="w"> </span><span class="kn">import</span> <span class="n">SimulationEvaluator</span>
+
+<span class="n">evaluator</span> <span class="o">=</span> <span class="n">SimulationEvaluator</span><span class="p">(</span>
+    <span class="n">goal</span><span class="o">=</span><span class="s2">&quot;خرید بسته اینترنت یک‌ماهه و دانستن قیمت آن&quot;</span><span class="p">,</span>
+    <span class="n">user</span><span class="o">=</span><span class="s2">&quot;محاوره‌ای+toman_rial_confusion+finglish_switch&quot;</span><span class="p">,</span>
+    <span class="n">criteria</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;قیمت به کاربر اعلام شود&quot;</span><span class="p">],</span>
+    <span class="n">simulator_model</span><span class="o">=</span><span class="s2">&quot;gpt-4.1-mini&quot;</span><span class="p">,</span>           <span class="c1"># the user simulator</span>
+    <span class="n">judge</span><span class="o">=</span><span class="s2">&quot;gpt-4.1-mini&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">evaluator</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">my_bot</span><span class="p">)</span>           <span class="c1"># fn(message) or fn(message, history)</span>
+</code></pre></div>
+<p><code>parsbench.appeval.TRAPS</code> lists the named behaviors; free text in the <code>user=</code>
+string becomes extra instructions for the simulated user. For finer control,
+pass a <code>PersianUser(style=..., persona=..., traps=[...])</code> and
+<code>ConversationGolden</code> objects.</p>
+<h2 id="generating-goldens-from-your-docs">Generating goldens from your docs</h2>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">parsbench.appeval</span><span class="w"> </span><span class="kn">import</span> <span class="n">GoldenGenerator</span>
+
+<span class="n">goldens</span> <span class="o">=</span> <span class="n">GoldenGenerator</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="s2">&quot;gpt-4.1-mini&quot;</span><span class="p">,</span> <span class="n">adversarial</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="s2">&quot;kb/&quot;</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">AppEvaluator</span><span class="p">(</span><span class="n">goldens</span><span class="p">)</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">my_bot</span><span class="p">)</span>
+</code></pre></div>
+<p>Questions come in both formal and colloquial register; <code>adversarial=True</code>
+mixes digit scripts, Jalali dates and Finglish. Generated goldens carry their
+source chunk as <code>context=</code>, so faithfulness is judged automatically.</p>
+<h2 id="calibrating-the-judge">Calibrating the judge</h2>
+<p>Before publishing judge-scored numbers, measure judge-vs-human agreement on a
+labeled sample:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">parsbench.appeval</span><span class="w"> </span><span class="kn">import</span> <span class="n">JudgeCalibrator</span>
+
+<span class="n">calibration</span> <span class="o">=</span> <span class="n">JudgeCalibrator</span><span class="p">(</span><span class="n">judge</span><span class="o">=</span><span class="s2">&quot;gpt-4.1-mini&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">calibrate</span><span class="p">(</span>
+    <span class="p">[{</span><span class="s2">&quot;golden&quot;</span><span class="p">:</span> <span class="n">Golden</span><span class="p">(</span><span class="nb">input</span><span class="o">=</span><span class="s2">&quot;...&quot;</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="s2">&quot;...&quot;</span><span class="p">),</span> <span class="s2">&quot;output&quot;</span><span class="p">:</span> <span class="s2">&quot;...&quot;</span><span class="p">,</span> <span class="s2">&quot;human&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span> <span class="o">...</span><span class="p">],</span>
+    <span class="n">prefer_concurrency</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">n_workers</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">calibration</span><span class="p">)</span>     <span class="c1"># agreement, Cohen&#39;s kappa, readable disagreements</span>
+</code></pre></div>
+<h2 id="ci">CI</h2>
+<p><code>result.assert_passed()</code> raises with the failing checks, so goldens are plain
+pytest cases (see <a href="https://github.com/ParsBench/ParsBench/blob/main/examples/ci_with_pytest.py"><code>examples/ci_with_pytest.py</code></a>):</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s2">&quot;golden&quot;</span><span class="p">,</span> <span class="n">GOLDENS</span><span class="p">,</span> <span class="n">ids</span><span class="o">=</span><span class="k">lambda</span> <span class="n">g</span><span class="p">:</span> <span class="n">g</span><span class="o">.</span><span class="n">label</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_bot</span><span class="p">(</span><span class="n">golden</span><span class="p">):</span>
+    <span class="n">AppEvaluator</span><span class="p">(</span><span class="n">goldens</span><span class="o">=</span><span class="p">[</span><span class="n">golden</span><span class="p">])</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">bot</span><span class="p">)</span><span class="o">.</span><span class="n">assert_passed</span><span class="p">()</span>
+</code></pre></div>
+<p>Run them with <code>pytest</code> or <code>parsbench test</code> (install via <code>pip install
+'parsbench[test]'</code>). For flaky agents, <code>evaluate(bot, n_runs=5)</code> repeats each
+golden and <code>result.pass_hat_k()</code> gives the tau²-style consistency score;
+<code>evaluate(bot, prefer_concurrency=True, n_workers=8)</code> fans independent goldens
+out over threads (your app and judge must then be thread-safe).</p>
+<p>Results are plain dataclasses with the same conveniences as benchmark
+results: <code>result.to_pandas()</code>, <code>result.save(output_path)</code> (also available as
+<code>evaluate(..., save_evaluation=True, output_path=...)</code>),
+<code>result.diff("out/app_evaluation.jsonl")</code> to track regressions between runs,
+and <code>result.to_langfuse()</code> to push per-check scores to a Langfuse instance
+(<code>LANGFUSE_HOST</code> / <code>LANGFUSE_PUBLIC_KEY</code> / <code>LANGFUSE_SECRET_KEY</code>).</p>
+<h2 id="viewing-runs-parsbench-view">Viewing runs — <code>parsbench view</code></h2>
+<p>Every <code>evaluate()</code> and <code>score_traces()</code> call records its run — full traces
+included — into a project-local <code>.parsbench/</code> store (self-gitignored, plain
+<code>run.json</code> + <code>events.jsonl</code> files). Open the viewer:</p>
+<div class="highlight"><pre><span></span><code>parsbench view
+</code></pre></div>
+<p><img alt="parsbench view" src="../imgs/viewer.png" /></p>
+<ul>
+<li><strong>Live</strong>: runs stream into the UI while they execute; finished runs stay
+  as the archive.</li>
+<li><strong>Checks matrix</strong>: goldens × checks with the judge's Persian reasons one
+  click away.</li>
+<li><strong>Trace detail</strong>: messages, tool calls (arguments/results/errors),
+  latency and steps — plus per-run tabs when <code>n_runs &gt; 1</code>.</li>
+<li><strong>Simulation replay</strong>: the conversation as an RTL chat, with the goal and
+  traps in play.</li>
+<li><strong>Compare</strong>: pick a baseline run to see which goldens regressed and how
+  each check's mean moved.</li>
+<li><strong>Export</strong>: download any run as JSON (full traces), CSV (one row per
+  check, Excel-safe UTF-8), or a paste-ready Markdown report.</li>
+<li><strong>Charts</strong>: an optional diagrams section — score per check and the app's
+  score history across runs. Dark and light themes, toggle in the top bar.</li>
+</ul>
+<p>Recording is on by default; turn it off per call with <code>record=False</code> or
+globally with the <code>PARSBENCH_NO_RECORD=1</code> env var (e.g. in CI). Delete
+<code>.parsbench/</code> whenever you like — it is only the viewer's data.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": [], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>
