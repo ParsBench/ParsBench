@@ -11,6 +11,9 @@
     <a href="https://pypi.python.org/pypi/parsbench">
         <img src="https://img.shields.io/pypi/v/parsbench.svg" alt="pypi">
     </a>
+    <a href="https://github.com/ParsBench/ParsBench/actions/workflows/ci.yml">
+        <img src="https://github.com/ParsBench/ParsBench/actions/workflows/ci.yml/badge.svg" alt="CI">
+    </a>
     <a href="https://huggingface.co/ParsBench">
         <img src="https://huggingface.co/datasets/huggingface/badges/resolve/main/follow-me-on-HF-md-dark.svg" alt="huggingface">
     </a>
@@ -23,6 +26,32 @@ ParsBench provides toolkits for benchmarking Large Language Models (LLMs) based 
 - **Variety of Tasks**: Evaluate LLMs across various topics.
 - **Benchmarking Tools**: Compare and rank multiple models.
 - **Customizable API**: Create custom models, tasks, scores, and benchmarks with ease.
+
+## Evaluating your AI app (new)
+
+Building a Persian chatbot or agent with the OpenAI SDK, OpenAI Agents SDK,
+LangGraph, Pydantic AI, Agno, or CrewAI? ParsBench now evaluates **your app**,
+not just models — tool-call matching across Jalali/Gregorian calendars, digit
+scripts and rial/toman amounts, Persian judge rubrics, a Persian user
+simulator, and pytest/CI integration:
+
+```python
+from parsbench.appeval import AppEvaluator, Golden, ToolCall
+
+evaluator = AppEvaluator(goldens=[
+    Golden(input="بلیط تهران-مشهد برای ۵ مهر می‌خوام",
+           tools=[ToolCall("search_flights", date="2026-09-27")],
+           contains=["250 هزار تومان"])])
+print(evaluator.evaluate(my_bot))
+```
+
+See runnable examples for every major framework in [`examples/`](examples/).
+
+- **See your runs** — `parsbench view` opens a local viewer: live progress, traces, simulation replays, diffs, exports, and charts. No extra dependencies, nothing to configure.
+
+<p align="center">
+    <img src="https://raw.githubusercontent.com/ParsBench/ParsBench/main/docs/imgs/viewer.png" alt="parsbench view" width="760">
+</p>
 
 ## Motivation
 

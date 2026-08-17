@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "parsbench"
-version = "0.2.0"
+version = "0.3.0"
 description = "ParsBench provides toolkits for benchmarking LLMs based on the Persian language tasks."
 authors = ["Shahriar Shariati <shahriarshm81@gmail.com>"]
 readme = "README.md"
@@ -21,6 +21,11 @@ classifiers = [
     "Programming Language :: Python :: 3 :: Only"
 ]
 packages = [{include = "parsbench"}]
+# ship the viewer SPA (non-Python files) in both distributions
+include = [{ path = "parsbench/ui/static/**/*", format = ["sdist", "wheel"] }]
+
+[tool.poetry.scripts]
+parsbench = "parsbench.cli:main"
 
 [tool.poetry.dependencies]
 # hazm >=0.11 requires Python >=3.12 and numpy 2.x; that sets the floor here.
@@ -39,9 +44,15 @@ pandas = ">=2.0"
 requests = ">=2.28"
 tqdm = ">=4.64"
 nltk = ">=3.8"
+# `parsbench test` wraps pytest; end users opt in with parsbench[test]
+pytest = {version = ">=8.0", optional = true}
+
+[tool.poetry.extras]
+test = ["pytest"]
 
 
 [tool.poetry.group.dev.dependencies]
+pytest = ">=8.0"
 black = "^24.4.2"
 isort = "^5.13.2"
 jupyter = "^1.0.0"

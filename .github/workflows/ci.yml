@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+    branches: [main, app-eval]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/pypoetry
+          key: poetry-${{ runner.os }}-py${{ matrix.python-version }}-${{ hashFiles('poetry.lock') }}
+      - name: Install
+        run: |
+          pipx install poetry
+          poetry install --with dev --extras test --no-interaction
+      - name: Test
+        run: poetry run pytest tests/ examples/ci_with_pytest.py -q
+      - name: Run offline examples
+        run: |
+          poetry run python examples/quickstart.py
+          poetry run python examples/industry/banking_support.py
+          poetry run python examples/industry/ecommerce_orders.py
+          poetry run python examples/industry/medical_triage.py
+      - name: Type-check the app-eval surface
+        run: poetry run mypy parsbench/appeval parsbench/integrations parsbench/ui parsbench/cli.py --ignore-missing-imports
+      - name: Build distribution
+        run: poetry build
