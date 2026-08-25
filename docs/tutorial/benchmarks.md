@@ -1,10 +1,13 @@
 # Benchmarks
 
-Using Benchmarks you can evaluate different Models based on different Tasks and compare their score.
+A benchmark evaluates multiple models on multiple tasks and compares their
+scores. It is a loop over `task.evaluate(model)` plus a result object that
+knows how to rank, pivot, plot, merge, and save.
 
-## Custom Benchmark
+## Custom benchmark
 
-You can easily create a benchmark with your desired tasks and models.
+`CustomBenchmark` takes your models and tasks. Interfaces mix freely; here a
+local transformers checkpoint runs against an API model:
 
 ```python
 from transformers import AutoModelForCausalLM, AutoTokenizer
@@ -13,7 +16,7 @@ from parsbench.benchmarks import CustomBenchmark
 from parsbench.models import OpenAIModel, PreTrainedTransformerModel
 from parsbench.tasks import ParsiNLUMultipleChoice, PersianMath, ParsiNLUReadingComprehension
 
-# Create Models
+# Create models
 model = AutoModelForCausalLM.from_pretrained(
     "Qwen/Qwen2-72B-Instruct",
     torch_dtype="auto",
@@ -28,7 +31,7 @@ aya_model = OpenAIModel(
     model="aya:latest",
 )
 
-# Run Benchmark
+# Run the benchmark
 benchmark = CustomBenchmark(
     models=[qwen2_model, aya_model],
     tasks=[
@@ -45,9 +48,17 @@ result = benchmark.run(
 )
 ```
 
-## Full Benchmark
+`run()` accepts the same evaluation parameters as `task.evaluate()`
+(`n_first`, `skip_existing_matches`, `prefer_concurrency`, `n_workers`, the
+save flags), plus `sort_by_score=` to rank models by average score in the
+result.
 
-To benchmark your model based on all existing tasks in the framework. You can use `load_all_tasks` function.
+There is also `ParsiNLUBenchmark`, a `CustomBenchmark` subclass hard-wired
+to the ParsiNLU task set.
+
+## Full benchmark
+
+To benchmark on every task in the framework, use `load_all_tasks`:
 
 ```python
 from parsbench.benchmarks import CustomBenchmark
@@ -60,7 +71,6 @@ aya_model = OpenAIModel(
     model="aya:latest",
 )
 
-# Run Benchmark
 benchmark = CustomBenchmark(
     models=[aya_model],
     tasks=load_all_tasks(),
@@ -73,46 +83,48 @@ result = benchmark.run(
 )
 ```
 
-## Benchmark Result
+## Benchmark result
 
-The benchmark result contains all evaluation results for each model. You can use it directly or convert it to
-a Pandas DataFrame with `to_pandas` function. If you want to get a pivot table of benchmark result, you should use `to_pandas(pivot=True)`.
+`BenchmarkResult` holds every evaluation result for every model. Convert it
+to a pandas DataFrame with `to_pandas()`; `to_pandas(pivot=True)` gives the
+models-as-columns pivot table:
 
 ```python
 print(result.to_pandas(pivot=True))
 ```
 
-Output should be like:
+Output:
 
 ```txt
-                                                                                     score          
-model_name                                                                     qwen2:latest          
+                                                                                     score
+model_name                                                                     qwen2:latest
 n_shots                                                                                   0         3
-task_category task_name                      sub_task         score_name                             
+task_category task_name                      sub_task         score_name
 classic       ParsiNLU Reading Comprehension NaN              Common Tokens         0.46231  0.588274
-knowledge     PersiNLU Multiple Choice       common_knowledge Exact Match           0.30000  0.000000
+knowledge     ParsiNLU Multiple Choice       common_knowledge Exact Match           0.30000  0.000000
                                              literature       Exact Match           0.20000  0.428571
                                              math_and_logic   Exact Match           0.60000  0.285714
 math          Persian Math                   NaN              Math Equivalence      0.00000  0.142857
 ```
 
-Note: It would look better if you run it in a Jupyter Notebook.
+It renders best in a Jupyter notebook.
 
-### Radar Plot (Spider Plot)
+### Plots
 
-For a better comparison between models performance on different tasks. You can use `show_radar_plot` to visualize the benchmark.
+`show_radar_plot()` compares models across task categories;
+`show_bar_plot()` shows the same data as bars:
 
 ```python
 result.show_radar_plot()
+result.show_bar_plot()
 ```
 
-Output should be like:
+![Benchmark Radar Plot](../imgs/radarplot.png)
 
-![Benchmark Bar Plot](../imgs/radarplot.png)
+### Saving results
 
-### Save Result
-
-To save the matches, evaluations and benchmark results during the benchmarking process, you can set `save_matches`, `save_evaluation` and `save_benchmark`.
+Set `save_matches`, `save_evaluation`, and `save_benchmark` to write matches,
+per-task evaluations, and the combined benchmark file during the run:
 
 ```python
 benchmark = CustomBenchmark(
@@ -131,27 +143,58 @@ result = benchmark.run(
 )
 ```
 
-The output directory structure should be like this:
+The output directory structure:
 
 ```txt
 results
 ├── aya:latest
-│   ├── FarsTail_Entailment
-│   │   ├── evaluation.jsonl
-│   │   ├── matches_0_shot.jsonl
-│   │   └── matches_5_shot.jsonl
-│   └── Persian_Math
-│       ├── evaluation.jsonl
-│       ├── matches_0_shot.jsonl
-│       └── matches_5_shot.jsonl
+│   ├── FarsTail_Entailment
+│   │   ├── evaluation.jsonl
+│   │   ├── matches_0_shot.jsonl
+│   │   └── matches_5_shot.jsonl
+│   └── Persian_Math
+│       ├── evaluation.jsonl
+│       ├── matches_0_shot.jsonl
+│       └── matches_5_shot.jsonl
 ├── qwen2:latest
-│   ├── FarsTail_Entailment
-│   │   ├── evaluation.jsonl
-│   │   ├── matches_0_shot.jsonl
-│   │   └── matches_5_shot.jsonl
-│   └── Persian_Math
-│       ├── evaluation.jsonl
-│       ├── matches_0_shot.jsonl
-│       └── matches_5_shot.jsonl
+│   ├── FarsTail_Entailment
+│   │   ├── evaluation.jsonl
+│   │   ├── matches_0_shot.jsonl
+│   │   └── matches_5_shot.jsonl
+│   └── Persian_Math
+│       ├── evaluation.jsonl
+│       ├── matches_0_shot.jsonl
+│       └── matches_5_shot.jsonl
 └── benchmark.jsonl
+```
+
+### Rebuilding and merging results
+
+Three helpers cover the "I ran benchmarks last week and want to work with
+them now" cases:
+
+```python
+from parsbench.benchmarks import BenchmarkResult, merge_benchmark_results
+
+# rebuild a result from saved matches files (rescore=True re-runs the scorers)
+result = BenchmarkResult.from_matches_files("results/", rescore=False)
+
+# combine runs done at different times / on different machines
+merged = merge_benchmark_results([result_a, result_b], sort=True)
+```
+
+`merge_benchmark_results` drops duplicate model names by default; pass
+`keep_duplicates=True` to keep them all.
+
+### Building a leaderboard
+
+`build_leaderboard_from_benchmark` writes the request/result file layout
+used by the
+[ParsBench Leaderboard](https://huggingface.co/spaces/ParsBench/leaderboard)
+HuggingFace space:
+
+```python
+from parsbench.benchmarks import build_leaderboard_from_benchmark
+
+build_leaderboard_from_benchmark(result, "leaderboard_data/")
 ```

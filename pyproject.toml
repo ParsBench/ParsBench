@@ -59,6 +59,7 @@ jupyter = "^1.0.0"
 mypy = "^1.10.0"
 mkdocs-material = "^9.5.27"
 mkdocstrings = {version = ">=0.26", extras = ["python"]}
+mkdocs-llmstxt = ">=0.5.0"
 # math_equivalence (Persian Math task scorer) is an optional manual install — its
 # git repo has no poetry-resolvable metadata. Install with:
 #   pip install git+https://github.com/hendrycks/math.git

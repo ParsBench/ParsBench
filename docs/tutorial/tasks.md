@@ -1,10 +1,13 @@
 # Tasks
 
-Tasks are used to test and evaluate the Model responses. They come with a dataset of questions and expected answers. The task will generate prompts based on the prompt template and data, get the completion of that prompt using the Model, and then score it using the specified score.
+A task evaluates model responses on one dataset. It ships with the data, a
+prompt template per language, and a scorer, so evaluating a model is: build
+prompts from the data, get the model's completions, score them against the
+targets.
 
-## Available Tasks
+## Available tasks
 
-| Task Name                   | Score Name       | Dataset      |
+| Task Name | Score Name | Dataset |
 |-----------------------------|------------------|--------------|
 | ParsiNLU Sentiment Analysis | Exact Match (F1) | [ParsiNLU](https://huggingface.co/datasets/persiannlp/parsinlu_sentiment) |
 | ParsiNLU Entailment | Exact Match (F1) | [ParsiNLU](https://huggingface.co/datasets/persiannlp/parsinlu_entailment) |
@@ -20,51 +23,63 @@ Tasks are used to test and evaluate the Model responses. They come with a datase
 | Persian News Summary | Rouge | [PNSummary](https://huggingface.co/datasets/HooshvareLab/pn_summary) |
 | XL-Sum | Rouge | [XLSum](https://huggingface.co/datasets/csebuetnlp/xlsum) |
 
-You can import the class of above tasks from `parsbench.tasks` and use it for evaluating your model.
+Import any of them from `parsbench.tasks`, or get instances of all of them
+with `parsbench.tasks.utils.load_all_tasks()`.
 
 ## Evaluation
 
 The evaluation process has 6 steps:
 
-1. Loading Data
-2. Loading Prompt Template
-3. Generating Matches (Prompt-Answer)
-4. Generating Completions
-5. Scoring Completions
-6. Storing Result (Optional)
+1. Loading data
+2. Loading the prompt template
+3. Generating matches (prompt-answer pairs)
+4. Generating completions
+5. Scoring completions
+6. Storing the result (optional)
 
-Here is an example of evaluating a pre-trained model on PersianMath:
+`evaluate()` runs all of them:
 
 ```python
-from transformers import AutoModelForCausalLM, AutoTokenizer
-
-from parsbench.models import PreTrainedTransformerModel
+from parsbench.models import OpenAIModel
 from parsbench.tasks import ParsiNLUMultipleChoice
 
-model = AutoModelForCausalLM.from_pretrained(
-    "Qwen/Qwen2-72B-Instruct",
-    torch_dtype="auto",
-    device_map="auto"
+model = OpenAIModel(
+    api_base_url="http://localhost:11434/v1/",
+    api_secret_key="ollama",
+    model="qwen2:latest",
 )
-tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen2-72B-Instruct")
-
-tf_model = PreTrainedTransformerModel(model=model, tokenizer=tokenizer)
 
 with ParsiNLUMultipleChoice() as task:
     results = task.evaluate(
-        model=tf_model,
+        model=model,
         prompt_lang="fa",
         prompt_shots=[0, 5],
     )
 ```
 
-You should use the task in a context manager. It manages data loading and offloading for a better performance.
+Use the task in a context manager. It loads the dataset on enter and frees
+it on exit.
 
-### Evaluation Result
+The parameters you'll actually reach for:
 
-The `evaluate` function of a task will return a list of `EvaluationResult` data classe which contains the overall score for each sub task and n_shot prompt of the task.
+- `prompt_lang=` selects the prompt template language, `"fa"` (default) or
+  `"en"` where a task ships both.
+- `prompt_shots=[0, 5]` evaluates zero-shot and 5-shot in one run; each shot
+  count produces its own result.
+- `n_first=100` evaluates only the first 100 samples (default 200). Handy
+  for cheap smoke runs before a full evaluation.
+- `sub_tasks=["math_and_logic"]` restricts a task with sub-tasks (Persian
+  MMLU, ParsiNLU Multiple Choice) to a subset.
+- `skip_existing_matches=True` resumes an interrupted run: matches already
+  generated and scored under `output_path` are not re-run.
+- `prefer_concurrency=` (default True) fans completion calls out over
+  threads when the model supports it; tune with `n_workers=` (default 4).
 
-You can directly use the class or convert it to a Pandas DataFrame with `to_pandas` function.
+## Evaluation result
+
+`evaluate()` returns a list of `EvaluationResult` objects, one per sub-task,
+each holding the overall score per shot count. Use them directly or convert
+to a pandas DataFrame:
 
 ```python
 eval_result = results[0]
@@ -75,20 +90,21 @@ Output:
 
 ```txt
      model_name                 task_name task_category        sub_task  n_shots   score_name     score
-0  qwen2:latest  PersiNLU Multiple Choice     knowladge  math_and_logic        0  Exact Match  0.600000
-1  qwen2:latest  PersiNLU Multiple Choice     knowladge  math_and_logic        3  Exact Match  0.285714
+0  qwen2:latest  ParsiNLU Multiple Choice     knowledge  math_and_logic        0  Exact Match  0.600000
+1  qwen2:latest  ParsiNLU Multiple Choice     knowledge  math_and_logic        3  Exact Match  0.285714
 ```
 
-### Save Result
+## Saving results
 
-You can manually save the result using `save` function of the `EvaluationResult` or pass `save_evaluation=True` to the `evaluate` function.
-
-You can also save task matches which contains prompt, completion, target, and score by passing `save_matches=True` to the `evaluate` function.
+Save manually with the `save` method of `EvaluationResult`, or pass
+`save_evaluation=True` to `evaluate()`. `save_matches=True` also writes every
+match (prompt, completion, target, score), which is what you want when you
+need to inspect *why* a score is low:
 
 ```python
 with PersianMath() as task:
     results = task.evaluate(
-        model=tf_model,
+        model=model,
         prompt_lang="fa",
         prompt_shots=[0, 5],
         save_matches=True,
@@ -97,7 +113,7 @@ with PersianMath() as task:
     )
 ```
 
-The output directory structure should be like this:
+The output directory structure:
 
 ```txt
 results

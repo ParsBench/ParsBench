@@ -2,10 +2,10 @@
 
 <div align="center">
     <a href="https://github.com/ParsBench/ParsBench">
-        <img src="https://raw.githubusercontent.com/ParsBench/ParsBench/main/docs/imgs/banner-black.png" alt="Beanie" width="480" height="240">
+        <img src="https://raw.githubusercontent.com/ParsBench/ParsBench/main/docs/imgs/banner-black.png" alt="ParsBench banner" width="480" height="240">
     </a>
     <br>
-    <a href="https://shahriarshm.github.io/parsbench/">
+    <a href="https://parsbench.github.io/ParsBench/">
         <img src="https://shields.io/badge/-docs-blue" alt="docs">
     </a>
     <a href="https://pypi.python.org/pypi/parsbench">
@@ -175,7 +175,7 @@ You can import the class of above tasks from `parsbench.tasks` and use it for ev
 
 ## Sponsors
 
-Here are the names of companies/people who helped us to keep maintaining this project. If you want to donate this project, see [this page](https://shahriarshm.github.io/parsbench/donation/).
+Here are the names of companies/people who helped us to keep maintaining this project. If you want to donate this project, see [this page](https://parsbench.github.io/ParsBench/donation/).
 
 - [AvalAI](https://avalai.ir/): They gave us free OpenAI API credit several times in their "AvalAward" program. It helped us for doing R&D and benchmarking GPT models.
 - [Basalam](https://basalam.com/): They voluntarily helped us to run the benchmarks on open-weight models and build the [ParsBench Leaderboard](https://huggingface.co/spaces/ParsBench/leaderboard).

@@ -1,5 +1,6 @@
 site_name: ParsBench Documentation
-site_description: ParsBench provides toolkits for benchmarking LLMs based on the Persian language.
+site_url: https://parsbench.github.io/ParsBench/
+site_description: ParsBench provides toolkits for benchmarking LLMs and evaluating AI applications in the Persian language.
 site_author: Shahriar Shariati
 
 repo_url: https://github.com/ParsBench/ParsBench
@@ -17,27 +18,66 @@ theme:
 plugins:
   - search
   - mkdocstrings
+  - llmstxt:
+      markdown_description: >-
+        ParsBench provides toolkits for benchmarking LLMs and evaluating AI
+        applications (chatbots, agents) in the Persian language. It ships
+        ready-made Persian benchmark tasks with datasets, and an app
+        evaluation layer with Persian-aware normalization (digit scripts,
+        rial/toman amounts, Jalali/Gregorian dates, ZWNJ spacing) for testing
+        your own Persian AI product in CI.
+      full_output: llms-full.txt
+      sections:
+        Getting started:
+          - index.md: What ParsBench is and why it exists
+          - getting-started.md: Installation, first app evaluation, first benchmark
+        App evaluation:
+          - app-eval.md: Overview and 60-second quickstart
+          - app-eval/*.md
+        Benchmarking:
+          - tutorial/*.md
+        Examples:
+          - examples.md: Runnable examples and industry scenarios
+        API reference:
+          - code_reference/*.md
+        Optional:
+          - contribution.md: How to contribute
+          - changelog.md: Release history
+          - donation.md: Supporting the project
 
 markdown_extensions:
   - attr_list
   - tables
+  - admonition
   - pymdownx.highlight
   - pymdownx.superfences
 
 nav:
     - Overview: index.md
     - Getting Started: getting-started.md
-    - Evaluating Your App: app-eval.md
-    - Tutorial:
+    - App Evaluation:
+      - Overview & Quickstart: app-eval.md
+      - Goldens & Checks: app-eval/goldens.md
+      - The Judge: app-eval/judge.md
+      - Persian Normalization: app-eval/normalization.md
+      - Framework Integrations: app-eval/integrations.md
+      - Multi-turn Simulation: app-eval/simulation.md
+      - Generating Goldens: app-eval/generating-goldens.md
+      - CI & Regression Tracking: app-eval/ci.md
+      - The Viewer: app-eval/viewer.md
+    - Benchmarking:
       - Models: tutorial/models.md
       - Tasks: tutorial/tasks.md
       - Benchmarks: tutorial/benchmarks.md
       - Advanced: tutorial/advanced.md
-    - Contribution: contribution.md
+    - Examples: examples.md
     - Code Reference:
+        - App Evaluation: code_reference/appeval.md
+        - Integrations: code_reference/integrations.md
         - Models: code_reference/models.md
         - Scores: code_reference/scores.md
         - Tasks: code_reference/tasks.md
         - Benchmarks: code_reference/benchmarks.md
+    - Contribution: contribution.md
     - Changelog: changelog.md
     - Donation: donation.md

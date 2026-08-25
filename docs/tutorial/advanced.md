@@ -1,43 +1,44 @@
-# Advanced Tutorial
+# Advanced tutorial
 
-This section is for the ones who want to implement their own Tasks or want to use the framework APIs for other use cases.
+This section is for implementing your own tasks, or using the framework's
+building blocks (scores, data loaders, prompt templates) for other purposes.
 
 ## Scores
 
-Scores are the methods that we use to measure the goodness of the completion of our model, comparing to the expected answer.
+Scores measure how good a completion is compared to the expected answer.
 
-### Available Scores
+### Available scores
 
 | Score Name            | Description                                                             |
 |-----------------------|-------------------------------------------------------------------------|
 | Exact Match           | `1` if the completion and target are equal, otherwise `0`.              |
-| English Sentence Bleu | Bleu n-gram score with NLTK English word tokenizer. Between `0` to `1`. |
-| Persian Sentence Bleu | Bleu n-gram score with Hazm Persian word tokenizer. Between `0` to `1`. |
-| English Rouge         | Rouge score with NLTK English word tokenizer. Between `0` to `1`.       |
-| Persian Rouge         | Rouge score with Hazm Persian word tokenizer. Between `0` to `1`.       |
+| English Sentence Bleu | Bleu n-gram score with NLTK English word tokenizer. Between `0` and `1`. |
+| Persian Sentence Bleu | Bleu n-gram score with Hazm Persian word tokenizer. Between `0` and `1`. |
+| English Rouge         | Rouge score with NLTK English word tokenizer. Between `0` and `1`.       |
+| Persian Rouge         | Rouge score with Hazm Persian word tokenizer. Between `0` and `1`.       |
 
-### Make Your Score
+### Make your own score
 
-You can write your score function anywhere and just wrap it using `wrap_scorer`.
+Write a plain function and wrap it with `wrap_scorer`:
 
 ```python
-import random
 from parsbench.scores.base import wrap_scorer
 
 @wrap_scorer
-def random_score(completion: str, target: str) -> float:
-    return random.random()
+def my_exact_match(completion: str, target: str) -> float:
+    return float(completion.strip() == target.strip())
 ```
 
-The function's name will be used as the name of your score in the benchmark result.
+The function's name becomes the score's name in results.
 
-## Data Loader
+## Data loaders
 
-Data Loader class will load the dataset needed for evaluation.
+A data loader loads the dataset a task evaluates on. All three load from a
+local path or a URL.
 
 ### JSONLine
 
-`JSONLineDataLoader` is based on the `jsonlines` file format (`.jsonl`). It can load jsonline files from web or local.
+`JSONLineDataLoader` reads jsonlines files (`.jsonl`):
 
 ```python
 from parsbench.tasks.base import JSONLineDataLoader
@@ -48,7 +49,7 @@ data = data_loader.load()
 
 ### CSV
 
-`CSVDataLoader` is based on the `CSV` file format (`.csv`). It can load CSV files from web or local.
+`CSVDataLoader` reads CSV files:
 
 ```python
 from parsbench.tasks.base import CSVDataLoader
@@ -59,37 +60,38 @@ data = data_loader.load()
 
 ### HuggingFace
 
-`HuggingFaceDataLoader` is based on the `datasets` library of HuggingFace that loads datasets from local or downloads it from the HuggingFace Dataset Hub.
+`HuggingFaceDataLoader` uses HuggingFace's `datasets` library to load from
+disk or download from the Hub:
 
 ```python
 from parsbench.tasks.base import HuggingFaceDataLoader
 
 data_loader = HuggingFaceDataLoader(
-    data_path="persiannlp/parsinlu_entailment"
-    split="validation"
+    data_path="persiannlp/parsinlu_entailment",
+    split="validation",
 )
 data = data_loader.load()
 ```
 
-## Prompt Template
+## Prompt templates
 
-Using `PromptTemplate` class, you can define the prompt template for different lanugages, shot templates, shot examples, prompt variables, etc.
+`PromptTemplate` defines the prompt for each language, shot templates, shot
+examples, and variable mappings.
 
-### With Shot Template
+### With a shot template
 
-In this example, you can define a prompt template for sentiment analysis task with shot template.
-
-Prompt and Shot Templates:
+A sentiment-analysis template where few-shot examples are rendered from the
+dataset:
 
 ```python
 FA_TEMPLATE = """
 جمله زیر نظر یک شخص است. این جمله به زبان فارسی است. بار یا احساس موجود در این جمله را شناسایی کن.
 پاسخ‌ های ممکن حالت‌های روبرو هستند:
 SAD
-NETURAL
+NEUTRAL
 HAPPY
 
-فقط کلمه مروبط به احساس نظر داده شده را خروجی بده.
+فقط کلمه مربوط به احساس نظر داده شده را خروجی بده.
 
 {example_shots}
 
@@ -103,8 +105,6 @@ FA_SHOT_TEMPLATE = """
 """
 ```
 
-And for the task prompt template:
-
 ```python
 from parsbench.tasks.base import PromptTemplate
 
@@ -117,34 +117,41 @@ prompt_template = PromptTemplate(
 
 prompt = prompt_template.get_prompt(
     prompt_lang="fa",
-    data={"review": "غذا خیلی بد بود", "label": "SAD"}
+    data={"review": "غذا خیلی بد بود", "label": "SAD"},
     n_shots=3,
     sample_data=[
-        {"review": "خوشمزه بود ممونم", "label": "HAPPY"},
-        {"review": "غذا خوب بود فقط کاش زودتر می‌رسید.", "label": "NETURAL"},
-        {"review": "نوشابه گرم بود. پیتزا هم خیلی بد مزه بود.", "label": "SAD"}
-    ]
+        {"review": "خوشمزه بود ممنونم", "label": "HAPPY"},
+        {"review": "غذا خوب بود فقط کاش زودتر می‌رسید.", "label": "NEUTRAL"},
+        {"review": "نوشابه گرم بود. پیتزا هم خیلی بد مزه بود.", "label": "SAD"},
+    ],
 )
 ```
 
-### With Shot Examples
+The variable mappings translate between prompt placeholders and dataset
+columns: `prompt_variables_mapping={"review": "review"}` fills `{review}` in
+the template from the `review` column, and `target_variables_mapping` does
+the same for the expected answer.
 
-If the task is complicated and you want to use methods like CoT (Chain of Thought) prompting,
-You can use static shot examples.
+### With static shot examples
+
+For complicated tasks where you want hand-written few-shot examples (for
+instance chain-of-thought prompting), use static shot examples instead of a
+shot template:
 
 ```python
 from parsbench.tasks.base import PromptTemplate
 
 prompt_template = PromptTemplate(
     language_templates={"fa": FA_TEMPLATE},
-    prompt_shot_examples={"fa": {1: FA_1_SHOT, 3: FA_3_SHOT, 5: FA_5_SHOT}}
+    prompt_shot_examples={"fa": {1: FA_1_SHOT, 3: FA_3_SHOT, 5: FA_5_SHOT}},
 )
-prompt = prompt_template.get_prompt(prompt_shot=5, ...)
+prompt = prompt_template.get_prompt(n_shots=5, ...)
 ```
 
-### Load Templates From File
+### Load templates from files
 
-You can also load prompts from text files using `LazyLoadTemplates`.
+`LazyLoadTemplates` reads templates from text files on first use, which
+keeps long prompts out of your Python code:
 
 ```python
 from parsbench.tasks.base import PromptTemplate, LazyLoadTemplates
@@ -158,9 +165,10 @@ prompt_template = PromptTemplate(
 )
 ```
 
-### Constant Prompt Variable
+### Constant prompt variables
 
-Sometimes you may wanna fill some prompt variables with constant data and you don't wanna put it in the prompt template text. You can use `ConstantPromptVariable`:
+To fill a placeholder with a fixed value rather than a dataset column, use
+`ConstantPromptVariable`:
 
 ```python
 from parsbench.tasks.base import PromptTemplate, ConstantPromptVariable
@@ -170,7 +178,7 @@ prompt_template = PromptTemplate(
     prompt_shot_templates={"fa": FA_SHOT_TEMPLATE},
     prompt_variables_mapping={
         "input": "input",
-        "first_name": ConstantPromptVariable("شهریار")
+        "first_name": ConstantPromptVariable("شهریار"),
     },
     target_variables_mapping={"label": "label"},
 )
@@ -178,24 +186,25 @@ prompt_template = PromptTemplate(
 
 ## Tasks
 
-The primary unit of the ParsBench framework is a task. Tasks are battery-included evaluators which do all the process from loading dataset to evaluating models and outputting the result.
+The task is the primary unit of the framework: a batteries-included
+evaluator that runs the whole pipeline from loading data to scoring.
 
-### Task Data Provider
+### Task data provider
 
-Each task includes a dataset for evaluation. If you need to get the data of that task, you can use `task.get_data` function.
+Each task carries its dataset. `task.get_data()` returns it:
 
 ```python
 from parsbench.tasks import ParsiNLUEntailment
 
-with ParsiNLUEntailment() as task:  # Open in context manager to load data.
+with ParsiNLUEntailment() as task:  # the context manager loads the data
     data = task.get_data()
 ```
 
-### Task Match Generator
+### Task match generator
 
-A `TaskMatch` is an object which includes prompt, target answer, model completion and the score. Initially the matches doesn't have `completion` and `score` attributes (default to `None`). But you can generate completions and score them using the task class itself.
-
-To generate matches based on the prompt template, you can use following code:
+A `TaskMatch` holds a prompt, the target answer, and (once generated) the
+model's completion and its score. Fresh matches have `completion` and
+`score` set to `None`:
 
 ```python
 from parsbench.tasks import ParsiNLUEntailment
@@ -204,24 +213,25 @@ with ParsiNLUEntailment() as task:
     matches = task.generate_matches(prompt_lang="fa", n_shots=0, n_first=100)
 ```
 
-### Generate Completions and Score
+### Generate completions and score
 
-After generating matches, now we should generate completions for each match prompt. Then we score them based on the defined scorer in the task.
+You can drive the pipeline step by step, which is useful when you want to
+inspect or modify matches between steps:
 
 ```python
 from parsbench.tasks import ParsiNLUEntailment
 
 with ParsiNLUEntailment() as task:
     matches = task.generate_matches(prompt_lang="fa", n_shots=0, n_first=100)
-    model.generate_completions(matches)  # Completions are generated by the model.
-    tasks.score_matches(matches)
+    model.generate_completions(matches)   # the model fills in completions
+    task.score_matches(matches)           # the task's scorer fills in scores
 ```
 
-### Make Your Task
+### Make your own task
 
-If you want to have a task with your own private dataset, prompts, setups, etc. You can inherit one of the existing tasks or create your own task from scratch.
-
-We suggest to put your prompt templates in a text file and use `LazyLoadTemplates` to load them for a better performance.
+For a task with your own dataset, prompts, and scoring, inherit `Task` (or
+one of the existing tasks). Put prompt templates in text files and load them
+with `LazyLoadTemplates`:
 
 ```python
 from parsbench.scores.base import Scorer, wrap_scorer
@@ -273,33 +283,33 @@ class CustomTask(Task):
         return sum(match.score for match in matches) / len(matches)
 ```
 
-You can use any data loader, prompt template and scorer you want.
+Any data loader, prompt template, and scorer combination works.
 
-#### Add Sub Tasks
+#### Sub-tasks
 
-Your task might have a couple of sub tasks. In that case you should specify `sub_task_key` and `sub_tasks` attributes in the task class.
+If your dataset covers several categories, declare them and ParsBench
+reports a score per category:
 
 ```python
 class CustomTask(Task):
     ...
-    sub_task_key: str = "category"  # Column in the dataset which specify the sub tasks.
-    sub_tasks: list[str] = ["math_and_logic", "common_knowledge", "literature"]  # Expected sub tasks.
+    sub_task_key: str = "category"  # dataset column that holds the sub task
+    sub_tasks: list[str] = ["math_and_logic", "common_knowledge", "literature"]
     ...
 ```
 
-And for generating matches or evaluating the model, you can specify a subset of the sub tasks.
+Both evaluation and benchmarks can then run a subset:
 
 ```python
 with CustomTask() as task:
     results = task.evaluate(..., sub_tasks=["math_and_logic"])
 
-# OR
-
+# or inside a benchmark
 benchmark = CustomBenchmark(
     ...,
     tasks=[
         PersianMath,
         CustomTask.select_sub_tasks(["math_and_logic"]),
-    ]
+    ],
 )
 ```
