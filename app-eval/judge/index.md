@@ -41,7 +41,7 @@ Judge prompts are authored in Persian, because a judge reasoning about Persian t
 
 ```
 from parsbench.appeval import prompts_fa
-print(prompts_fa.correctness)
+print(prompts_fa.CORRECTNESS)
 ```
 
 The judge's verdict and its reasoning land in each `CheckResult.reason`, and `parsbench view` shows them one click away from the checks matrix.

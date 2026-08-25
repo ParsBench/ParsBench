@@ -1280,7 +1280,7 @@ Persian text in Persian makes fewer normalization mistakes than one
 translating on the fly. They're importable, so you can read or edit the
 rubrics:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">parsbench.appeval</span><span class="w"> </span><span class="kn">import</span> <span class="n">prompts_fa</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">prompts_fa</span><span class="o">.</span><span class="n">correctness</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">prompts_fa</span><span class="o">.</span><span class="n">CORRECTNESS</span><span class="p">)</span>
 </code></pre></div>
 <p>The judge's verdict and its reasoning land in each <code>CheckResult.reason</code>, and
 <code>parsbench view</code> shows them one click away from the checks matrix.</p>
