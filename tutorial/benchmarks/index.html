@@ -6,11 +6,13 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="ParsBench provides toolkits for benchmarking LLMs based on the Persian language.">
+        <meta name="description" content="ParsBench provides toolkits for benchmarking LLMs and evaluating AI applications in the Persian language.">
       
       
         <meta name="author" content="Shahriar Shariati">
       
+      
+        <link rel="canonical" href="https://parsbench.github.io/ParsBench/tutorial/benchmarks/">
       
       
         <link rel="prev" href="../tasks/">
@@ -285,6 +287,53 @@
   
   
   
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    App Evaluation
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    App Evaluation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
     <li class="md-nav__item">
       <a href="../../app-eval/" class="md-nav__link">
         
@@ -293,7 +342,7 @@
   <span class="md-ellipsis">
     
   
-    Evaluating Your App
+    Overview & Quickstart
   
 
     
@@ -302,6 +351,238 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../app-eval/goldens/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Goldens & Checks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../app-eval/judge/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Judge
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../app-eval/normalization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Persian Normalization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../app-eval/integrations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Framework Integrations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../app-eval/simulation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Multi-turn Simulation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../app-eval/generating-goldens/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Generating Goldens
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../app-eval/ci/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CI & Regression Tracking
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../app-eval/viewer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Viewer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -333,7 +614,7 @@
   <span class="md-ellipsis">
     
   
-    Tutorial
+    Benchmarking
   
 
     
@@ -349,7 +630,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Tutorial
+    Benchmarking
   
 
           </label>
@@ -481,7 +762,7 @@
   <a href="#custom-benchmark" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Custom Benchmark
+        Custom benchmark
       
     </span>
   </a>
@@ -492,7 +773,7 @@
   <a href="#full-benchmark" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Full Benchmark
+        Full benchmark
       
     </span>
   </a>
@@ -503,19 +784,19 @@
   <a href="#benchmark-result" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Benchmark Result
+        Benchmark result
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Benchmark Result">
+    <nav class="md-nav" aria-label="Benchmark result">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#radar-plot-spider-plot" class="md-nav__link">
+  <a href="#plots" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Radar Plot (Spider Plot)
+        Plots
       
     </span>
   </a>
@@ -523,10 +804,32 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#save-result" class="md-nav__link">
+  <a href="#saving-results" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Save Result
+        Saving results
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rebuilding-and-merging-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rebuilding and merging results
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#building-a-leaderboard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Building a leaderboard
       
     </span>
   </a>
@@ -589,14 +892,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../contribution/" class="md-nav__link">
+      <a href="../../examples/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Contribution
+    Examples
   
 
     
@@ -655,6 +958,62 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../code_reference/appeval/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    App Evaluation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../code_reference/integrations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integrations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -782,6 +1141,33 @@
   
   
     <li class="md-nav__item">
+      <a href="../../contribution/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contribution
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../changelog/" class="md-nav__link">
         
   
@@ -859,7 +1245,7 @@
   <a href="#custom-benchmark" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Custom Benchmark
+        Custom benchmark
       
     </span>
   </a>
@@ -870,7 +1256,7 @@
   <a href="#full-benchmark" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Full Benchmark
+        Full benchmark
       
     </span>
   </a>
@@ -881,19 +1267,19 @@
   <a href="#benchmark-result" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Benchmark Result
+        Benchmark result
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Benchmark Result">
+    <nav class="md-nav" aria-label="Benchmark result">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#radar-plot-spider-plot" class="md-nav__link">
+  <a href="#plots" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Radar Plot (Spider Plot)
+        Plots
       
     </span>
   </a>
@@ -901,10 +1287,32 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#save-result" class="md-nav__link">
+  <a href="#saving-results" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Save Result
+        Saving results
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rebuilding-and-merging-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rebuilding and merging results
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#building-a-leaderboard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Building a leaderboard
       
     </span>
   </a>
@@ -937,31 +1345,34 @@
 
 
 <h1 id="benchmarks">Benchmarks</h1>
-<p>Using Benchmarks you can evaluate different Models based on different Tasks and compare their score.</p>
-<h2 id="custom-benchmark">Custom Benchmark</h2>
-<p>You can easily create a benchmark with your desired tasks and models.</p>
+<p>A benchmark evaluates multiple models on multiple tasks and compares their
+scores. It is a loop over <code>task.evaluate(model)</code> plus a result object that
+knows how to rank, pivot, plot, merge, and save.</p>
+<h2 id="custom-benchmark">Custom benchmark</h2>
+<p><code>CustomBenchmark</code> takes your models and tasks. Interfaces mix freely; here a
+local transformers checkpoint runs against an API model:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">transformers</span><span class="w"> </span><span class="kn">import</span> <span class="n">AutoModelForCausalLM</span><span class="p">,</span> <span class="n">AutoTokenizer</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">parsbench.benchmarks</span><span class="w"> </span><span class="kn">import</span> <span class="n">CustomBenchmark</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">parsbench.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">OpenAIModel</span><span class="p">,</span> <span class="n">PreTrainedTransformerModel</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">parsbench.tasks</span><span class="w"> </span><span class="kn">import</span> <span class="n">ParsiNLUMultipleChoice</span><span class="p">,</span> <span class="n">PersianMath</span><span class="p">,</span> <span class="n">ParsiNLUReadingComprehension</span>
 
-<span class="c1"># Create Models</span>
+<span class="c1"># Create models</span>
 <span class="n">model</span> <span class="o">=</span> <span class="n">AutoModelForCausalLM</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span>
-    <span class="s2">&quot;Qwen/Qwen2-72B-Instruct&quot;</span><span class="p">,</span>
-    <span class="n">torch_dtype</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span>
-    <span class="n">device_map</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span>
+    <span class="s2">"Qwen/Qwen2-72B-Instruct"</span><span class="p">,</span>
+    <span class="n">torch_dtype</span><span class="o">=</span><span class="s2">"auto"</span><span class="p">,</span>
+    <span class="n">device_map</span><span class="o">=</span><span class="s2">"auto"</span>
 <span class="p">)</span>
-<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s2">&quot;Qwen/Qwen2-72B-Instruct&quot;</span><span class="p">)</span>
+<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s2">"Qwen/Qwen2-72B-Instruct"</span><span class="p">)</span>
 <span class="n">qwen2_model</span> <span class="o">=</span> <span class="n">PreTrainedTransformerModel</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">tokenizer</span><span class="o">=</span><span class="n">tokenizer</span><span class="p">)</span>
 
 <span class="n">aya_model</span> <span class="o">=</span> <span class="n">OpenAIModel</span><span class="p">(</span>
-    <span class="n">api_base_url</span><span class="o">=</span><span class="s2">&quot;http://localhost:11434/v1/&quot;</span><span class="p">,</span>
-    <span class="n">api_secret_key</span><span class="o">=</span><span class="s2">&quot;ollama&quot;</span><span class="p">,</span>
-    <span class="n">model</span><span class="o">=</span><span class="s2">&quot;aya:latest&quot;</span><span class="p">,</span>
+    <span class="n">api_base_url</span><span class="o">=</span><span class="s2">"http://localhost:11434/v1/"</span><span class="p">,</span>
+    <span class="n">api_secret_key</span><span class="o">=</span><span class="s2">"ollama"</span><span class="p">,</span>
+    <span class="n">model</span><span class="o">=</span><span class="s2">"aya:latest"</span><span class="p">,</span>
 <span class="p">)</span>
 
-<span class="c1"># Run Benchmark</span>
+<span class="c1"># Run the benchmark</span>
 <span class="n">benchmark</span> <span class="o">=</span> <span class="n">CustomBenchmark</span><span class="p">(</span>
     <span class="n">models</span><span class="o">=</span><span class="p">[</span><span class="n">qwen2_model</span><span class="p">,</span> <span class="n">aya_model</span><span class="p">],</span>
     <span class="n">tasks</span><span class="o">=</span><span class="p">[</span>
@@ -971,97 +1382,127 @@
     <span class="p">],</span>
 <span class="p">)</span>
 <span class="n">result</span> <span class="o">=</span> <span class="n">benchmark</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
-    <span class="n">prompt_lang</span><span class="o">=</span><span class="s2">&quot;fa&quot;</span><span class="p">,</span>
+    <span class="n">prompt_lang</span><span class="o">=</span><span class="s2">"fa"</span><span class="p">,</span>
     <span class="n">prompt_shots</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
     <span class="n">n_first</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
     <span class="n">sort_by_score</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span>
 </code></pre></div>
-<h2 id="full-benchmark">Full Benchmark</h2>
-<p>To benchmark your model based on all existing tasks in the framework. You can use <code>load_all_tasks</code> function.</p>
+<p><code>run()</code> accepts the same evaluation parameters as <code>task.evaluate()</code>
+(<code>n_first</code>, <code>skip_existing_matches</code>, <code>prefer_concurrency</code>, <code>n_workers</code>, the
+save flags), plus <code>sort_by_score=</code> to rank models by average score in the
+result.</p>
+<p>There is also <code>ParsiNLUBenchmark</code>, a <code>CustomBenchmark</code> subclass hard-wired
+to the ParsiNLU task set.</p>
+<h2 id="full-benchmark">Full benchmark</h2>
+<p>To benchmark on every task in the framework, use <code>load_all_tasks</code>:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">parsbench.benchmarks</span><span class="w"> </span><span class="kn">import</span> <span class="n">CustomBenchmark</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">parsbench.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">OpenAIModel</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">parsbench.tasks.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_all_tasks</span>
 
 <span class="n">aya_model</span> <span class="o">=</span> <span class="n">OpenAIModel</span><span class="p">(</span>
-    <span class="n">api_base_url</span><span class="o">=</span><span class="s2">&quot;http://localhost:11434/v1/&quot;</span><span class="p">,</span>
-    <span class="n">api_secret_key</span><span class="o">=</span><span class="s2">&quot;ollama&quot;</span><span class="p">,</span>
-    <span class="n">model</span><span class="o">=</span><span class="s2">&quot;aya:latest&quot;</span><span class="p">,</span>
+    <span class="n">api_base_url</span><span class="o">=</span><span class="s2">"http://localhost:11434/v1/"</span><span class="p">,</span>
+    <span class="n">api_secret_key</span><span class="o">=</span><span class="s2">"ollama"</span><span class="p">,</span>
+    <span class="n">model</span><span class="o">=</span><span class="s2">"aya:latest"</span><span class="p">,</span>
 <span class="p">)</span>
 
-<span class="c1"># Run Benchmark</span>
 <span class="n">benchmark</span> <span class="o">=</span> <span class="n">CustomBenchmark</span><span class="p">(</span>
     <span class="n">models</span><span class="o">=</span><span class="p">[</span><span class="n">aya_model</span><span class="p">],</span>
     <span class="n">tasks</span><span class="o">=</span><span class="n">load_all_tasks</span><span class="p">(),</span>
 <span class="p">)</span>
 <span class="n">result</span> <span class="o">=</span> <span class="n">benchmark</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
-    <span class="n">prompt_lang</span><span class="o">=</span><span class="s2">&quot;fa&quot;</span><span class="p">,</span>
+    <span class="n">prompt_lang</span><span class="o">=</span><span class="s2">"fa"</span><span class="p">,</span>
     <span class="n">prompt_shots</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
     <span class="n">n_first</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
     <span class="n">sort_by_score</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span>
 </code></pre></div>
-<h2 id="benchmark-result">Benchmark Result</h2>
-<p>The benchmark result contains all evaluation results for each model. You can use it directly or convert it to
-a Pandas DataFrame with <code>to_pandas</code> function. If you want to get a pivot table of benchmark result, you should use <code>to_pandas(pivot=True)</code>.</p>
+<h2 id="benchmark-result">Benchmark result</h2>
+<p><code>BenchmarkResult</code> holds every evaluation result for every model. Convert it
+to a pandas DataFrame with <code>to_pandas()</code>; <code>to_pandas(pivot=True)</code> gives the
+models-as-columns pivot table:</p>
 <div class="highlight"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">(</span><span class="n">pivot</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
 </code></pre></div>
-<p>Output should be like:</p>
-<div class="highlight"><pre><span></span><code>                                                                                     score          
-model_name                                                                     qwen2:latest          
+<p>Output:</p>
+<div class="highlight"><pre><span></span><code>                                                                                     score
+model_name                                                                     qwen2:latest
 n_shots                                                                                   0         3
-task_category task_name                      sub_task         score_name                             
+task_category task_name                      sub_task         score_name
 classic       ParsiNLU Reading Comprehension NaN              Common Tokens         0.46231  0.588274
-knowledge     PersiNLU Multiple Choice       common_knowledge Exact Match           0.30000  0.000000
+knowledge     ParsiNLU Multiple Choice       common_knowledge Exact Match           0.30000  0.000000
                                              literature       Exact Match           0.20000  0.428571
                                              math_and_logic   Exact Match           0.60000  0.285714
 math          Persian Math                   NaN              Math Equivalence      0.00000  0.142857
 </code></pre></div>
-<p>Note: It would look better if you run it in a Jupyter Notebook.</p>
-<h3 id="radar-plot-spider-plot">Radar Plot (Spider Plot)</h3>
-<p>For a better comparison between models performance on different tasks. You can use <code>show_radar_plot</code> to visualize the benchmark.</p>
+<p>It renders best in a Jupyter notebook.</p>
+<h3 id="plots">Plots</h3>
+<p><code>show_radar_plot()</code> compares models across task categories;
+<code>show_bar_plot()</code> shows the same data as bars:</p>
 <div class="highlight"><pre><span></span><code><span class="n">result</span><span class="o">.</span><span class="n">show_radar_plot</span><span class="p">()</span>
+<span class="n">result</span><span class="o">.</span><span class="n">show_bar_plot</span><span class="p">()</span>
 </code></pre></div>
-<p>Output should be like:</p>
-<p><img alt="Benchmark Bar Plot" src="../../imgs/radarplot.png" /></p>
-<h3 id="save-result">Save Result</h3>
-<p>To save the matches, evaluations and benchmark results during the benchmarking process, you can set <code>save_matches</code>, <code>save_evaluation</code> and <code>save_benchmark</code>.</p>
+<p><img alt="Benchmark Radar Plot" src="../../imgs/radarplot.png" /></p>
+<h3 id="saving-results">Saving results</h3>
+<p>Set <code>save_matches</code>, <code>save_evaluation</code>, and <code>save_benchmark</code> to write matches,
+per-task evaluations, and the combined benchmark file during the run:</p>
 <div class="highlight"><pre><span></span><code><span class="n">benchmark</span> <span class="o">=</span> <span class="n">CustomBenchmark</span><span class="p">(</span>
     <span class="n">models</span><span class="o">=</span><span class="p">[</span><span class="n">aya_model</span><span class="p">,</span> <span class="n">qwen2_model</span><span class="p">],</span>
     <span class="n">tasks</span><span class="o">=</span><span class="p">[</span><span class="n">PersianMath</span><span class="p">,</span> <span class="n">FarsTailEntailment</span><span class="p">],</span>
 <span class="p">)</span>
 <span class="n">result</span> <span class="o">=</span> <span class="n">benchmark</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
-    <span class="n">prompt_lang</span><span class="o">=</span><span class="s2">&quot;fa&quot;</span><span class="p">,</span>
+    <span class="n">prompt_lang</span><span class="o">=</span><span class="s2">"fa"</span><span class="p">,</span>
     <span class="n">prompt_shots</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
     <span class="n">n_first</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
     <span class="n">save_matches</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="n">save_evaluation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="n">save_benchmark</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="n">output_path</span><span class="o">=</span><span class="s2">&quot;results&quot;</span><span class="p">,</span>
+    <span class="n">output_path</span><span class="o">=</span><span class="s2">"results"</span><span class="p">,</span>
     <span class="n">sort_by_score</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span>
 </code></pre></div>
-<p>The output directory structure should be like this:</p>
+<p>The output directory structure:</p>
 <div class="highlight"><pre><span></span><code>results
 ├── aya:latest
-│   ├── FarsTail_Entailment
-│   │   ├── evaluation.jsonl
-│   │   ├── matches_0_shot.jsonl
-│   │   └── matches_5_shot.jsonl
-│   └── Persian_Math
-│       ├── evaluation.jsonl
-│       ├── matches_0_shot.jsonl
-│       └── matches_5_shot.jsonl
+│   ├── FarsTail_Entailment
+│   │   ├── evaluation.jsonl
+│   │   ├── matches_0_shot.jsonl
+│   │   └── matches_5_shot.jsonl
+│   └── Persian_Math
+│       ├── evaluation.jsonl
+│       ├── matches_0_shot.jsonl
+│       └── matches_5_shot.jsonl
 ├── qwen2:latest
-│   ├── FarsTail_Entailment
-│   │   ├── evaluation.jsonl
-│   │   ├── matches_0_shot.jsonl
-│   │   └── matches_5_shot.jsonl
-│   └── Persian_Math
-│       ├── evaluation.jsonl
-│       ├── matches_0_shot.jsonl
-│       └── matches_5_shot.jsonl
+│   ├── FarsTail_Entailment
+│   │   ├── evaluation.jsonl
+│   │   ├── matches_0_shot.jsonl
+│   │   └── matches_5_shot.jsonl
+│   └── Persian_Math
+│       ├── evaluation.jsonl
+│       ├── matches_0_shot.jsonl
+│       └── matches_5_shot.jsonl
 └── benchmark.jsonl
+</code></pre></div>
+<h3 id="rebuilding-and-merging-results">Rebuilding and merging results</h3>
+<p>Three helpers cover the "I ran benchmarks last week and want to work with
+them now" cases:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">parsbench.benchmarks</span><span class="w"> </span><span class="kn">import</span> <span class="n">BenchmarkResult</span><span class="p">,</span> <span class="n">merge_benchmark_results</span>
+
+<span class="c1"># rebuild a result from saved matches files (rescore=True re-runs the scorers)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">BenchmarkResult</span><span class="o">.</span><span class="n">from_matches_files</span><span class="p">(</span><span class="s2">"results/"</span><span class="p">,</span> <span class="n">rescore</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># combine runs done at different times / on different machines</span>
+<span class="n">merged</span> <span class="o">=</span> <span class="n">merge_benchmark_results</span><span class="p">([</span><span class="n">result_a</span><span class="p">,</span> <span class="n">result_b</span><span class="p">],</span> <span class="n">sort</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div>
+<p><code>merge_benchmark_results</code> drops duplicate model names by default; pass
+<code>keep_duplicates=True</code> to keep them all.</p>
+<h3 id="building-a-leaderboard">Building a leaderboard</h3>
+<p><code>build_leaderboard_from_benchmark</code> writes the request/result file layout
+used by the
+<a href="https://huggingface.co/spaces/ParsBench/leaderboard">ParsBench Leaderboard</a>
+HuggingFace space:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">parsbench.benchmarks</span><span class="w"> </span><span class="kn">import</span> <span class="n">build_leaderboard_from_benchmark</span>
+
+<span class="n">build_leaderboard_from_benchmark</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="s2">"leaderboard_data/"</span><span class="p">)</span>
 </code></pre></div>
 
 

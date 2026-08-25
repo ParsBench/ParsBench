@@ -1,0 +1,49 @@
+# ParsBench Documentation
+
+> ParsBench provides toolkits for benchmarking LLMs and evaluating AI applications in the Persian language.
+
+ParsBench provides toolkits for benchmarking LLMs and evaluating AI applications (chatbots, agents) in the Persian language. It ships ready-made Persian benchmark tasks with datasets, and an app evaluation layer with Persian-aware normalization (digit scripts, rial/toman amounts, Jalali/Gregorian dates, ZWNJ spacing) for testing your own Persian AI product in CI.
+
+## Getting started
+
+- [Overview](https://parsbench.github.io/ParsBench/index.md): What ParsBench is and why it exists
+- [Getting Started](https://parsbench.github.io/ParsBench/getting-started/index.md): Installation, first app evaluation, first benchmark
+
+## App evaluation
+
+- [Overview & Quickstart](https://parsbench.github.io/ParsBench/app-eval/index.md): Overview and 60-second quickstart
+- [CI & Regression Tracking](https://parsbench.github.io/ParsBench/app-eval/ci/index.md)
+- [Generating Goldens](https://parsbench.github.io/ParsBench/app-eval/generating-goldens/index.md)
+- [Goldens & Checks](https://parsbench.github.io/ParsBench/app-eval/goldens/index.md)
+- [Framework Integrations](https://parsbench.github.io/ParsBench/app-eval/integrations/index.md)
+- [The Judge](https://parsbench.github.io/ParsBench/app-eval/judge/index.md)
+- [Persian Normalization](https://parsbench.github.io/ParsBench/app-eval/normalization/index.md)
+- [Multi-turn Simulation](https://parsbench.github.io/ParsBench/app-eval/simulation/index.md)
+- [The Viewer](https://parsbench.github.io/ParsBench/app-eval/viewer/index.md)
+
+## Benchmarking
+
+- [Advanced](https://parsbench.github.io/ParsBench/tutorial/advanced/index.md)
+- [Benchmarks](https://parsbench.github.io/ParsBench/tutorial/benchmarks/index.md)
+- [Models](https://parsbench.github.io/ParsBench/tutorial/models/index.md)
+- [Tasks](https://parsbench.github.io/ParsBench/tutorial/tasks/index.md)
+
+## Examples
+
+- [Examples](https://parsbench.github.io/ParsBench/examples/index.md): Runnable examples and industry scenarios
+
+## API reference
+
+- [App Evaluation](https://parsbench.github.io/ParsBench/code_reference/appeval/index.md)
+- [Benchmarks](https://parsbench.github.io/ParsBench/code_reference/benchmarks/index.md)
+- [Integrations](https://parsbench.github.io/ParsBench/code_reference/integrations/index.md)
+- [Models](https://parsbench.github.io/ParsBench/code_reference/models/index.md)
+- [Scores](https://parsbench.github.io/ParsBench/code_reference/scores/index.md)
+- [Tasks](https://parsbench.github.io/ParsBench/code_reference/tasks/index.md)
+
+## Optional
+
+- [Contribution](https://parsbench.github.io/ParsBench/contribution/index.md): How to contribute
+- [Changelog](https://parsbench.github.io/ParsBench/changelog/index.md): Release history
+- [Donation](https://parsbench.github.io/ParsBench/donation/index.md): Supporting the project
+

@@ -6,11 +6,13 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="ParsBench provides toolkits for benchmarking LLMs based on the Persian language.">
+        <meta name="description" content="ParsBench provides toolkits for benchmarking LLMs and evaluating AI applications in the Persian language.">
       
       
         <meta name="author" content="Shahriar Shariati">
       
+      
+        <link rel="canonical" href="https://parsbench.github.io/ParsBench/getting-started/">
       
       
         <link rel="prev" href="..">
@@ -330,22 +332,44 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#usage" class="md-nav__link">
+  <a href="#pick-your-path" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Usage
+        Pick your path
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Usage">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#evaluate-your-app-60-seconds-no-api-key" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Evaluate your app (60 seconds, no API key)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#benchmark-a-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Benchmark a model
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Benchmark a model">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#evaluating-a-pretrained-model" class="md-nav__link">
+  <a href="#evaluating-a-pre-trained-model" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Evaluating a PreTrained Model
+        Evaluating a pre-trained model
       
     </span>
   </a>
@@ -353,10 +377,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#benchmarking-multiple-models-with-multiple-tasks" class="md-nav__link">
+  <a href="#benchmarking-multiple-models-on-multiple-tasks" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Benchmarking Multiple Models with Multiple Tasks
+        Benchmarking multiple models on multiple tasks
       
     </span>
   </a>
@@ -365,6 +389,17 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Troubleshooting
+      
+    </span>
+  </a>
   
 </li>
       
@@ -382,6 +417,53 @@
   
   
   
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    App Evaluation
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    App Evaluation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
     <li class="md-nav__item">
       <a href="../app-eval/" class="md-nav__link">
         
@@ -390,7 +472,7 @@
   <span class="md-ellipsis">
     
   
-    Evaluating Your App
+    Overview & Quickstart
   
 
     
@@ -399,6 +481,238 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../app-eval/goldens/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Goldens & Checks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../app-eval/judge/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Judge
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../app-eval/normalization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Persian Normalization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../app-eval/integrations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Framework Integrations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../app-eval/simulation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Multi-turn Simulation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../app-eval/generating-goldens/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Generating Goldens
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../app-eval/ci/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CI & Regression Tracking
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../app-eval/viewer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Viewer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -428,7 +742,7 @@
   <span class="md-ellipsis">
     
   
-    Tutorial
+    Benchmarking
   
 
     
@@ -444,7 +758,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Tutorial
+    Benchmarking
   
 
           </label>
@@ -576,14 +890,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../contribution/" class="md-nav__link">
+      <a href="../examples/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Contribution
+    Examples
   
 
     
@@ -642,6 +956,62 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../code_reference/appeval/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    App Evaluation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../code_reference/integrations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integrations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -769,6 +1139,33 @@
   
   
     <li class="md-nav__item">
+      <a href="../contribution/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contribution
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../changelog/" class="md-nav__link">
         
   
@@ -854,22 +1251,44 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#usage" class="md-nav__link">
+  <a href="#pick-your-path" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Usage
+        Pick your path
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Usage">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#evaluate-your-app-60-seconds-no-api-key" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Evaluate your app (60 seconds, no API key)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#benchmark-a-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Benchmark a model
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Benchmark a model">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#evaluating-a-pretrained-model" class="md-nav__link">
+  <a href="#evaluating-a-pre-trained-model" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Evaluating a PreTrained Model
+        Evaluating a pre-trained model
       
     </span>
   </a>
@@ -877,10 +1296,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#benchmarking-multiple-models-with-multiple-tasks" class="md-nav__link">
+  <a href="#benchmarking-multiple-models-on-multiple-tasks" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Benchmarking Multiple Models with Multiple Tasks
+        Benchmarking multiple models on multiple tasks
       
     </span>
   </a>
@@ -889,6 +1308,17 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Troubleshooting
+      
+    </span>
+  </a>
   
 </li>
       
@@ -915,53 +1345,106 @@
 <h1 id="getting-started">Getting Started</h1>
 <h2 id="installation">Installation</h2>
 <blockquote>
-<p><strong>Requires Python ≥ 3.12.</strong> ParsBench 0.2.x targets current library versions (transformers 5, datasets 5, numpy 2), which need Python 3.12+. If you're on Python 3.10/3.11, pin the previous release: <code>pip install "parsbench==0.1.7"</code>.</p>
+<p><strong>Requires Python ≥ 3.12.</strong> ParsBench 0.2+ targets current library versions
+(transformers 5, datasets 5, numpy 2), which need Python 3.12+. If you're on
+Python 3.10/3.11, pin the previous release: <code>pip install "parsbench==0.1.7"</code>.</p>
 </blockquote>
 <p>Install ParsBench using pip:</p>
 <div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>parsbench
 </code></pre></div>
-<p>The <a href="https://github.com/hendrycks/math">Persian Math</a> task additionally needs the Math Equivalence package, installed manually:</p>
-<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>git+https://github.com/hendrycks/math.git
+<p>Two optional extras, depending on what you're doing:</p>
+<ul>
+<li><code>pip install 'parsbench[test]'</code> also installs pytest, so you can run golden
+  suites with <code>parsbench test</code> in CI.</li>
+<li>The <a href="https://github.com/hendrycks/math">Persian Math</a> benchmark task
+  additionally needs the Math Equivalence package, installed manually:
+  <code>pip install git+https://github.com/hendrycks/math.git</code></li>
+</ul>
+<h2 id="pick-your-path">Pick your path</h2>
+<p>ParsBench does two different jobs. Pick the one you came for:</p>
+<ul>
+<li><strong>"I'm building a Persian chatbot/agent and want to test it"</strong> →
+  <a href="#evaluate-your-app-60-seconds-no-api-key">evaluate your app</a> below, then
+  the <a href="../app-eval/">App Evaluation</a> docs.</li>
+<li><strong>"I have a model and want to know how good it is at Persian"</strong> →
+  <a href="#benchmark-a-model">benchmark a model</a> below, then the
+  <a href="../tutorial/models/">Benchmarking tutorial</a>.</li>
+</ul>
+<h2 id="evaluate-your-app-60-seconds-no-api-key">Evaluate your app (60 seconds, no API key)</h2>
+<p>Your app is any function that takes a user message and returns a string, a
+<code>Trace</code>, or an OpenAI-format message list. Write down what a good answer looks
+like as <code>Golden</code> objects, and evaluate:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">parsbench.appeval</span><span class="w"> </span><span class="kn">import</span> <span class="n">AppEvaluator</span><span class="p">,</span> <span class="n">Golden</span><span class="p">,</span> <span class="n">ToolCall</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">my_bot</span><span class="p">(</span><span class="n">message</span><span class="p">):</span>          <span class="c1"># stand-in for your app</span>
+    <span class="k">return</span> <span class="p">[</span>
+        <span class="p">{</span><span class="s2">"role"</span><span class="p">:</span> <span class="s2">"assistant"</span><span class="p">,</span> <span class="s2">"tool_calls"</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span><span class="s2">"id"</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span> <span class="s2">"function"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"name"</span><span class="p">:</span> <span class="s2">"search_flights"</span><span class="p">,</span>
+                                     <span class="s2">"arguments"</span><span class="p">:</span> <span class="s1">'{"date": "1405-07-05"}'</span><span class="p">}}]},</span>
+        <span class="p">{</span><span class="s2">"role"</span><span class="p">:</span> <span class="s2">"tool"</span><span class="p">,</span> <span class="s2">"tool_call_id"</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span> <span class="s2">"content"</span><span class="p">:</span> <span class="s2">"پرواز PY-101"</span><span class="p">},</span>
+        <span class="p">{</span><span class="s2">"role"</span><span class="p">:</span> <span class="s2">"assistant"</span><span class="p">,</span> <span class="s2">"content"</span><span class="p">:</span> <span class="s2">"پرواز ساعت ۸ صبح، قیمت ۲٬۵۰۰٬۰۰۰ ریال"</span><span class="p">},</span>
+    <span class="p">]</span>
+
+<span class="n">evaluator</span> <span class="o">=</span> <span class="n">AppEvaluator</span><span class="p">(</span><span class="n">goldens</span><span class="o">=</span><span class="p">[</span>
+    <span class="n">Golden</span><span class="p">(</span>
+        <span class="nb">input</span><span class="o">=</span><span class="s2">"بلیط تهران-مشهد برای ۵ مهر ۱۴۰۵ می‌خوام. قیمتش چنده؟"</span><span class="p">,</span>
+        <span class="n">tools</span><span class="o">=</span><span class="p">[</span><span class="n">ToolCall</span><span class="p">(</span><span class="s2">"search_flights"</span><span class="p">,</span> <span class="n">date</span><span class="o">=</span><span class="s2">"2026-09-27"</span><span class="p">)],</span>  <span class="c1"># Jalali == Gregorian</span>
+        <span class="n">contains</span><span class="o">=</span><span class="p">[</span><span class="s2">"250 هزار تومان"</span><span class="p">],</span>                            <span class="c1"># rials == tomans</span>
+        <span class="n">forbidden_tools</span><span class="o">=</span><span class="p">[</span><span class="s2">"book_flight"</span><span class="p">],</span>
+    <span class="p">),</span>
+<span class="p">])</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">evaluator</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">my_bot</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
 </code></pre></div>
-<h2 id="usage">Usage</h2>
-<h3 id="evaluating-a-pretrained-model">Evaluating a PreTrained Model</h3>
-<p>Load the pre-trained model and tokenizer from the HuggingFace and then, evaluate the model using the PersianMath task:</p>
+<p>Every filled <code>Golden</code> field switches on its check. There is no separate
+metric configuration and no YAML. The deterministic checks (tools, contains,
+format, budgets) run with no API key at all; add a
+<a href="../app-eval/judge/">judge model</a> when you want LLM-judged correctness,
+faithfulness, and refusal checks too.</p>
+<p>Then open the local viewer to browse the run, traces included:</p>
+<div class="highlight"><pre><span></span><code>parsbench<span class="w"> </span>view
+</code></pre></div>
+<p>Continue with the <a href="../app-eval/">App Evaluation overview</a>.</p>
+<h2 id="benchmark-a-model">Benchmark a model</h2>
+<h3 id="evaluating-a-pre-trained-model">Evaluating a pre-trained model</h3>
+<p>Load a model and tokenizer from HuggingFace, then evaluate on a task, here
+Persian Math:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">transformers</span><span class="w"> </span><span class="kn">import</span> <span class="n">AutoModelForCausalLM</span><span class="p">,</span> <span class="n">AutoTokenizer</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">parsbench.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">PreTrainedTransformerModel</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">parsbench.tasks</span><span class="w"> </span><span class="kn">import</span> <span class="n">PersianMath</span>
 
 <span class="n">model</span> <span class="o">=</span> <span class="n">AutoModelForCausalLM</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span>
-    <span class="s2">&quot;Qwen/Qwen2-72B-Instruct&quot;</span><span class="p">,</span>
-    <span class="n">torch_dtype</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span>
-    <span class="n">device_map</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span>
+    <span class="s2">"Qwen/Qwen2-72B-Instruct"</span><span class="p">,</span>
+    <span class="n">torch_dtype</span><span class="o">=</span><span class="s2">"auto"</span><span class="p">,</span>
+    <span class="n">device_map</span><span class="o">=</span><span class="s2">"auto"</span>
 <span class="p">)</span>
-<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s2">&quot;Qwen/Qwen2-72B-Instruct&quot;</span><span class="p">)</span>
+<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s2">"Qwen/Qwen2-72B-Instruct"</span><span class="p">)</span>
 
 <span class="n">tf_model</span> <span class="o">=</span> <span class="n">PreTrainedTransformerModel</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">tokenizer</span><span class="o">=</span><span class="n">tokenizer</span><span class="p">)</span>
 
 <span class="k">with</span> <span class="n">PersianMath</span><span class="p">()</span> <span class="k">as</span> <span class="n">task</span><span class="p">:</span>
     <span class="n">results</span> <span class="o">=</span> <span class="n">task</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">tf_model</span><span class="p">)</span>
 </code></pre></div>
-<h3 id="benchmarking-multiple-models-with-multiple-tasks">Benchmarking Multiple Models with Multiple Tasks</h3>
-<p>For example, we run our local models using Ollama:</p>
+<h3 id="benchmarking-multiple-models-on-multiple-tasks">Benchmarking multiple models on multiple tasks</h3>
+<p>Any OpenAI-compatible API works, so local models via Ollama are one line each:</p>
 <div class="highlight"><pre><span></span><code>ollama<span class="w"> </span>run<span class="w"> </span>qwen2
 ollama<span class="w"> </span>run<span class="w"> </span>aya
 </code></pre></div>
-<p>Then we benchmark those models using the ParsBench.</p>
+<p>Then benchmark them:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">parsbench.benchmarks</span><span class="w"> </span><span class="kn">import</span> <span class="n">CustomBenchmark</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">parsbench.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">OpenAIModel</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">parsbench.tasks</span><span class="w"> </span><span class="kn">import</span> <span class="n">ParsiNLUMultipleChoice</span><span class="p">,</span> <span class="n">PersianMath</span><span class="p">,</span> <span class="n">ParsiNLUReadingComprehension</span>
 
 <span class="n">qwen2_model</span> <span class="o">=</span> <span class="n">OpenAIModel</span><span class="p">(</span>
-    <span class="n">api_base_url</span><span class="o">=</span><span class="s2">&quot;http://localhost:11434/v1/&quot;</span><span class="p">,</span>
-    <span class="n">api_secret_key</span><span class="o">=</span><span class="s2">&quot;ollama&quot;</span><span class="p">,</span>
-    <span class="n">model</span><span class="o">=</span><span class="s2">&quot;qwen2:latest&quot;</span><span class="p">,</span>
+    <span class="n">api_base_url</span><span class="o">=</span><span class="s2">"http://localhost:11434/v1/"</span><span class="p">,</span>
+    <span class="n">api_secret_key</span><span class="o">=</span><span class="s2">"ollama"</span><span class="p">,</span>
+    <span class="n">model</span><span class="o">=</span><span class="s2">"qwen2:latest"</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="n">aya_model</span> <span class="o">=</span> <span class="n">OpenAIModel</span><span class="p">(</span>
-    <span class="n">api_base_url</span><span class="o">=</span><span class="s2">&quot;http://localhost:11434/v1/&quot;</span><span class="p">,</span>
-    <span class="n">api_secret_key</span><span class="o">=</span><span class="s2">&quot;ollama&quot;</span><span class="p">,</span>
-    <span class="n">model</span><span class="o">=</span><span class="s2">&quot;aya:latest&quot;</span><span class="p">,</span>
+    <span class="n">api_base_url</span><span class="o">=</span><span class="s2">"http://localhost:11434/v1/"</span><span class="p">,</span>
+    <span class="n">api_secret_key</span><span class="o">=</span><span class="s2">"ollama"</span><span class="p">,</span>
+    <span class="n">model</span><span class="o">=</span><span class="s2">"aya:latest"</span><span class="p">,</span>
 <span class="p">)</span>
 
 <span class="n">benchmark</span> <span class="o">=</span> <span class="n">CustomBenchmark</span><span class="p">(</span>
@@ -973,14 +1456,34 @@ ollama<span class="w"> </span>run<span class="w"> </span>aya
     <span class="p">],</span>
 <span class="p">)</span>
 <span class="n">result</span> <span class="o">=</span> <span class="n">benchmark</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
-    <span class="n">prompt_lang</span><span class="o">=</span><span class="s2">&quot;fa&quot;</span><span class="p">,</span>
+    <span class="n">prompt_lang</span><span class="o">=</span><span class="s2">"fa"</span><span class="p">,</span>
     <span class="n">prompt_shots</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
     <span class="n">n_first</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
     <span class="n">sort_by_score</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="n">result</span><span class="o">.</span><span class="n">show_radar_plot</span><span class="p">()</span>
 </code></pre></div>
-<p><img alt="Benchmark Bar Plot" src="../imgs/radarplot.png" /></p>
+<p><img alt="Benchmark Radar Plot" src="../imgs/radarplot.png" /></p>
+<p>Continue with the <a href="../tutorial/models/">Benchmarking tutorial</a>.</p>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<p><strong>"I can't reach the OpenAI API from Iran."</strong> Every API-based piece of
+ParsBench (models, the judge, the user simulator) speaks the OpenAI protocol,
+so point it at any OpenAI-compatible gateway: <a href="https://avalai.ir/">AvalAI</a>,
+<a href="https://openrouter.ai/">OpenRouter</a>, or a local
+<a href="https://ollama.com/">Ollama</a>.</p>
+<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">OPENAI_BASE_URL</span><span class="o">=</span>https://api.avalai.ir/v1
+<span class="nb">export</span><span class="w"> </span><span class="nv">OPENAI_API_KEY</span><span class="o">=</span>...
+</code></pre></div>
+<p><strong>Judge checks show as "skipped".</strong> Judge-based checks (<code>output=</code>,
+<code>context=</code>, <code>refuses=</code>) need a judge model and skip gracefully without one.
+Set <code>PARSBENCH_JUDGE</code> to any model name your gateway serves; see
+<a href="../app-eval/judge/">The Judge</a>.</p>
+<p><strong><code>import parsbench</code> fails on <code>math_equivalence</code>.</strong> You only need that
+package for the Persian Math benchmark task; install it as shown under
+<a href="#installation">Installation</a>.</p>
+<p><strong>Dataset downloads fail.</strong> Benchmark task datasets come from the HuggingFace
+Hub; set <code>HF_ENDPOINT</code> to a mirror if the hub is unreachable from your
+network.</p>
 
 
 

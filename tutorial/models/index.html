@@ -6,14 +6,16 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="ParsBench provides toolkits for benchmarking LLMs based on the Persian language.">
+        <meta name="description" content="ParsBench provides toolkits for benchmarking LLMs and evaluating AI applications in the Persian language.">
       
       
         <meta name="author" content="Shahriar Shariati">
       
       
+        <link rel="canonical" href="https://parsbench.github.io/ParsBench/tutorial/models/">
       
-        <link rel="prev" href="../../app-eval/">
+      
+        <link rel="prev" href="../../app-eval/viewer/">
       
       
         <link rel="next" href="../tasks/">
@@ -285,6 +287,53 @@
   
   
   
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    App Evaluation
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    App Evaluation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
     <li class="md-nav__item">
       <a href="../../app-eval/" class="md-nav__link">
         
@@ -293,7 +342,7 @@
   <span class="md-ellipsis">
     
   
-    Evaluating Your App
+    Overview & Quickstart
   
 
     
@@ -302,6 +351,238 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../app-eval/goldens/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Goldens & Checks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../app-eval/judge/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Judge
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../app-eval/normalization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Persian Normalization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../app-eval/integrations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Framework Integrations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../app-eval/simulation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Multi-turn Simulation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../app-eval/generating-goldens/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Generating Goldens
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../app-eval/ci/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CI & Regression Tracking
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../app-eval/viewer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Viewer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -333,7 +614,7 @@
   <span class="md-ellipsis">
     
   
-    Tutorial
+    Benchmarking
   
 
     
@@ -349,7 +630,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Tutorial
+    Benchmarking
   
 
           </label>
@@ -458,7 +739,7 @@
   <a href="#create-your-own-interface" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Create Your Own Interface
+        Create your own interface
       
     </span>
   </a>
@@ -572,14 +853,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../contribution/" class="md-nav__link">
+      <a href="../../examples/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Contribution
+    Examples
   
 
     
@@ -638,6 +919,62 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../code_reference/appeval/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    App Evaluation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../code_reference/integrations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integrations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -765,6 +1102,33 @@
   
   
     <li class="md-nav__item">
+      <a href="../../contribution/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contribution
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../changelog/" class="md-nav__link">
         
   
@@ -875,7 +1239,7 @@
   <a href="#create-your-own-interface" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Create Your Own Interface
+        Create your own interface
       
     </span>
   </a>
@@ -903,76 +1267,101 @@
 
 
 <h1 id="models">Models</h1>
-<p>Models are the interfaces that enable you to generate completions using LLMs.</p>
+<p>Models are the interfaces that generate completions from LLMs. A benchmark
+or task doesn't care where the completion comes from; it calls the model
+interface and scores what comes back. Three interfaces ship with ParsBench,
+and writing your own takes four methods.</p>
 <h2 id="openaimodel">OpenAIModel</h2>
-<p>The <code>OpenAIModel</code> is an interface for using OpenAI-like APIs to generate completions.</p>
+<p><code>OpenAIModel</code> speaks the OpenAI chat-completions protocol, which in practice
+means most of the ecosystem: OpenAI itself, gateways like
+<a href="https://avalai.ir/">AvalAI</a> and <a href="https://openrouter.ai/">OpenRouter</a>, and
+local runtimes like <a href="https://ollama.com/">Ollama</a> and vLLM.</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">parsbench.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">OpenAIModel</span>
 
 <span class="n">model</span> <span class="o">=</span> <span class="n">OpenAIModel</span><span class="p">(</span>
-    <span class="n">api_base_url</span><span class="o">=</span><span class="s2">&quot;https://api.openai.com/v1/&quot;</span><span class="p">,</span>
-    <span class="n">api_secret_key</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">{SECRET_KEY}</span><span class="s2">&quot;</span><span class="p">,</span>
-    <span class="n">model</span><span class="o">=</span><span class="s2">&quot;gpt-4o&quot;</span><span class="p">,</span>
+    <span class="n">api_base_url</span><span class="o">=</span><span class="s2">"https://api.openai.com/v1/"</span><span class="p">,</span>
+    <span class="n">api_secret_key</span><span class="o">=</span><span class="s2">"</span><span class="si">{SECRET_KEY}</span><span class="s2">"</span><span class="p">,</span>
+    <span class="n">model</span><span class="o">=</span><span class="s2">"gpt-4.1"</span><span class="p">,</span>
 <span class="p">)</span>
 </code></pre></div>
-<p>Use can run your local model using for example <code>Ollama</code>:</p>
+<p>A local model through Ollama is the same interface with a different base URL:</p>
 <div class="highlight"><pre><span></span><code>ollama<span class="w"> </span>run<span class="w"> </span>llama3
 </code></pre></div>
-<p>And use its API:</p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">parsbench.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">OpenAIModel</span>
-
-<span class="n">model</span> <span class="o">=</span> <span class="n">OpenAIModel</span><span class="p">(</span>
-    <span class="n">api_base_url</span><span class="o">=</span><span class="s2">&quot;http://localhost:11434/v1/&quot;</span><span class="p">,</span>
-    <span class="n">api_secret_key</span><span class="o">=</span><span class="s2">&quot;ollama&quot;</span><span class="p">,</span>
-    <span class="n">model</span><span class="o">=</span><span class="s2">&quot;llama3:latest&quot;</span><span class="p">,</span>
+<div class="highlight"><pre><span></span><code><span class="n">model</span> <span class="o">=</span> <span class="n">OpenAIModel</span><span class="p">(</span>
+    <span class="n">api_base_url</span><span class="o">=</span><span class="s2">"http://localhost:11434/v1/"</span><span class="p">,</span>
+    <span class="n">api_secret_key</span><span class="o">=</span><span class="s2">"ollama"</span><span class="p">,</span>
+    <span class="n">model</span><span class="o">=</span><span class="s2">"llama3:latest"</span><span class="p">,</span>
 <span class="p">)</span>
 </code></pre></div>
+<p>Useful optional parameters, shared with <code>AnthropicModel</code>:</p>
+<ul>
+<li><code>instruction_prompt=</code> replaces the default system prompt.</li>
+<li><code>completion_parameters=</code> passes sampling parameters through to the API,
+  e.g. <code>{"temperature": 0}</code>.</li>
+<li><code>retry_on_ratelimit=True</code> with <code>cooldown_interval=</code> (seconds, default 10)
+  and <code>max_retries=</code> (default 1) retries rate-limited calls instead of
+  failing the run.</li>
+</ul>
 <h2 id="anthropicmodel">AnthropicModel</h2>
-<p>The <code>AnthropicModel</code> is an interface for using Anthropic-like APIs to generate completions.</p>
+<p><code>AnthropicModel</code> is the same idea for Anthropic-style APIs:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">parsbench.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">AnthropicModel</span>
 
 <span class="n">model</span> <span class="o">=</span> <span class="n">AnthropicModel</span><span class="p">(</span>
-    <span class="n">api_secret_key</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">{SECRET_KEY}</span><span class="s2">&quot;</span><span class="p">,</span>
-    <span class="n">model</span><span class="o">=</span><span class="s2">&quot;claude3.5-sonnet&quot;</span><span class="p">,</span>
+    <span class="n">api_secret_key</span><span class="o">=</span><span class="s2">"</span><span class="si">{SECRET_KEY}</span><span class="s2">"</span><span class="p">,</span>
+    <span class="n">model</span><span class="o">=</span><span class="s2">"claude-sonnet-4-5"</span><span class="p">,</span>
 <span class="p">)</span>
 </code></pre></div>
+<p><code>api_base_url=</code> is optional and lets you point it at an Anthropic-compatible
+gateway.</p>
 <h2 id="pretrainedtransformermodel">PreTrainedTransformerModel</h2>
-<p>The <code>PreTrainedTransformerModel</code> is an interface for the <code>PreTrainedModel</code> of the <a href="https://huggingface.co/docs/transformers">transformers</a> framework.
-You can load any pre-trained model and tokenizer you want and pass it to the <code>PreTrainedTransformerModel</code>. And it will generate completions using your own model.</p>
+<p><code>PreTrainedTransformerModel</code> wraps a <code>PreTrainedModel</code> from the
+<a href="https://huggingface.co/docs/transformers">transformers</a> library, so you can
+evaluate a checkpoint directly, including one you just fine-tuned, without
+serving it behind an API:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">transformers</span><span class="w"> </span><span class="kn">import</span> <span class="n">AutoModelForCausalLM</span><span class="p">,</span> <span class="n">AutoTokenizer</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">parsbench.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">PreTrainedTransformerModel</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">parsbench.tasks</span><span class="w"> </span><span class="kn">import</span> <span class="n">PersianMath</span>
 
 <span class="n">model</span> <span class="o">=</span> <span class="n">AutoModelForCausalLM</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span>
-    <span class="s2">&quot;Qwen/Qwen2-72B-Instruct&quot;</span><span class="p">,</span>
-    <span class="n">torch_dtype</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span>
-    <span class="n">device_map</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span>
+    <span class="s2">"Qwen/Qwen2-72B-Instruct"</span><span class="p">,</span>
+    <span class="n">torch_dtype</span><span class="o">=</span><span class="s2">"auto"</span><span class="p">,</span>
+    <span class="n">device_map</span><span class="o">=</span><span class="s2">"auto"</span>
 <span class="p">)</span>
-<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s2">&quot;Qwen/Qwen2-72B-Instruct&quot;</span><span class="p">)</span>
+<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s2">"Qwen/Qwen2-72B-Instruct"</span><span class="p">)</span>
 
 <span class="n">tf_model</span> <span class="o">=</span> <span class="n">PreTrainedTransformerModel</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">tokenizer</span><span class="o">=</span><span class="n">tokenizer</span><span class="p">)</span>
 
 <span class="k">with</span> <span class="n">PersianMath</span><span class="p">()</span> <span class="k">as</span> <span class="n">task</span><span class="p">:</span>
     <span class="n">results</span> <span class="o">=</span> <span class="n">task</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">tf_model</span><span class="p">)</span>
 </code></pre></div>
-<h2 id="create-your-own-interface">Create Your Own Interface</h2>
-<p>You can easily create your own model interface by inheriting the <code>Model</code> abstract class:</p>
+<h2 id="create-your-own-interface">Create your own interface</h2>
+<p>Inherit the <code>Model</code> abstract class and implement four methods:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">parsbench.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Model</span>
 
 <span class="k">class</span><span class="w"> </span><span class="nc">CustomModel</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">model_name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s2">&quot;My Custom Model&quot;</span>
+        <span class="k">return</span> <span class="s2">"My Custom Model"</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">get_prompt_completion</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prompt</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Response to </span><span class="si">{</span><span class="n">prompt</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="c1"># call your API / model here</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">"Response to </span><span class="si">{</span><span class="n">prompt</span><span class="si">}</span><span class="s2">"</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">prompt_formater</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prompt</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>
-        <span class="k">return</span> <span class="n">prompt</span>  <span class="c1"># No format</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">prompt_formatter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prompt</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="n">prompt</span>  <span class="c1"># or wrap into chat messages</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">completion_formatter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">completion</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">completion</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;&#39;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">completion</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"'"</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span>
 </code></pre></div>
+<ul>
+<li><code>model_name</code> labels the model in results and output directories.</li>
+<li><code>get_prompt_completion</code> does the actual call.</li>
+<li><code>prompt_formatter</code> turns the task's prompt string into whatever your API
+  expects (a raw string, or an OpenAI-style message list).</li>
+<li><code>completion_formatter</code> cleans the raw completion before scoring, stripping
+  quotes, whitespace, or chatter that would break exact-match scores.</li>
+</ul>
 
 
 

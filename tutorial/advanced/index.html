@@ -6,17 +6,19 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="ParsBench provides toolkits for benchmarking LLMs based on the Persian language.">
+        <meta name="description" content="ParsBench provides toolkits for benchmarking LLMs and evaluating AI applications in the Persian language.">
       
       
         <meta name="author" content="Shahriar Shariati">
       
       
+        <link rel="canonical" href="https://parsbench.github.io/ParsBench/tutorial/advanced/">
+      
       
         <link rel="prev" href="../benchmarks/">
       
       
-        <link rel="next" href="../../contribution/">
+        <link rel="next" href="../../examples/">
       
       
         
@@ -285,6 +287,53 @@
   
   
   
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    App Evaluation
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    App Evaluation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
     <li class="md-nav__item">
       <a href="../../app-eval/" class="md-nav__link">
         
@@ -293,7 +342,7 @@
   <span class="md-ellipsis">
     
   
-    Evaluating Your App
+    Overview & Quickstart
   
 
     
@@ -302,6 +351,238 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../app-eval/goldens/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Goldens & Checks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../app-eval/judge/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Judge
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../app-eval/normalization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Persian Normalization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../app-eval/integrations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Framework Integrations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../app-eval/simulation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Multi-turn Simulation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../app-eval/generating-goldens/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Generating Goldens
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../app-eval/ci/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CI & Regression Tracking
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../app-eval/viewer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Viewer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -333,7 +614,7 @@
   <span class="md-ellipsis">
     
   
-    Tutorial
+    Benchmarking
   
 
     
@@ -349,7 +630,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Tutorial
+    Benchmarking
   
 
           </label>
@@ -521,7 +802,7 @@
   <a href="#available-scores" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Available Scores
+        Available scores
       
     </span>
   </a>
@@ -529,10 +810,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#make-your-score" class="md-nav__link">
+  <a href="#make-your-own-score" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Make Your Score
+        Make your own score
       
     </span>
   </a>
@@ -545,15 +826,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#data-loader" class="md-nav__link">
+  <a href="#data-loaders" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Data Loader
+        Data loaders
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Data Loader">
+    <nav class="md-nav" aria-label="Data loaders">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -595,22 +876,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#prompt-template" class="md-nav__link">
+  <a href="#prompt-templates" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Prompt Template
+        Prompt templates
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Prompt Template">
+    <nav class="md-nav" aria-label="Prompt templates">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#with-shot-template" class="md-nav__link">
+  <a href="#with-a-shot-template" class="md-nav__link">
     <span class="md-ellipsis">
       
-        With Shot Template
+        With a shot template
       
     </span>
   </a>
@@ -618,10 +899,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#with-shot-examples" class="md-nav__link">
+  <a href="#with-static-shot-examples" class="md-nav__link">
     <span class="md-ellipsis">
       
-        With Shot Examples
+        With static shot examples
       
     </span>
   </a>
@@ -629,10 +910,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#load-templates-from-file" class="md-nav__link">
+  <a href="#load-templates-from-files" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Load Templates From File
+        Load templates from files
       
     </span>
   </a>
@@ -640,10 +921,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#constant-prompt-variable" class="md-nav__link">
+  <a href="#constant-prompt-variables" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Constant Prompt Variable
+        Constant prompt variables
       
     </span>
   </a>
@@ -671,7 +952,7 @@
   <a href="#task-data-provider" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Task Data Provider
+        Task data provider
       
     </span>
   </a>
@@ -682,7 +963,7 @@
   <a href="#task-match-generator" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Task Match Generator
+        Task match generator
       
     </span>
   </a>
@@ -693,7 +974,7 @@
   <a href="#generate-completions-and-score" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Generate Completions and Score
+        Generate completions and score
       
     </span>
   </a>
@@ -701,22 +982,22 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#make-your-task" class="md-nav__link">
+  <a href="#make-your-own-task" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Make Your Task
+        Make your own task
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Make Your Task">
+    <nav class="md-nav" aria-label="Make your own task">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#add-sub-tasks" class="md-nav__link">
+  <a href="#sub-tasks" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Add Sub Tasks
+        Sub-tasks
       
     </span>
   </a>
@@ -756,14 +1037,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../contribution/" class="md-nav__link">
+      <a href="../../examples/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Contribution
+    Examples
   
 
     
@@ -822,6 +1103,62 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../code_reference/appeval/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    App Evaluation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../code_reference/integrations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integrations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -949,6 +1286,33 @@
   
   
     <li class="md-nav__item">
+      <a href="../../contribution/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contribution
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../changelog/" class="md-nav__link">
         
   
@@ -1038,7 +1402,7 @@
   <a href="#available-scores" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Available Scores
+        Available scores
       
     </span>
   </a>
@@ -1046,10 +1410,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#make-your-score" class="md-nav__link">
+  <a href="#make-your-own-score" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Make Your Score
+        Make your own score
       
     </span>
   </a>
@@ -1062,15 +1426,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#data-loader" class="md-nav__link">
+  <a href="#data-loaders" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Data Loader
+        Data loaders
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Data Loader">
+    <nav class="md-nav" aria-label="Data loaders">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1112,22 +1476,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#prompt-template" class="md-nav__link">
+  <a href="#prompt-templates" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Prompt Template
+        Prompt templates
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Prompt Template">
+    <nav class="md-nav" aria-label="Prompt templates">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#with-shot-template" class="md-nav__link">
+  <a href="#with-a-shot-template" class="md-nav__link">
     <span class="md-ellipsis">
       
-        With Shot Template
+        With a shot template
       
     </span>
   </a>
@@ -1135,10 +1499,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#with-shot-examples" class="md-nav__link">
+  <a href="#with-static-shot-examples" class="md-nav__link">
     <span class="md-ellipsis">
       
-        With Shot Examples
+        With static shot examples
       
     </span>
   </a>
@@ -1146,10 +1510,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#load-templates-from-file" class="md-nav__link">
+  <a href="#load-templates-from-files" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Load Templates From File
+        Load templates from files
       
     </span>
   </a>
@@ -1157,10 +1521,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#constant-prompt-variable" class="md-nav__link">
+  <a href="#constant-prompt-variables" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Constant Prompt Variable
+        Constant prompt variables
       
     </span>
   </a>
@@ -1188,7 +1552,7 @@
   <a href="#task-data-provider" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Task Data Provider
+        Task data provider
       
     </span>
   </a>
@@ -1199,7 +1563,7 @@
   <a href="#task-match-generator" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Task Match Generator
+        Task match generator
       
     </span>
   </a>
@@ -1210,7 +1574,7 @@
   <a href="#generate-completions-and-score" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Generate Completions and Score
+        Generate completions and score
       
     </span>
   </a>
@@ -1218,22 +1582,22 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#make-your-task" class="md-nav__link">
+  <a href="#make-your-own-task" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Make Your Task
+        Make your own task
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Make Your Task">
+    <nav class="md-nav" aria-label="Make your own task">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#add-sub-tasks" class="md-nav__link">
+  <a href="#sub-tasks" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Add Sub Tasks
+        Sub-tasks
       
     </span>
   </a>
@@ -1270,11 +1634,12 @@
   
 
 
-<h1 id="advanced-tutorial">Advanced Tutorial</h1>
-<p>This section is for the ones who want to implement their own Tasks or want to use the framework APIs for other use cases.</p>
+<h1 id="advanced-tutorial">Advanced tutorial</h1>
+<p>This section is for implementing your own tasks, or using the framework's
+building blocks (scores, data loaders, prompt templates) for other purposes.</p>
 <h2 id="scores">Scores</h2>
-<p>Scores are the methods that we use to measure the goodness of the completion of our model, comparing to the expected answer.</p>
-<h3 id="available-scores">Available Scores</h3>
+<p>Scores measure how good a completion is compared to the expected answer.</p>
+<h3 id="available-scores">Available scores</h3>
 <table>
 <thead>
 <tr>
@@ -1289,170 +1654,182 @@
 </tr>
 <tr>
 <td>English Sentence Bleu</td>
-<td>Bleu n-gram score with NLTK English word tokenizer. Between <code>0</code> to <code>1</code>.</td>
+<td>Bleu n-gram score with NLTK English word tokenizer. Between <code>0</code> and <code>1</code>.</td>
 </tr>
 <tr>
 <td>Persian Sentence Bleu</td>
-<td>Bleu n-gram score with Hazm Persian word tokenizer. Between <code>0</code> to <code>1</code>.</td>
+<td>Bleu n-gram score with Hazm Persian word tokenizer. Between <code>0</code> and <code>1</code>.</td>
 </tr>
 <tr>
 <td>English Rouge</td>
-<td>Rouge score with NLTK English word tokenizer. Between <code>0</code> to <code>1</code>.</td>
+<td>Rouge score with NLTK English word tokenizer. Between <code>0</code> and <code>1</code>.</td>
 </tr>
 <tr>
 <td>Persian Rouge</td>
-<td>Rouge score with Hazm Persian word tokenizer. Between <code>0</code> to <code>1</code>.</td>
+<td>Rouge score with Hazm Persian word tokenizer. Between <code>0</code> and <code>1</code>.</td>
 </tr>
 </tbody>
 </table>
-<h3 id="make-your-score">Make Your Score</h3>
-<p>You can write your score function anywhere and just wrap it using <code>wrap_scorer</code>.</p>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">parsbench.scores.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">wrap_scorer</span>
+<h3 id="make-your-own-score">Make your own score</h3>
+<p>Write a plain function and wrap it with <code>wrap_scorer</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">parsbench.scores.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">wrap_scorer</span>
 
 <span class="nd">@wrap_scorer</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">random_score</span><span class="p">(</span><span class="n">completion</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">target</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-    <span class="k">return</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">my_exact_match</span><span class="p">(</span><span class="n">completion</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">target</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">completion</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">==</span> <span class="n">target</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
 </code></pre></div>
-<p>The function's name will be used as the name of your score in the benchmark result.</p>
-<h2 id="data-loader">Data Loader</h2>
-<p>Data Loader class will load the dataset needed for evaluation.</p>
+<p>The function's name becomes the score's name in results.</p>
+<h2 id="data-loaders">Data loaders</h2>
+<p>A data loader loads the dataset a task evaluates on. All three load from a
+local path or a URL.</p>
 <h3 id="jsonline">JSONLine</h3>
-<p><code>JSONLineDataLoader</code> is based on the <code>jsonlines</code> file format (<code>.jsonl</code>). It can load jsonline files from web or local.</p>
+<p><code>JSONLineDataLoader</code> reads jsonlines files (<code>.jsonl</code>):</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">parsbench.tasks.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">JSONLineDataLoader</span>
 
-<span class="n">data_loader</span> <span class="o">=</span> <span class="n">JSONLineDataLoader</span><span class="p">(</span><span class="n">data_path</span><span class="o">=</span><span class="s2">&quot;dataset.jsonl&quot;</span><span class="p">)</span>
+<span class="n">data_loader</span> <span class="o">=</span> <span class="n">JSONLineDataLoader</span><span class="p">(</span><span class="n">data_path</span><span class="o">=</span><span class="s2">"dataset.jsonl"</span><span class="p">)</span>
 <span class="n">data</span> <span class="o">=</span> <span class="n">data_loader</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
 </code></pre></div>
 <h3 id="csv">CSV</h3>
-<p><code>CSVDataLoader</code> is based on the <code>CSV</code> file format (<code>.csv</code>). It can load CSV files from web or local.</p>
+<p><code>CSVDataLoader</code> reads CSV files:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">parsbench.tasks.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">CSVDataLoader</span>
 
-<span class="n">data_loader</span> <span class="o">=</span> <span class="n">CSVDataLoader</span><span class="p">(</span><span class="n">data_path</span><span class="o">=</span><span class="s2">&quot;dataset.csv&quot;</span><span class="p">)</span>
+<span class="n">data_loader</span> <span class="o">=</span> <span class="n">CSVDataLoader</span><span class="p">(</span><span class="n">data_path</span><span class="o">=</span><span class="s2">"dataset.csv"</span><span class="p">)</span>
 <span class="n">data</span> <span class="o">=</span> <span class="n">data_loader</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
 </code></pre></div>
 <h3 id="huggingface">HuggingFace</h3>
-<p><code>HuggingFaceDataLoader</code> is based on the <code>datasets</code> library of HuggingFace that loads datasets from local or downloads it from the HuggingFace Dataset Hub.</p>
+<p><code>HuggingFaceDataLoader</code> uses HuggingFace's <code>datasets</code> library to load from
+disk or download from the Hub:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">parsbench.tasks.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">HuggingFaceDataLoader</span>
 
 <span class="n">data_loader</span> <span class="o">=</span> <span class="n">HuggingFaceDataLoader</span><span class="p">(</span>
-    <span class="n">data_path</span><span class="o">=</span><span class="s2">&quot;persiannlp/parsinlu_entailment&quot;</span>
-    <span class="n">split</span><span class="o">=</span><span class="s2">&quot;validation&quot;</span>
+    <span class="n">data_path</span><span class="o">=</span><span class="s2">"persiannlp/parsinlu_entailment"</span><span class="p">,</span>
+    <span class="n">split</span><span class="o">=</span><span class="s2">"validation"</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="n">data</span> <span class="o">=</span> <span class="n">data_loader</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
 </code></pre></div>
-<h2 id="prompt-template">Prompt Template</h2>
-<p>Using <code>PromptTemplate</code> class, you can define the prompt template for different lanugages, shot templates, shot examples, prompt variables, etc.</p>
-<h3 id="with-shot-template">With Shot Template</h3>
-<p>In this example, you can define a prompt template for sentiment analysis task with shot template.</p>
-<p>Prompt and Shot Templates:</p>
-<div class="highlight"><pre><span></span><code><span class="n">FA_TEMPLATE</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<h2 id="prompt-templates">Prompt templates</h2>
+<p><code>PromptTemplate</code> defines the prompt for each language, shot templates, shot
+examples, and variable mappings.</p>
+<h3 id="with-a-shot-template">With a shot template</h3>
+<p>A sentiment-analysis template where few-shot examples are rendered from the
+dataset:</p>
+<div class="highlight"><pre><span></span><code><span class="n">FA_TEMPLATE</span> <span class="o">=</span> <span class="s2">"""</span>
 <span class="s2">جمله زیر نظر یک شخص است. این جمله به زبان فارسی است. بار یا احساس موجود در این جمله را شناسایی کن.</span>
 <span class="s2">پاسخ‌ های ممکن حالت‌های روبرو هستند:</span>
 <span class="s2">SAD</span>
-<span class="s2">NETURAL</span>
+<span class="s2">NEUTRAL</span>
 <span class="s2">HAPPY</span>
 
-<span class="s2">فقط کلمه مروبط به احساس نظر داده شده را خروجی بده.</span>
+<span class="s2">فقط کلمه مربوط به احساس نظر داده شده را خروجی بده.</span>
 
 <span class="si">{example_shots}</span>
 
 <span class="s2">نظر: </span><span class="si">{review}</span>
 <span class="s2">احساس:</span>
-<span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">"""</span>
 
-<span class="n">FA_SHOT_TEMPLATE</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="n">FA_SHOT_TEMPLATE</span> <span class="o">=</span> <span class="s2">"""</span>
 <span class="s2">نظر: </span><span class="si">{review}</span>
 <span class="s2">احساس: </span><span class="si">{label}</span>
-<span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">"""</span>
 </code></pre></div>
-<p>And for the task prompt template:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">parsbench.tasks.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">PromptTemplate</span>
 
 <span class="n">prompt_template</span> <span class="o">=</span> <span class="n">PromptTemplate</span><span class="p">(</span>
-    <span class="n">language_templates</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;fa&quot;</span><span class="p">:</span> <span class="n">FA_TEMPLATE</span><span class="p">},</span>
-    <span class="n">prompt_shot_templates</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;fa&quot;</span><span class="p">:</span> <span class="n">FA_SHOT_TEMPLATE</span><span class="p">},</span>
-    <span class="n">prompt_variables_mapping</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;review&quot;</span><span class="p">:</span> <span class="s2">&quot;review&quot;</span><span class="p">},</span>
-    <span class="n">target_variables_mapping</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;label&quot;</span><span class="p">},</span>
+    <span class="n">language_templates</span><span class="o">=</span><span class="p">{</span><span class="s2">"fa"</span><span class="p">:</span> <span class="n">FA_TEMPLATE</span><span class="p">},</span>
+    <span class="n">prompt_shot_templates</span><span class="o">=</span><span class="p">{</span><span class="s2">"fa"</span><span class="p">:</span> <span class="n">FA_SHOT_TEMPLATE</span><span class="p">},</span>
+    <span class="n">prompt_variables_mapping</span><span class="o">=</span><span class="p">{</span><span class="s2">"review"</span><span class="p">:</span> <span class="s2">"review"</span><span class="p">},</span>
+    <span class="n">target_variables_mapping</span><span class="o">=</span><span class="p">{</span><span class="s2">"label"</span><span class="p">:</span> <span class="s2">"label"</span><span class="p">},</span>
 <span class="p">)</span>
 
 <span class="n">prompt</span> <span class="o">=</span> <span class="n">prompt_template</span><span class="o">.</span><span class="n">get_prompt</span><span class="p">(</span>
-    <span class="n">prompt_lang</span><span class="o">=</span><span class="s2">&quot;fa&quot;</span><span class="p">,</span>
-    <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;review&quot;</span><span class="p">:</span> <span class="s2">&quot;غذا خیلی بد بود&quot;</span><span class="p">,</span> <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;SAD&quot;</span><span class="p">}</span>
+    <span class="n">prompt_lang</span><span class="o">=</span><span class="s2">"fa"</span><span class="p">,</span>
+    <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s2">"review"</span><span class="p">:</span> <span class="s2">"غذا خیلی بد بود"</span><span class="p">,</span> <span class="s2">"label"</span><span class="p">:</span> <span class="s2">"SAD"</span><span class="p">},</span>
     <span class="n">n_shots</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
     <span class="n">sample_data</span><span class="o">=</span><span class="p">[</span>
-        <span class="p">{</span><span class="s2">&quot;review&quot;</span><span class="p">:</span> <span class="s2">&quot;خوشمزه بود ممونم&quot;</span><span class="p">,</span> <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;HAPPY&quot;</span><span class="p">},</span>
-        <span class="p">{</span><span class="s2">&quot;review&quot;</span><span class="p">:</span> <span class="s2">&quot;غذا خوب بود فقط کاش زودتر می‌رسید.&quot;</span><span class="p">,</span> <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;NETURAL&quot;</span><span class="p">},</span>
-        <span class="p">{</span><span class="s2">&quot;review&quot;</span><span class="p">:</span> <span class="s2">&quot;نوشابه گرم بود. پیتزا هم خیلی بد مزه بود.&quot;</span><span class="p">,</span> <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;SAD&quot;</span><span class="p">}</span>
-    <span class="p">]</span>
+        <span class="p">{</span><span class="s2">"review"</span><span class="p">:</span> <span class="s2">"خوشمزه بود ممنونم"</span><span class="p">,</span> <span class="s2">"label"</span><span class="p">:</span> <span class="s2">"HAPPY"</span><span class="p">},</span>
+        <span class="p">{</span><span class="s2">"review"</span><span class="p">:</span> <span class="s2">"غذا خوب بود فقط کاش زودتر می‌رسید."</span><span class="p">,</span> <span class="s2">"label"</span><span class="p">:</span> <span class="s2">"NEUTRAL"</span><span class="p">},</span>
+        <span class="p">{</span><span class="s2">"review"</span><span class="p">:</span> <span class="s2">"نوشابه گرم بود. پیتزا هم خیلی بد مزه بود."</span><span class="p">,</span> <span class="s2">"label"</span><span class="p">:</span> <span class="s2">"SAD"</span><span class="p">},</span>
+    <span class="p">],</span>
 <span class="p">)</span>
 </code></pre></div>
-<h3 id="with-shot-examples">With Shot Examples</h3>
-<p>If the task is complicated and you want to use methods like CoT (Chain of Thought) prompting,
-You can use static shot examples.</p>
+<p>The variable mappings translate between prompt placeholders and dataset
+columns: <code>prompt_variables_mapping={"review": "review"}</code> fills <code>{review}</code> in
+the template from the <code>review</code> column, and <code>target_variables_mapping</code> does
+the same for the expected answer.</p>
+<h3 id="with-static-shot-examples">With static shot examples</h3>
+<p>For complicated tasks where you want hand-written few-shot examples (for
+instance chain-of-thought prompting), use static shot examples instead of a
+shot template:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">parsbench.tasks.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">PromptTemplate</span>
 
 <span class="n">prompt_template</span> <span class="o">=</span> <span class="n">PromptTemplate</span><span class="p">(</span>
-    <span class="n">language_templates</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;fa&quot;</span><span class="p">:</span> <span class="n">FA_TEMPLATE</span><span class="p">},</span>
-    <span class="n">prompt_shot_examples</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;fa&quot;</span><span class="p">:</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="n">FA_1_SHOT</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="n">FA_3_SHOT</span><span class="p">,</span> <span class="mi">5</span><span class="p">:</span> <span class="n">FA_5_SHOT</span><span class="p">}}</span>
+    <span class="n">language_templates</span><span class="o">=</span><span class="p">{</span><span class="s2">"fa"</span><span class="p">:</span> <span class="n">FA_TEMPLATE</span><span class="p">},</span>
+    <span class="n">prompt_shot_examples</span><span class="o">=</span><span class="p">{</span><span class="s2">"fa"</span><span class="p">:</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="n">FA_1_SHOT</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="n">FA_3_SHOT</span><span class="p">,</span> <span class="mi">5</span><span class="p">:</span> <span class="n">FA_5_SHOT</span><span class="p">}},</span>
 <span class="p">)</span>
-<span class="n">prompt</span> <span class="o">=</span> <span class="n">prompt_template</span><span class="o">.</span><span class="n">get_prompt</span><span class="p">(</span><span class="n">prompt_shot</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span>
+<span class="n">prompt</span> <span class="o">=</span> <span class="n">prompt_template</span><span class="o">.</span><span class="n">get_prompt</span><span class="p">(</span><span class="n">n_shots</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span>
 </code></pre></div>
-<h3 id="load-templates-from-file">Load Templates From File</h3>
-<p>You can also load prompts from text files using <code>LazyLoadTemplates</code>.</p>
+<h3 id="load-templates-from-files">Load templates from files</h3>
+<p><code>LazyLoadTemplates</code> reads templates from text files on first use, which
+keeps long prompts out of your Python code:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">parsbench.tasks.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">PromptTemplate</span><span class="p">,</span> <span class="n">LazyLoadTemplates</span>
 
 <span class="n">prompt_template</span> <span class="o">=</span> <span class="n">PromptTemplate</span><span class="p">(</span>
     <span class="n">language_templates</span><span class="o">=</span><span class="n">LazyLoadTemplates</span><span class="p">(</span>
-        <span class="n">fa</span><span class="o">=</span><span class="s2">&quot;fa_math.txt&quot;</span><span class="p">,</span>
-        <span class="n">en</span><span class="o">=</span><span class="s2">&quot;en_math.txt&quot;</span><span class="p">,</span>
+        <span class="n">fa</span><span class="o">=</span><span class="s2">"fa_math.txt"</span><span class="p">,</span>
+        <span class="n">en</span><span class="o">=</span><span class="s2">"en_math.txt"</span><span class="p">,</span>
     <span class="p">),</span>
     <span class="o">...</span>
 <span class="p">)</span>
 </code></pre></div>
-<h3 id="constant-prompt-variable">Constant Prompt Variable</h3>
-<p>Sometimes you may wanna fill some prompt variables with constant data and you don't wanna put it in the prompt template text. You can use <code>ConstantPromptVariable</code>:</p>
+<h3 id="constant-prompt-variables">Constant prompt variables</h3>
+<p>To fill a placeholder with a fixed value rather than a dataset column, use
+<code>ConstantPromptVariable</code>:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">parsbench.tasks.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">PromptTemplate</span><span class="p">,</span> <span class="n">ConstantPromptVariable</span>
 
 <span class="n">prompt_template</span> <span class="o">=</span> <span class="n">PromptTemplate</span><span class="p">(</span>
-    <span class="n">language_templates</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;fa&quot;</span><span class="p">:</span> <span class="n">FA_TEMPLATE</span><span class="p">},</span>
-    <span class="n">prompt_shot_templates</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;fa&quot;</span><span class="p">:</span> <span class="n">FA_SHOT_TEMPLATE</span><span class="p">},</span>
+    <span class="n">language_templates</span><span class="o">=</span><span class="p">{</span><span class="s2">"fa"</span><span class="p">:</span> <span class="n">FA_TEMPLATE</span><span class="p">},</span>
+    <span class="n">prompt_shot_templates</span><span class="o">=</span><span class="p">{</span><span class="s2">"fa"</span><span class="p">:</span> <span class="n">FA_SHOT_TEMPLATE</span><span class="p">},</span>
     <span class="n">prompt_variables_mapping</span><span class="o">=</span><span class="p">{</span>
-        <span class="s2">&quot;input&quot;</span><span class="p">:</span> <span class="s2">&quot;input&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;first_name&quot;</span><span class="p">:</span> <span class="n">ConstantPromptVariable</span><span class="p">(</span><span class="s2">&quot;شهریار&quot;</span><span class="p">)</span>
+        <span class="s2">"input"</span><span class="p">:</span> <span class="s2">"input"</span><span class="p">,</span>
+        <span class="s2">"first_name"</span><span class="p">:</span> <span class="n">ConstantPromptVariable</span><span class="p">(</span><span class="s2">"شهریار"</span><span class="p">),</span>
     <span class="p">},</span>
-    <span class="n">target_variables_mapping</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;label&quot;</span><span class="p">},</span>
+    <span class="n">target_variables_mapping</span><span class="o">=</span><span class="p">{</span><span class="s2">"label"</span><span class="p">:</span> <span class="s2">"label"</span><span class="p">},</span>
 <span class="p">)</span>
 </code></pre></div>
 <h2 id="tasks">Tasks</h2>
-<p>The primary unit of the ParsBench framework is a task. Tasks are battery-included evaluators which do all the process from loading dataset to evaluating models and outputting the result.</p>
-<h3 id="task-data-provider">Task Data Provider</h3>
-<p>Each task includes a dataset for evaluation. If you need to get the data of that task, you can use <code>task.get_data</code> function.</p>
+<p>The task is the primary unit of the framework: a batteries-included
+evaluator that runs the whole pipeline from loading data to scoring.</p>
+<h3 id="task-data-provider">Task data provider</h3>
+<p>Each task carries its dataset. <code>task.get_data()</code> returns it:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">parsbench.tasks</span><span class="w"> </span><span class="kn">import</span> <span class="n">ParsiNLUEntailment</span>
 
-<span class="k">with</span> <span class="n">ParsiNLUEntailment</span><span class="p">()</span> <span class="k">as</span> <span class="n">task</span><span class="p">:</span>  <span class="c1"># Open in context manager to load data.</span>
+<span class="k">with</span> <span class="n">ParsiNLUEntailment</span><span class="p">()</span> <span class="k">as</span> <span class="n">task</span><span class="p">:</span>  <span class="c1"># the context manager loads the data</span>
     <span class="n">data</span> <span class="o">=</span> <span class="n">task</span><span class="o">.</span><span class="n">get_data</span><span class="p">()</span>
 </code></pre></div>
-<h3 id="task-match-generator">Task Match Generator</h3>
-<p>A <code>TaskMatch</code> is an object which includes prompt, target answer, model completion and the score. Initially the matches doesn't have <code>completion</code> and <code>score</code> attributes (default to <code>None</code>). But you can generate completions and score them using the task class itself.</p>
-<p>To generate matches based on the prompt template, you can use following code:</p>
+<h3 id="task-match-generator">Task match generator</h3>
+<p>A <code>TaskMatch</code> holds a prompt, the target answer, and (once generated) the
+model's completion and its score. Fresh matches have <code>completion</code> and
+<code>score</code> set to <code>None</code>:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">parsbench.tasks</span><span class="w"> </span><span class="kn">import</span> <span class="n">ParsiNLUEntailment</span>
 
 <span class="k">with</span> <span class="n">ParsiNLUEntailment</span><span class="p">()</span> <span class="k">as</span> <span class="n">task</span><span class="p">:</span>
-    <span class="n">matches</span> <span class="o">=</span> <span class="n">task</span><span class="o">.</span><span class="n">generate_matches</span><span class="p">(</span><span class="n">prompt_lang</span><span class="o">=</span><span class="s2">&quot;fa&quot;</span><span class="p">,</span> <span class="n">n_shots</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_first</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+    <span class="n">matches</span> <span class="o">=</span> <span class="n">task</span><span class="o">.</span><span class="n">generate_matches</span><span class="p">(</span><span class="n">prompt_lang</span><span class="o">=</span><span class="s2">"fa"</span><span class="p">,</span> <span class="n">n_shots</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_first</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 </code></pre></div>
-<h3 id="generate-completions-and-score">Generate Completions and Score</h3>
-<p>After generating matches, now we should generate completions for each match prompt. Then we score them based on the defined scorer in the task.</p>
+<h3 id="generate-completions-and-score">Generate completions and score</h3>
+<p>You can drive the pipeline step by step, which is useful when you want to
+inspect or modify matches between steps:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">parsbench.tasks</span><span class="w"> </span><span class="kn">import</span> <span class="n">ParsiNLUEntailment</span>
 
 <span class="k">with</span> <span class="n">ParsiNLUEntailment</span><span class="p">()</span> <span class="k">as</span> <span class="n">task</span><span class="p">:</span>
-    <span class="n">matches</span> <span class="o">=</span> <span class="n">task</span><span class="o">.</span><span class="n">generate_matches</span><span class="p">(</span><span class="n">prompt_lang</span><span class="o">=</span><span class="s2">&quot;fa&quot;</span><span class="p">,</span> <span class="n">n_shots</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_first</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
-    <span class="n">model</span><span class="o">.</span><span class="n">generate_completions</span><span class="p">(</span><span class="n">matches</span><span class="p">)</span>  <span class="c1"># Completions are generated by the model.</span>
-    <span class="n">tasks</span><span class="o">.</span><span class="n">score_matches</span><span class="p">(</span><span class="n">matches</span><span class="p">)</span>
+    <span class="n">matches</span> <span class="o">=</span> <span class="n">task</span><span class="o">.</span><span class="n">generate_matches</span><span class="p">(</span><span class="n">prompt_lang</span><span class="o">=</span><span class="s2">"fa"</span><span class="p">,</span> <span class="n">n_shots</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_first</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">generate_completions</span><span class="p">(</span><span class="n">matches</span><span class="p">)</span>   <span class="c1"># the model fills in completions</span>
+    <span class="n">task</span><span class="o">.</span><span class="n">score_matches</span><span class="p">(</span><span class="n">matches</span><span class="p">)</span>           <span class="c1"># the task's scorer fills in scores</span>
 </code></pre></div>
-<h3 id="make-your-task">Make Your Task</h3>
-<p>If you want to have a task with your own private dataset, prompts, setups, etc. You can inherit one of the existing tasks or create your own task from scratch.</p>
-<p>We suggest to put your prompt templates in a text file and use <code>LazyLoadTemplates</code> to load them for a better performance.</p>
+<h3 id="make-your-own-task">Make your own task</h3>
+<p>For a task with your own dataset, prompts, and scoring, inherit <code>Task</code> (or
+one of the existing tasks). Put prompt templates in text files and load them
+with <code>LazyLoadTemplates</code>:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">parsbench.scores.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">Scorer</span><span class="p">,</span> <span class="n">wrap_scorer</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">parsbench.tasks.base</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">HuggingFaceDataLoader</span><span class="p">,</span>
@@ -1468,60 +1845,60 @@ You can use static shot examples.</p>
     <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">completion</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">==</span> <span class="n">target</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
 
 <span class="k">class</span><span class="w"> </span><span class="nc">CustomTask</span><span class="p">(</span><span class="n">Task</span><span class="p">):</span>
-    <span class="n">task_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Custom Task&quot;</span>
+    <span class="n">task_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"Custom Task"</span>
     <span class="n">task_category</span><span class="p">:</span> <span class="n">TaskCategory</span> <span class="o">=</span> <span class="n">TaskCategory</span><span class="o">.</span><span class="n">REASONING</span>
 
     <span class="n">data_loader</span><span class="p">:</span> <span class="n">HuggingFaceDataLoader</span> <span class="o">=</span> <span class="n">HuggingFaceDataLoader</span><span class="p">(</span>
-        <span class="n">data_path</span><span class="o">=</span><span class="s2">&quot;org/custom_dataset&quot;</span><span class="p">,</span>
-        <span class="n">split</span><span class="o">=</span><span class="s2">&quot;test&quot;</span><span class="p">,</span>
+        <span class="n">data_path</span><span class="o">=</span><span class="s2">"org/custom_dataset"</span><span class="p">,</span>
+        <span class="n">split</span><span class="o">=</span><span class="s2">"test"</span><span class="p">,</span>
     <span class="p">)</span>
-    <span class="n">data_target_key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;target&quot;</span>
+    <span class="n">data_target_key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"target"</span>
 
     <span class="n">prompt_template</span><span class="p">:</span> <span class="n">PromptTemplate</span> <span class="o">=</span> <span class="n">PromptTemplate</span><span class="p">(</span>
         <span class="n">language_templates</span><span class="o">=</span><span class="n">LazyLoadTemplates</span><span class="p">(</span>
-            <span class="n">en</span><span class="o">=</span><span class="s2">&quot;path/to/en_template.txt&quot;</span><span class="p">,</span>
-            <span class="n">fa</span><span class="o">=</span><span class="s2">&quot;path/to/fa_template.txt&quot;</span><span class="p">,</span>
+            <span class="n">en</span><span class="o">=</span><span class="s2">"path/to/en_template.txt"</span><span class="p">,</span>
+            <span class="n">fa</span><span class="o">=</span><span class="s2">"path/to/fa_template.txt"</span><span class="p">,</span>
         <span class="p">),</span>
         <span class="n">prompt_shot_templates</span><span class="o">=</span><span class="n">LazyLoadTemplates</span><span class="p">(</span>
-            <span class="n">en</span><span class="o">=</span><span class="s2">&quot;path/to/en_shot_template.txt&quot;</span><span class="p">,</span>
-            <span class="n">fa</span><span class="o">=</span><span class="s2">&quot;path/to/fa_shot_template.txt&quot;</span><span class="p">,</span>
+            <span class="n">en</span><span class="o">=</span><span class="s2">"path/to/en_shot_template.txt"</span><span class="p">,</span>
+            <span class="n">fa</span><span class="o">=</span><span class="s2">"path/to/fa_shot_template.txt"</span><span class="p">,</span>
         <span class="p">),</span>
-        <span class="n">prompt_variables_mapping</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;prompt_variable1&quot;</span><span class="p">:</span> <span class="s2">&quot;variable1&quot;</span><span class="p">,</span> <span class="s2">&quot;prompt_variable2&quot;</span><span class="p">:</span> <span class="s2">&quot;variable2&quot;</span><span class="p">},</span>
-        <span class="n">target_variables_mapping</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;prompt_target&quot;</span><span class="p">:</span> <span class="s2">&quot;target&quot;</span><span class="p">},</span>
+        <span class="n">prompt_variables_mapping</span><span class="o">=</span><span class="p">{</span><span class="s2">"prompt_variable1"</span><span class="p">:</span> <span class="s2">"variable1"</span><span class="p">,</span> <span class="s2">"prompt_variable2"</span><span class="p">:</span> <span class="s2">"variable2"</span><span class="p">},</span>
+        <span class="n">target_variables_mapping</span><span class="o">=</span><span class="p">{</span><span class="s2">"prompt_target"</span><span class="p">:</span> <span class="s2">"target"</span><span class="p">},</span>
     <span class="p">)</span>
 
     <span class="n">scorer</span><span class="p">:</span> <span class="n">Scorer</span> <span class="o">=</span> <span class="n">my_custom_score</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">score_matches</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">matches</span><span class="p">:</span> <span class="n">TaskMatchGroup</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TaskMatchGroup</span><span class="p">:</span>
         <span class="n">matches</span><span class="o">.</span><span class="n">format_completions</span><span class="p">(</span>
-            <span class="k">lambda</span> <span class="n">c</span><span class="p">:</span> <span class="n">c</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;&#39;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+            <span class="k">lambda</span> <span class="n">c</span><span class="p">:</span> <span class="n">c</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">"'"</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
         <span class="p">)</span>
         <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">score_matches</span><span class="p">(</span><span class="n">matches</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">get_overall_score</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">matches</span><span class="p">:</span> <span class="n">TaskMatchGroup</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
         <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">score</span> <span class="k">for</span> <span class="n">match</span> <span class="ow">in</span> <span class="n">matches</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">matches</span><span class="p">)</span>
 </code></pre></div>
-<p>You can use any data loader, prompt template and scorer you want.</p>
-<h4 id="add-sub-tasks">Add Sub Tasks</h4>
-<p>Your task might have a couple of sub tasks. In that case you should specify <code>sub_task_key</code> and <code>sub_tasks</code> attributes in the task class.</p>
+<p>Any data loader, prompt template, and scorer combination works.</p>
+<h4 id="sub-tasks">Sub-tasks</h4>
+<p>If your dataset covers several categories, declare them and ParsBench
+reports a score per category:</p>
 <div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">CustomTask</span><span class="p">(</span><span class="n">Task</span><span class="p">):</span>
     <span class="o">...</span>
-    <span class="n">sub_task_key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;category&quot;</span>  <span class="c1"># Column in the dataset which specify the sub tasks.</span>
-    <span class="n">sub_tasks</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;math_and_logic&quot;</span><span class="p">,</span> <span class="s2">&quot;common_knowledge&quot;</span><span class="p">,</span> <span class="s2">&quot;literature&quot;</span><span class="p">]</span>  <span class="c1"># Expected sub tasks.</span>
+    <span class="n">sub_task_key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"category"</span>  <span class="c1"># dataset column that holds the sub task</span>
+    <span class="n">sub_tasks</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"math_and_logic"</span><span class="p">,</span> <span class="s2">"common_knowledge"</span><span class="p">,</span> <span class="s2">"literature"</span><span class="p">]</span>
     <span class="o">...</span>
 </code></pre></div>
-<p>And for generating matches or evaluating the model, you can specify a subset of the sub tasks.</p>
+<p>Both evaluation and benchmarks can then run a subset:</p>
 <div class="highlight"><pre><span></span><code><span class="k">with</span> <span class="n">CustomTask</span><span class="p">()</span> <span class="k">as</span> <span class="n">task</span><span class="p">:</span>
-    <span class="n">results</span> <span class="o">=</span> <span class="n">task</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">sub_tasks</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;math_and_logic&quot;</span><span class="p">])</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">task</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">sub_tasks</span><span class="o">=</span><span class="p">[</span><span class="s2">"math_and_logic"</span><span class="p">])</span>
 
-<span class="c1"># OR</span>
-
+<span class="c1"># or inside a benchmark</span>
 <span class="n">benchmark</span> <span class="o">=</span> <span class="n">CustomBenchmark</span><span class="p">(</span>
     <span class="o">...</span><span class="p">,</span>
     <span class="n">tasks</span><span class="o">=</span><span class="p">[</span>
         <span class="n">PersianMath</span><span class="p">,</span>
-        <span class="n">CustomTask</span><span class="o">.</span><span class="n">select_sub_tasks</span><span class="p">([</span><span class="s2">&quot;math_and_logic&quot;</span><span class="p">]),</span>
-    <span class="p">]</span>
+        <span class="n">CustomTask</span><span class="o">.</span><span class="n">select_sub_tasks</span><span class="p">([</span><span class="s2">"math_and_logic"</span><span class="p">]),</span>
+    <span class="p">],</span>
 <span class="p">)</span>
 </code></pre></div>
 
