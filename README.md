@@ -19,170 +19,147 @@
     </a>
 </div>
 
-ParsBench provides toolkits for benchmarking Large Language Models (LLMs) based on the Persian language. It includes various tasks for evaluating LLMs on different topics, benchmarking tools to compare multiple models and rank them, and an easy, fully customizable API for developers to create custom models, tasks, scores, and benchmarks.
+ParsBench is a toolkit for making AI work well in Persian. It has two pillars:
 
-## Key Features
+- **App evaluation.** Test your own Persian chatbot or agent, whatever
+  framework it is built with, and wire the checks into CI. The Persian-aware
+  matching layer understands digit scripts, rial/toman amounts, Jalali dates,
+  and ZWNJ spacing, so checks that would silently fail in an English-shaped
+  eval harness hold up on Persian text.
+- **Model benchmarking.** Evaluate and rank LLMs on 13 ready-made Persian
+  tasks (ParsiNLU, Persian MMLU, FarsTail, Persian Math, and more), each
+  bundled with its dataset, prompt templates, and scorer. This is the toolkit
+  behind the [ParsBench Leaderboard](https://huggingface.co/spaces/ParsBench/leaderboard).
 
-- **Variety of Tasks**: Evaluate LLMs across various topics.
-- **Benchmarking Tools**: Compare and rank multiple models.
-- **Customizable API**: Create custom models, tasks, scores, and benchmarks with ease.
+Both share the same class-based API: create an evaluator, hand it the thing
+under test, read the result. No YAML, no metric registry, one import.
 
-## Evaluating your AI app (new)
+## Evaluate your app
 
-Building a Persian chatbot or agent with the OpenAI SDK, OpenAI Agents SDK,
-LangGraph, Pydantic AI, Agno, or CrewAI? ParsBench now evaluates **your app**,
-not just models — tool-call matching across Jalali/Gregorian calendars, digit
-scripts and rial/toman amounts, Persian judge rubrics, a Persian user
-simulator, and pytest/CI integration:
+Your app is any function that takes a user message and returns an answer.
+Works with the OpenAI SDK, OpenAI Agents SDK, LangGraph, Pydantic AI, Agno,
+CrewAI, or anything OTel-instrumented:
 
 ```python
 from parsbench.appeval import AppEvaluator, Golden, ToolCall
 
 evaluator = AppEvaluator(goldens=[
-    Golden(input="بلیط تهران-مشهد برای ۵ مهر می‌خوام",
-           tools=[ToolCall("search_flights", date="2026-09-27")],
-           contains=["250 هزار تومان"])])
-print(evaluator.evaluate(my_bot))
+    Golden(
+        input="بلیط تهران-مشهد برای ۵ مهر می‌خوام. قیمتش چنده؟",
+        tools=[ToolCall("search_flights", date="2026-09-27")],  # Jalali == Gregorian
+        contains=["250 هزار تومان"],                            # rials == tomans
+        forbidden_tools=["book_flight"],
+    ),
+])
+evaluator.evaluate(my_bot).assert_passed()
 ```
 
-See runnable examples for every major framework in [`examples/`](examples/).
+Then open the local viewer, with live runs, full traces, RTL simulation
+replay, and run-vs-run diffs. No extra dependencies, nothing to configure:
 
-- **See your runs** — `parsbench view` opens a local viewer: live progress, traces, simulation replays, diffs, exports, and charts. No extra dependencies, nothing to configure.
+```bash
+parsbench view
+```
 
 <p align="center">
     <img src="https://raw.githubusercontent.com/ParsBench/ParsBench/main/docs/imgs/viewer.png" alt="parsbench view" width="760">
 </p>
 
-## Motivation
+There is more: multi-turn simulation with an Iranian-user persona (taarof,
+Finglish, toman/rial confusion), golden generation from your docs, judge
+calibration against human labels, and pytest/CI integration. Start with the
+[app evaluation docs](https://parsbench.github.io/ParsBench/app-eval/) or the
+runnable [`examples/`](examples/), which cover every supported framework plus
+industry scenarios (banking, e-commerce, healthcare, telecom, RAG).
 
-I was trying to fine-tune an open-source LLM for the Persian language. I needed some evaluation to test the performance and utility of my LLM. It leads me to research and find [this paper](https://arxiv.org/abs/2404.02403). It's great work that they prepared some datasets and evaluation methods to test on ChatGPT. They even shared their code in this [repository](https://github.com/Ipouyall/Benchmarking_ChatGPT_for_Persian).
+## Benchmark a model
 
-So, I thought that I should build a handy framework that includes various tasks and datasets for evaluating LLMs based on the Persian language. I used some parts of their work (Datasets, Metrics, Basic prompt templates) in this library.
+```python
+from parsbench.benchmarks import CustomBenchmark
+from parsbench.models import OpenAIModel
+from parsbench.tasks import ParsiNLUMultipleChoice, PersianMath
+
+benchmark = CustomBenchmark(
+    models=[OpenAIModel(api_base_url=..., api_secret_key=..., model=...)],
+    tasks=[ParsiNLUMultipleChoice, PersianMath],
+)
+result = benchmark.run(prompt_lang="fa", prompt_shots=[0, 3])
+result.show_radar_plot()
+```
+
+<p align="center">
+    <img src="https://raw.githubusercontent.com/ParsBench/ParsBench/main/docs/imgs/radarplot.png" alt="Benchmark radar plot" width="560">
+</p>
+
+Any OpenAI-compatible API works (OpenAI, AvalAI, OpenRouter, a local Ollama),
+and `PreTrainedTransformerModel` evaluates a HuggingFace checkpoint directly,
+including one you just fine-tuned. See the
+[benchmarking tutorial](https://parsbench.github.io/ParsBench/tutorial/models/)
+and the
+[task list](https://parsbench.github.io/ParsBench/tutorial/tasks/), or these
+Colab notebooks benchmarking real Persian-capable models:
+[Aya](https://colab.research.google.com/drive/1aPayB9AaheDxT7zS4A_4SAMH3a7mIDFX?usp=sharing),
+[Ava](https://drive.google.com/file/d/1ToJ8gTQz1ifU70EBAM7fZG2LIOY4zAp0/view?usp=sharing),
+[Dorna](https://drive.google.com/file/d/1f64d0GnmcQIZ-tlN8cg49pPdiwlVlWvi/view?usp=sharing),
+[MaralGPT](https://drive.google.com/file/d/1ZfjxPa4CfAZdQgtPaEt3nnX180A825ZF/view?usp=sharing).
 
 ## Installation
 
-> **Requires Python ≥ 3.12.** ParsBench 0.2.x targets current library versions (transformers 5, datasets 5, numpy 2), which need Python 3.12+. If you're on Python 3.10/3.11, pin the previous release: `pip install "parsbench==0.1.7"`.
-
-Install ParsBench using pip:
+> **Requires Python ≥ 3.12.** ParsBench 0.2+ targets current library versions
+> (transformers 5, datasets 5, numpy 2), which need Python 3.12+. If you're on
+> Python 3.10/3.11, pin the previous release: `pip install "parsbench==0.1.7"`.
 
 ```bash
 pip install parsbench
 ```
 
-The [Persian Math](https://github.com/hendrycks/math) task additionally needs the Math Equivalence package, installed manually:
+`pip install 'parsbench[test]'` adds pytest for running golden suites with
+`parsbench test` in CI. The Persian Math benchmark task additionally needs
+`pip install git+https://github.com/hendrycks/math.git`.
 
-```bash
-pip install git+https://github.com/hendrycks/math.git
-```
+## Documentation
 
-## Usage
+Full documentation lives at
+[parsbench.github.io/ParsBench](https://parsbench.github.io/ParsBench/). It is
+also published in LLM-friendly form:
+[`llms.txt`](https://parsbench.github.io/ParsBench/llms.txt) (index) and
+[`llms-full.txt`](https://parsbench.github.io/ParsBench/llms-full.txt)
+(everything inlined). Paste either into your assistant to give it the whole
+API.
 
-### Evaluating a PreTrained Model
+## Motivation
 
-Load the pre-trained model and tokenizer from the HuggingFace and then, evaluate the model using the PersianMath task:
+I was trying to fine-tune an open-source LLM for the Persian language and
+needed a way to measure whether it was actually any good. That led me to
+[this paper](https://arxiv.org/abs/2404.02403), great work preparing datasets
+and evaluation methods for testing ChatGPT on Persian, with the code shared in
+[this repository](https://github.com/Ipouyall/Benchmarking_ChatGPT_for_Persian).
 
-```python
-from transformers import AutoModelForCausalLM, AutoTokenizer
-
-from parsbench.models import PreTrainedTransformerModel
-from parsbench.tasks import PersianMath
-
-model = AutoModelForCausalLM.from_pretrained(
-    "Qwen/Qwen2-72B-Instruct",
-    torch_dtype="auto",
-    device_map="auto"
-)
-tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen2-72B-Instruct")
-
-tf_model = PreTrainedTransformerModel(model=model, tokenizer=tokenizer)
-
-with PersianMath() as task:
-    results = task.evaluate(tf_model)
-```
-
-### Benchmarking Multiple Models with Multiple Tasks
-
-For example, we run our local models using Ollama:
-
-```bash
-ollama run qwen2
-ollama run aya
-```
-
-Then we benchmark those models using the ParsBench.
-
-```python
-from parsbench.benchmarks import CustomBenchmark
-from parsbench.models import OpenAIModel
-from parsbench.tasks import ParsiNLUMultipleChoice, PersianMath, ParsiNLUReadingComprehension
-
-qwen2_model = OpenAIModel(
-    api_base_url="http://localhost:11434/v1/",
-    api_secret_key="ollama",
-    model="qwen2:latest",
-)
-aya_model = OpenAIModel(
-    api_base_url="http://localhost:11434/v1/",
-    api_secret_key="ollama",
-    model="aya:latest",
-)
-
-benchmark = CustomBenchmark(
-    models=[qwen2_model, aya_model],
-    tasks=[
-        ParsiNLUMultipleChoice,
-        ParsiNLUReadingComprehension,
-        PersianMath,
-    ],
-)
-result = benchmark.run(
-    prompt_lang="fa",
-    prompt_shots=[0, 3],
-    n_first=100,
-    sort_by_score=True,
-)
-result.show_radar_plot()
-```
-
-![Benchmark Bar Plot](https://raw.githubusercontent.com/ParsBench/ParsBench/main/docs/imgs/radarplot.png)
-
-## Available Tasks
-
-| Task Name                   | Score Name       | Dataset      |
-|-----------------------------|------------------|--------------|
-| ParsiNLU Sentiment Analysis | Exact Match (F1) | [ParsiNLU](https://huggingface.co/datasets/persiannlp/parsinlu_sentiment) |
-| ParsiNLU Entailment | Exact Match (F1) | [ParsiNLU](https://huggingface.co/datasets/persiannlp/parsinlu_entailment) |
-| ParsiNLU Machine Translation En -> Fa | Bleu | [ParsiNLU](https://huggingface.co/datasets/persiannlp/parsinlu_translation_en_fa) |
-| ParsiNLU Machine Translation Fa -> En | Bleu | [ParsiNLU](https://huggingface.co/datasets/persiannlp/parsinlu_translation_fa_en) |
-| ParsiNLU Multiple Choice | Exact Match (Accuracy) | [ParsiNLU](https://github.com/persiannlp/parsinlu) |
-| ParsiNLU Reading Comprehension | Common Tokens (F1) | [ParsiNLU](https://huggingface.co/datasets/persiannlp/parsinlu_reading_comprehension) |
-| Persian NER | NER Exact Match (F1) | [PersianNER](https://github.com/HaniehP/PersianNER) |
-| Persian Math | Math Equivalence (Accuracy) | [Source](https://github.com/Ipouyall/Benchmarking_ChatGPT_for_Persian) |
-| ConjNLI Entailment | Exact Match (F1) | [Source](https://github.com/Ipouyall/Benchmarking_ChatGPT_for_Persian) |
-| Persian MMLU (Khayyam Challenge) | Exact Match (Accuracy) | [Khayyam Challenge](https://huggingface.co/datasets/raia-center/khayyam-challenge) |
-| FarsTail Entailment | Exact Match (F1) | [FarsTail](https://github.com/dml-qom/FarsTail) |
-| Persian News Summary | Rouge | [PNSummary](https://huggingface.co/datasets/HooshvareLab/pn_summary) |
-| XL-Sum | Rouge | [XLSum](https://huggingface.co/datasets/csebuetnlp/xlsum) |
-
-You can import the class of above tasks from `parsbench.tasks` and use it for evaluating your model.
-
-## Example Notebooks
-
-- Benchmark [Aya](https://huggingface.co/CohereForAI) models: [![aya](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1aPayB9AaheDxT7zS4A_4SAMH3a7mIDFX?usp=sharing)
-- Benchmark [Ava](https://huggingface.co/MehdiHosseiniMoghadam) models: [![ava](https://colab.research.google.com/assets/colab-badge.svg)](https://drive.google.com/file/d/1ToJ8gTQz1ifU70EBAM7fZG2LIOY4zAp0/view?usp=sharing)
-- Benchmark [Dorna](https://huggingface.co/PartAI) models: [![dorna](https://colab.research.google.com/assets/colab-badge.svg)](https://drive.google.com/file/d/1f64d0GnmcQIZ-tlN8cg49pPdiwlVlWvi/view?usp=sharing)
-- Benchmark [MaralGPT](https://huggingface.co/MaralGPT) models: [![maralgpt](https://colab.research.google.com/assets/colab-badge.svg)](https://drive.google.com/file/d/1ZfjxPa4CfAZdQgtPaEt3nnX180A825ZF/view?usp=sharing)
+So I built a handy framework that packages various tasks and datasets for
+evaluating LLMs on Persian, reusing parts of their work (datasets, metrics,
+basic prompt templates). ParsBench powered the
+[Open Persian LLM Leaderboard](https://huggingface.co/spaces/ParsBench/leaderboard),
+and has since grown a second pillar: helping teams that *build* Persian AI
+products ship them with confidence, not just ranking base models.
 
 ## Sponsors
 
-Here are the names of companies/people who helped us to keep maintaining this project. If you want to donate this project, see [this page](https://parsbench.github.io/ParsBench/donation/).
+Here are the companies/people who have helped keep this project maintained.
+If you want to support the project, see the
+[donation page](https://parsbench.github.io/ParsBench/donation/).
 
-- [AvalAI](https://avalai.ir/): They gave us free OpenAI API credit several times in their "AvalAward" program. It helped us for doing R&D and benchmarking GPT models.
-- [Basalam](https://basalam.com/): They voluntarily helped us to run the benchmarks on open-weight models and build the [ParsBench Leaderboard](https://huggingface.co/spaces/ParsBench/leaderboard).
+- [AvalAI](https://avalai.ir/): gave us free OpenAI API credit several times
+  through their "AvalAward" program, which funded R&D and benchmarking GPT
+  models.
+- [Basalam](https://basalam.com/): voluntarily helped run the benchmarks on
+  open-weight models and build the
+  [ParsBench Leaderboard](https://huggingface.co/spaces/ParsBench/leaderboard).
 
 ## Contributing
 
-Contributions are welcome! Please refer to the [contribution guidelines](docs/contribution.md) for more information on how to contribute.
+Contributions are welcome! Please refer to the
+[contribution guidelines](https://parsbench.github.io/ParsBench/contribution/)
+for how to get involved.
 
 ## Citation
 
@@ -199,13 +176,15 @@ If you use ParsBench in your research, please cite it as follows:
 
 Or in text format:
 
-Shariati Motlagh, S. (2025). ParsBench: A Toolkit for Benchmarking Persian Language Models. GitHub repository: https://github.com/ParsBench/ParsBench
+Shariati Motlagh, S. (2025). ParsBench: A Toolkit for Benchmarking Persian
+Language Models. GitHub repository: https://github.com/ParsBench/ParsBench
 
 ## License
 
 ParsBench is distributed under the Apache-2.0 license.
 
-## Contact Information
+## Contact
 
-For support or questions, please contact: [shahriarshm81@gmail.com](mailto:shahriarshm81@gmail.com)
-Feel free to let me know if there are any additional details or changes you'd like to make!
+For support or questions, contact
+[shahriarshm81@gmail.com](mailto:shahriarshm81@gmail.com) or open an issue on
+[GitHub](https://github.com/ParsBench/ParsBench/issues).
