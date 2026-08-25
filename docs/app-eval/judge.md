@@ -50,7 +50,7 @@ rubrics:
 
 ```python
 from parsbench.appeval import prompts_fa
-print(prompts_fa.correctness)
+print(prompts_fa.CORRECTNESS)
 ```
 
 The judge's verdict and its reasoning land in each `CheckResult.reason`, and

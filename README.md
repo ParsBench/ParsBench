@@ -127,6 +127,19 @@ also published in LLM-friendly form:
 (everything inlined). Paste either into your assistant to give it the whole
 API.
 
+If you use a coding agent, ParsBench also ships an
+[agent skill](skills/parsbench/) that teaches it the API, the Persian
+normalization rules, and the gotchas. With Claude Code, copy it into your
+project:
+
+```bash
+git clone --depth 1 https://github.com/ParsBench/ParsBench /tmp/pb \
+  && mkdir -p .claude/skills && cp -r /tmp/pb/skills/parsbench .claude/skills/
+```
+
+The same `SKILL.md` format works in other agents that support
+[Agent Skills](https://agentskills.io/).
+
 ## Motivation
 
 I was trying to fine-tune an open-source LLM for the Persian language and
