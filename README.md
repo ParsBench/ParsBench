@@ -129,16 +129,16 @@ API.
 
 If you use a coding agent, ParsBench also ships an
 [agent skill](skills/parsbench/) that teaches it the API, the Persian
-normalization rules, and the gotchas. With Claude Code, copy it into your
-project:
+normalization rules, and the gotchas. Install it into your project with:
 
 ```bash
-git clone --depth 1 https://github.com/ParsBench/ParsBench /tmp/pb \
-  && mkdir -p .claude/skills && cp -r /tmp/pb/skills/parsbench .claude/skills/
+npx skills add ParsBench/ParsBench
 ```
 
-The same `SKILL.md` format works in other agents that support
-[Agent Skills](https://agentskills.io/).
+This works for Claude Code, Cursor, Codex, Gemini CLI, and any other agent
+that supports [Agent Skills](https://agentskills.io/). No `npx`? Copy
+[`skills/parsbench/`](skills/parsbench/) into your agent's skills directory
+(for Claude Code, `.claude/skills/`).
 
 ## Motivation
 
